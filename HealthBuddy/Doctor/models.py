@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import Permission, User
 from Pharmacy.models import Medicine
-# from seven.models import Test
+from seven.models import Test, bodyVital
+
 #from users.models import Test
 
 # Create your models here.
@@ -11,8 +12,7 @@ class HCDept(models.Model):
     def __str__(self):
         return self.deptName
 
-class Test(models.Model):
-    test = models.CharField(max_length=100)
+
 
 class Day(models.Model):
     day = models.CharField(max_length=10)
@@ -39,5 +39,6 @@ class Prescription(models.Model):
     medicines = models.ForeignKey(Medicine, on_delete=models.CASCADE)
     remarks = models.TextField()
     tests = models.ForeignKey(Test, on_delete=models.CASCADE)
+    vitals = models.ForeignKey(bodyVital, on_delete = models.CASCADE)
 
 
