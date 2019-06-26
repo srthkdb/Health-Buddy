@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
+    'students.apps.StudentsConfig',
+    'employee.apps.EmployeeConfig',
     'Patient.apps.PatientConfig',
     'Doctor.apps.DoctorConfig',
     'Pharmacy.apps.PharmacyConfig',
@@ -60,7 +62,7 @@ ROOT_URLCONF = 'HealthBuddy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,7 +88,7 @@ DATABASES = {
         'USER': 'myuser',
         'PASSWORD': 'mypassword',
         'HOST': 'localhost',
-        'PORT': '5433'
+        'PORT': ''
     }
 }
 
