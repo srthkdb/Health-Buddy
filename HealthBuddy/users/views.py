@@ -73,4 +73,3 @@ class UserFormView(View):
                     if type == 'pat':
                         return render(request, 'users/pat_register.html', {'form': form, 'user': user})
         return render(request, self.template_name, {'form': form})
-

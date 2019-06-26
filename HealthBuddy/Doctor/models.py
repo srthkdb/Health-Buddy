@@ -9,8 +9,7 @@ class HCDept(models.Model):
 
     def __str__(self):
         return self.deptName
-
-
+      
 class Day(models.Model):
     day = models.CharField(max_length=10)
 
@@ -41,7 +40,5 @@ class Prescription(models.Model):
     remarks = models.TextField(blank=True)
     tests = models.ForeignKey(Test, on_delete=models.CASCADE, blank=True)
     vitals = models.ForeignKey(bodyVital, on_delete = models.CASCADE, default='')
-
-
 
 
