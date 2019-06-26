@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Registration form</title>
+    </head>
+    <body>
+        <form action="{% url 'users:register' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

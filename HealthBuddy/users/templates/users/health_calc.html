@@ -1,0 +1,744 @@
+<html>
+
+<head>
+    <title>Health Calculator</title>
+    {% load staticfiles%}
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta content="Diets.com.sg Reach your Goal An on-line weight management program that provides you with custom daily meal plans using local Asian foods. " name="description">
+    <meta content="diet, weight loss, weight loss tools, health, healthy lifestyle, low calorie diet, weight loss journal, exercise calendar, weight loss logbook, nutrition, nutritional intake, exercise, weight management, weight loss programs, weight loss plan, calorie calculator" name="keywords"><link title="regular" href="Calculators/ns_fstuff.css" type="text/css" rel="stylesheet">
+    <meta content="MSHTML 6.00.2600.0" name="GENERATOR">
+    <meta http-equiv="Content-Language" content="en-us">
+    <meta content="Microsoft FrontPage 5.0" name="GENERATOR">
+    <meta content="FrontPage.Editor.Document" name="ProgId">
+    <script src="{% static 'users/calc-cal.js' %}"></script>
+</head>
+
+<center>
+<body style="TEXT-ALIGN: center" bgcolor="white" leftmargin="0" background="{% static 'users/cnvbkgnd.jpg' %}
+    <p align="center"><u><b><font face="Arial Black" color="#cc0000" size="5">HEALTH 
+    CALCULATORS</font></b></u></p>
+    <p align="center">&nbsp;<img height="12" src="{% static 'users/topline.gif'%}" width="760" border="0">&nbsp;&nbsp;&nbsp;&nbsp; </p>
+    <table cellspacing="0" cellpadding="0" width="760" bgcolor="#ffffff" border="0">
+    <tbody>
+    <tr valign="top">
+        <td valign="top" width="591">
+        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+            <tbody>
+            <tr>
+            <td class="topline">
+                <p align="center">Calorie Calculator</p></td></tr>
+            <tr>
+            <td bgcolor="#cc0000" height="1">
+                <p align="center"><img height="1" src="{% static 'users/spacer.gif'%}" border="0"></p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td>
+                <p align="center">This provides information for weight maintenance. 
+                This is based on the information you provide (height, weight, age, 
+                and activity level). If you are overweight or underweight, the 
+                calculation may be high or may be low. You can choose a healthy 
+                weight for yourself and use that weight in the calculation. 
+            </p></td></tr>
+            <tr>
+            <td height="20">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td align="middle">
+                <table cellspacing="0" cellpadding="0" border="0">
+                <form></form>
+                <tbody>
+                <tr>
+                    <td>
+                    <p align="center">Enter your height:&nbsp;</p></td>
+                    <td>
+                    <p align="center"><input size="3" name="height">&nbsp;</p></td>
+                    <td>
+                    <p align="center"><select size="1" name="meash"> <option value="1" selected="">centimetres</option> <option value="2.54">inches</option></select> </p></td></tr>
+                <tr>
+                    <td>
+                    <p align="center">Enter your weight:&nbsp;</p></td>
+                    <td>
+                    <p align="center"><input size="3" name="weight"></p></td>
+                    <td>
+                    <p align="center"><select size="1" name="measw"> <option value="1" selected="">kilograms</option> <option value="2.2">pounds</option></select> </p></td></tr>
+                <tr>
+                    <td>
+                    <p align="center">Your age:</p></td>
+                    <td>
+                    <p align="center"><input size="3" name="years"></p></td>
+                    <td>
+                    <p align="center">years</p></td></tr></tbody></table>
+                <table cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td height="5">
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td></tr>
+                <tr>
+                    <td align="left">
+                    <p align="center">&nbsp;</p></td>
+                    <td>
+                    <p align="center"><input onclick="calories(this.form)" type="button" value="Calculate" name="calc"> 
+                    </p></td></tr>
+                <tr>
+                    <td height="15">
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td></tr></tbody></table></td></tr>
+            <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td align="left" colspan="2">
+                    <p align="center"><b>Resting Calorie Requirements</b> (for basic 
+                    body function such as breathing, digestion, before any 
+                    activities): <br><br></p></td></tr>
+                <tr>
+                    <td align="middle">Men's result: </td>
+                    <td>
+                    <p align="center"><input size="6" name="calcma0"></p></td></tr>
+                <tr>
+                    <td align="middle">Women's result: </td>
+                    <td>
+                    <p align="center"><input size="6" name="calcwa0"></p></td></tr></tbody></table></td></tr>
+            <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td height="15">
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td></tr>
+                <tr>
+                    <td>
+                    <p align="center"><b>Activity level:</b></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td valign="top" align="middle">Men's result</td>
+                    <td valign="top" align="middle">Women's result</td></tr>
+                <tr>
+                    <td height="7">
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td></tr>
+                <tr>
+                    <td width="75">
+                    <p align="center">Sedentary</p></td>
+                    <td class="smallline">
+                    <p align="center">sits and stands most of the day; driving, 
+                    computer work, ironing, cooking; rarely gets any physical 
+                    activity </p></td>
+                    <td align="middle"><input size="6" name="calcma1"></td>
+                    <td align="middle"><input size="6" name="calcwa1"></td></tr>
+                <tr>
+                    <td height="7">
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td></tr>
+                <tr>
+                    <td>
+                    <p align="center">Lightly<br>Active</p></td>
+                    <td class="smallline">
+                    <p align="center">exercises or walks 3-5 times per week at a 
+                    slow pace of 2.5 - 3 mph for less than 30 minutes per session; 
+                    child care, garage work, electrical trades, golf </p></td>
+                    <td align="middle"><input size="6" name="calcma2"></td>
+                    <td align="middle"><input size="6" name="calcwa2"></td></tr>
+                <tr>
+                    <td height="7">
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td></tr>
+                <tr>
+                    <td>
+                    <p align="center">Moderately<br>Active</p></td>
+                    <td class="smallline">
+                    <p align="center">exercises or walks 3.5 - 4 mph for one hour 
+                    3-5 times per week; heavy housework, yard work, carrying a 
+                    load, cycling, tennis, dancing </p></td>
+                    <td align="middle"><input size="6" name="calcma3"></td>
+                    <td align="middle"><input size="6" name="calcwa3"></td></tr>
+                <tr>
+                    <td height="7">
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td>
+                    <td>
+                    <p align="center"></p></td></tr>
+                <tr>
+                    <td>
+                    <p align="center">Very<br>Active</p></td>
+                    <td class="smallline">
+                    <p align="center">exercises 3-5 times per week for 1½ hours per 
+                    session; heavy manual labor such as construction work, 
+                    digging, climbing, carrying a load uphill, professional sports 
+                    </p></td>
+                    <td align="middle"><input size="6" name="calcma4"></td>
+                    <td align="middle"><input size="6" name="calcwa4"></td></tr></tbody></table></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td class="smallline" align="middle" height="30">NOTE: Your browser must 
+                support javascript for the calculator to work. </td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td>
+                <p align="center">This is an estimate of the calorie intake you need 
+                every day to maintain your current weight. Note that the calorie 
+                requirements increases as you are more active.<br><br>If you want to 
+                lose weight, subtract 500 calories per day for each pound you want 
+                to lose every week. Add 500 calories per day for each pound you want 
+                to gain each week. Theoretically this works as 1 pound of fat 
+                represents 3500 calories (500 calories per day x 7 days = 3500 
+                calories). Calorie levels of less than 1200 calories are not 
+                recommended and are too low to meet nutritional requirements. Weight 
+                loss of more than 2 pounds per week is not recommended.<br><br>For a 
+                more balanced approach, increase your activity. Consider cutting 
+                calorie intake by 250 calories per day and exercising to expend (use 
+                up) the other 250 calories. This approach prevents a decrease in 
+                your metabolic rate and promotes increased lean muscle 
+                mass.<br><br>&nbsp;</p></td></tr></tbody></table></td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="750" border="0">
+    <tbody>
+    <tr>
+        <td>
+        <p align="center"><img height="12" alt="" src="Calculators/topline(1).gif" width="760" border="0"></p></td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" border="0">
+    <tbody>
+    <tr>
+        <td valign="top">
+        <p align="center">&nbsp;</p></td>
+        <td valign="center" align="middle">&nbsp;</td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" border="0">
+    <tbody>
+    <tr>
+        <td valign="bottom" align="middle" width="200" height="40">&nbsp;</td>
+        <td valign="bottom" width="450">
+        <p align="center">&nbsp;</p></td>
+        <td valign="bottom" align="middle" width="110">&nbsp;</td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" border="0">
+    <tbody>
+    <tr>
+        <td align="middle" width="175">&nbsp;</td>
+        <td class="smallline" width="585">
+        <p align="center">&nbsp;</p></td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" bgcolor="#ffffff" border="0">
+    <tbody>
+    <tr valign="top">
+        <td width="5">
+        <p align="center">&nbsp;</p></td>
+        <td valign="top">
+        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+            <tbody>
+            <tr>
+            <td class="topline">
+                <p align="center">Body Mass Index (BMI)</p></td></tr>
+            <tr>
+            <td bgcolor="#cc0000" height="1">
+                <p align="center"><img height="1" src="Calculators/spacer(1).gif" border="0"></p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td>
+                <p align="center">Body Mass Index (BMI) measures weight in relation to 
+                height. The ranges shown are for adults and should not be used for 
+                children.<br><br>To determine your BMI, simply enter your height and 
+                weight where specified below. The calculator will automatically 
+                calculate your BMI score. </p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td height="30">
+                <p align="center"><b>How to measure height and weight</b> </p></td></tr>
+            <tr>
+            <td>
+                <p align="center">Height Measurement - If you are not sure how tall 
+                you are, then follow these easy steps: </p></td></tr>
+            <tr>
+            <td>
+                <ul>
+                <li>
+                <p align="center">Stand with your head, buttocks, and feet touching 
+                a vertical wall. If this is not possible due to large amounts of 
+                body fat, simply stand erect, with hands relaxed at your sides. 
+                </p>
+                </li><li>
+                <p align="center">Look forward and keep your head straight and in an 
+                upright position. </p>
+                </li><li>
+                <p align="center">Straighten your spine so that your height is 
+                maximized. </p>
+                </li><li>
+                <p align="center">Have a friend gently lower a ruler down on your 
+                head, taking care to keep it horizontal to the floor. Your friend 
+                should then mark your height on the wall with a light pencil. </p>
+                </li><li>
+                <p align="center">Use a measuring tape to determine your height. 
+                </p></li></ul></td></tr>
+            <tr>
+            <td>
+                <p align="center">Weight Measurement - If you have not had your weight 
+                measured in the last month by a health care professional, follow 
+                these easy steps to measure your weight at home: </p></td></tr>
+            <tr>
+            <td>
+                <ul>
+                <li>
+                <p align="center">Weight should be taken first thing in the morning 
+                on an empty stomach or two hours after your last meal. </p>
+                </li><li>
+                <p align="center">Clothing should be minimal. Shoes should not be 
+                worn. </p>
+                </li><li>
+                <p align="center">Weight fluctuates day-to-day and in females 
+                throughout the menstrual cycle. You might want to weigh yourself 
+                for three days and use the average weight. </p></li></ul></td></tr>
+            <tr>
+            <td height="30">
+                <p align="center"><b>BMI Calculator</b></p></td></tr>
+            <tr>
+            <td>
+                <form>
+                <table cellspacing="0" cellpadding="0" align="center" border="0">
+                <tbody>
+                <tr>
+                    <td>
+                    <p align="center">Enter your height:</p></td>
+                    <td>
+                    <p align="center"><input size="4" name="height">&nbsp;</p></td>
+                    <td>
+                    <p align="center"><select size="1" name="meash"> <option value=".3937" selected="">cm</option> <option value="1">inches</option></select> </p></td></tr>
+                <tr>
+                    <td>
+                    <p align="center">Enter your weight:</p></td>
+                    <td>
+                    <p align="center"><input size="4" name="weight">&nbsp;</p></td>
+                    <td>
+                    <p align="center"><select size="1" name="measw"> <option value="2.2" selected="">kilograms</option> <option value="1">pounds</option></select> </p></td></tr></tbody></table>
+                <table cellspacing="0" cellpadding="0" align="center" border="0">
+                <tbody>
+                <tr>
+                    <td valign="top" align="left">
+                    <p align="center">Click when you're ready:</p></td>
+                    <td>
+                    <p align="center"><input onclick="BMI(form)" type="button" value="Calculate" name="calc"> 
+                    </p></td></tr></tbody></table>
+                <table cellspacing="0" cellpadding="0" align="center" border="0">
+                <tbody>
+                <tr>
+                    <td height="10">
+                    <p align="center"></p></td></tr>
+                <tr>
+                    <td>
+                    <p align="center">Your result: <input size="4" name="calcval"></p></td></tr></tbody></table></form></td></tr>
+            <tr>
+            <td class="smallline" align="middle">NOTE: Your browser must support 
+                Javascript for the calculator to work. </td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td>
+                <table cellspacing="1" width="100%" border="1">
+                <tbody>
+                <tr>
+                    <td width="90">
+                    <p align="center">BMI</p></td>
+                    <td width="120">
+                    <p align="center">Category</p></td>
+                    <td width="120">
+                    <p align="center">Health Risk Based Solely On BMI</p></td>
+                    <td>
+                    <p align="center">Risk Adjusted for the Presence of Co-morbid 
+                    Conditions and/or Risk Factors</p></td></tr>
+                <tr>
+                    <td bgcolor="#ffff00">
+                    <p align="center"><b>Below 18.5</b></p></td>
+                    <td bgcolor="#ffff00">
+                    <p align="center"><b>Underweight</b></p></td>
+                    <td bgcolor="#ffff00">
+                    <p align="center"><b>Low</b></p></td>
+                    <td bgcolor="#ffff00">
+                    <p align="center"><b>Moderate</b></p></td></tr>
+                <tr>
+                    <td bgcolor="#00ff00">
+                    <p align="center"><b>18.5-24.9</b></p></td>
+                    <td bgcolor="#00ff00">
+                    <p align="center"><b>Healthy Weight</b></p></td>
+                    <td bgcolor="#00ff00">
+                    <p align="center"><b>Minimal</b></p></td>
+                    <td bgcolor="#00ff00">
+                    <p align="center"><b>Low</b></p></td></tr>
+                <tr>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>25-29.9</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Overweight</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Moderate</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>High</b></p></td></tr>
+                <tr>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>30-34.9</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Obese</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>High</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Very High</b></p></td></tr>
+                <tr>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>35-39.9</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Very Obese</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Very High</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Extremely High</b></p></td></tr>
+                <tr>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>40+</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Morbid Obesity</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Extremely High</b></p></td>
+                    <td bgcolor="#ff0000">
+                    <p align="center"><b>Extremely 
+            High</b></p></td></tr></tbody></table></td></tr>
+            <tr>
+            <td height="20">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td>
+                <p align="center">On the BMI table above, find your score and the 
+                health risk for which it is assessed. For example, a BMI score of 
+                18.5 - 25 is associated with the lowest health risk based solely on 
+                BMI scores. If your score is 25 - 30, you are considered to be at 
+                increased risk for health problems that are negatively impacted by 
+                obesity, such as diabetes, heart disease, high cholesterol or 
+                hypertension. BMI above 30 places you at higher health risks. 
+                Exceptions to a high BMI score include competitive athletes and body 
+                builders, whose BMI is high due to increased muscle mass, and women 
+                who are pregnant or lactating. The BMI is also not intended for use 
+                in measuring growing children or frail, elderly individuals. 
+            </p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td align="middle"><img height="209" alt="" src="Calculators/bmichart.gif" width="371"></td></tr>
+            <tr>
+            <td height="30">
+                <p align="center"><b>Why is BMI Important?</b></p></td></tr>
+            <tr>
+            <td>
+                <p align="center">If your BMI is high, you may have an increased risk 
+                of developing certain diseases, including:</p></td></tr>
+            <tr>
+            <td>
+                <ul>
+                <li>
+                <p align="center">High blood pressure </p>
+                </li><li>
+                <p align="center">Heart disease </p>
+                </li><li>
+                <p align="center">High blood cholesterol </p>
+                </li><li>
+                <p align="center">Diabetes </p>
+                </li><li>
+                <p align="center">Stroke </p>
+                </li><li>
+                <p align="center">Certain types of cancer </p>
+                </li><li>
+                <p align="center">Arthritis </p>
+                </li><li>
+                <p align="center">Breathing problems </p></li></ul></td></tr>
+            <tr>
+            <td>
+                <p align="center">Prevention of further weight gain is important and 
+                weight reduction is desirable. </p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td height="30">
+                <p align="center"><b>What is a co-morbid condition or other risks 
+                factors for chronic diseases?</b> </p></td></tr>
+            <tr>
+            <td>
+                <p align="center">Co-morbidity is any condition associated with 
+                obesity that usually worsens as the degree of obesity increases and 
+                often improves as obesity is successfully treated. The more of the 
+                risk factors from the following list that you have, the more likely 
+                you are to benefit from weight loss if you are overweight or obese*: 
+                </p></td></tr>
+            <tr>
+            <td>
+                <ul>
+                <li>
+                <p align="center">Do you have a personal or family history of heart 
+                disease? </p>
+                </li><li>
+                <p align="center">Are you male over 45 years or a postmenopausal 
+                female? </p>
+                </li><li>
+                <p align="center">Do you smoke cigarettes? </p>
+                </li><li>
+                <p align="center">Do you have a sedentary lifestyle? </p>
+                </li><li>
+                <p align="center">Has your doctor told you that you have high blood 
+                pressure, abnormal blood lipids (high cholesterol, low HDL, high 
+                triglyceride), or diabetes? </p></li></ul></td></tr>
+            <tr>
+            <td class="smallline">
+                <p align="center"><i>* Source: Dietary Guidelines for Americans, 
+                2000</i> </p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td height="30">
+                <p align="center"><b>Improving Your Health:</b> </p></td></tr>
+            <tr>
+            <td>
+                <p align="center">Weight reduction is an important way to reduce your 
+                BMI and improve your overall health. Even a modest 5% reduction from 
+                your current weight is beneficial to your health. For instance, a 5' 
+                2" female who weighs 150 pounds (BMI=27), can improve her health by 
+                losing as little as seven pounds, reducing her BMI to 26. </p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td height="30">
+                <p align="center"><b>Tipping The Scales In Your Favor:</b> </p></td></tr>
+            <tr>
+            <td>
+                <p align="center">The Energy Balance Equation is the key factor in the 
+                weight loss/weight gain puzzle. In other words - if you consistently 
+                consume more energy (calories) than you use up, you will gain weight 
+                and the reverse is also true, burning more energy (calories) than 
+                you consume will cause weight reduction. It's really as simple as 
+                that! </p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td height="30">
+                <p align="center"><b>Remember These Tips:</b> </p></td></tr>
+            <tr>
+            <td>
+                <ul>
+                <li>
+                <p align="center">Realistic Goals </p>
+                </li><li>
+                <p align="center">The best way to lose weight and keep it off is to 
+                balance the foods you eat with daily physical activity. </p>
+                </li><li>
+                <p align="center">Eat a healthy diet and get the recommended 30 
+                minutes or more of daily physical activity. </p>
+                </li><li>
+                <p align="center">Develop healthy habits, since permanent changes 
+                will lead to a lifetime of better health. 
+            </p></li></ul></td></tr></tbody></table></td></tr></tbody></table>
+    <p align="center"><br><br><!-- saved from url=(0040)http://www.diets.com.sg/fst/catarget.asp -->
+    <meta content="Diets.com.sg Reach your Goal An on-line weight management program that provides you with custom daily meal plans using local Asian foods. " name="description">
+    <meta content="diet, weight loss, weight loss tools, health, healthy lifestyle, low calorie diet, weight loss journal, exercise calendar, weight loss logbook, nutrition, nutritional intake, exercise, weight management, weight loss programs, weight loss plan, calorie calculator" name="keywords"><link title="regular" href="Calculators/ns_fstuff.css" type="text/css" rel="stylesheet">
+    <script language="JavaScript" src="Calculators/calc-th.js" type="text/javascript"></script>
+
+    <meta content="Microsoft FrontPage 5.0" name="GENERATOR"></p>
+    <table cellspacing="0" cellpadding="0" width="750" border="0">
+    <tbody>
+    <tr>
+        <td>
+        <p align="center"><img height="12" alt="" src="Calculators/topline(2).gif" width="760" border="0"></p></td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" border="0">
+    <tbody>
+    <tr>
+        <td valign="top">
+        <p align="center"><img height="12" src="Calculators/spacer(2).gif" border="0"><br><img src="Calculators/spacer(2).gif" width="20" border="0"> </p></td>
+        <td valign="center" align="middle">&nbsp;</td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" border="0">
+    <tbody>
+    <tr>
+        <td valign="bottom" align="middle" width="200" height="40">&nbsp;</td>
+        <td valign="bottom" width="450">
+        <p align="center">&nbsp;</p></td>
+        <td valign="bottom" align="middle" width="110">&nbsp;</td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" border="0">
+    <tbody>
+    <tr>
+        <td align="middle" width="175">&nbsp;</td>
+        <td class="smallline" width="585">
+        <p align="center">&nbsp;</p></td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" bgcolor="#ffffff" border="0">
+    <tbody>
+    <tr valign="top">
+        <td width="5">
+        <p align="center"></p></td>
+        <td width="2">
+        <p align="center"></p></td>
+        <td valign="top" width="590">
+        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+            <tbody>
+            <tr>
+            <td class="topline">
+                <p align="center">Target Heart Rate</p></td></tr>
+            <tr>
+            <td bgcolor="#cc0000" height="1">
+                <p align="center"><img height="1" src="Calculators/spacer(2).gif" border="0"></p></td></tr>
+            <tr>
+            <td height="10">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td>
+                <p align="center">When you exercise, your body speeds up and so does 
+                your heart as it works to meet your increased energy needs. But how 
+                much speeding-up of your heart is safe when you exercise? You need 
+                the answer to this question in order to maximize your exercise 
+                benefits while not overworking your heart.<br><br>Your target heart 
+                rate is not one rate but a range of rates (beats per minute, or 
+                <b>bpm</b>), expressed as percentages of your maximum heart rate. 
+                For most healthy people, the American Council of Sports Medicine 
+                recommends a target heart rate for exercise ranging from 60% to 85% 
+                of your maximum heart rate, which is normally calculated as (maximum 
+                heart rate 220 minus your age). </p></td></tr>
+            <tr>
+            <td height="20">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td>
+                <form>
+                <table cellspacing="0" cellpadding="0" align="center" border="0">
+                <tbody>
+                <tr>
+                    <td>
+                    <p align="center">Enter your age:&nbsp;</p></td>
+                    <td>
+                    <p align="center"><input maxlength="3" size="3" name="age"></p></td></tr>
+                <tr>
+                    <td height="5">
+                    <p align="center"></p></td></tr>
+                <tr valign="center">
+                    <td width="50%">
+                    <p align="center">Your Gender:&nbsp;</p></td>
+                    <td>
+                    <p align="center"><input type="radio" checked="" value="male" name="gender">Male <input type="radio" value="female" name="gender">Female</p></td></tr>
+                <tr>
+                    <td height="5">
+                    <p align="center"></p></td></tr></tbody></table>
+                <table cellspacing="0" cellpadding="0" align="center" border="0">
+                <tbody>
+                <tr>
+                    <td align="left">
+                    <p align="center">&nbsp;</p></td>
+                    <td>
+                    <p align="center"><input onclick="compute(this)" type="button" value="Calculate" name="change_focus"></p></td></tr></tbody></table>
+                <p align="center"><br></p>
+                <table cellspacing="0" cellpadding="0" align="center" border="0">
+                <tbody>
+                <tr>
+                    <td height="30">
+                    <p align="center">While you are exercising....you should count 
+                    between:</p></td></tr>
+                <tr>
+                    <td nowrap="" align="middle"><input maxlength="3" size="3" name="max_thr"> and <input maxlength="3" size="3" name="min_thr"> 
+                    beats in <select onchange="compute(this)" name="seconds"> 
+                        <option value="60">60</option> <option value="30">30</option> 
+                        <option value="15">15</option> <option value="10" selected="">10</option> <option value="6">6</option></select> sec. 
+                    and it should not exceed <input maxlength="3" size="4" name="hrmax">&nbsp;&nbsp;beats. </td></tr></tbody></table></form></td></tr>
+            <tr>
+            <td height="20">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td class="smallline" align="middle">NOTE: Your browser must support 
+                Javascript for the calculator to work. </td></tr>
+            <tr>
+            <td height="20">
+                <p align="center"></p></td></tr>
+            <tr>
+            <td height="30">
+                <p align="center"><b>Taking Your Pulse</b></p></td></tr>
+            <tr>
+            <td>
+                <p align="center">Now that you know your target heart rate, check your 
+                bpm regularly as you exercise by take your pulse. An easy way to do 
+                this is to count your heartbeats (pulse) for 10 seconds using your 
+                watch, and then multiply this number by 6 to get your 
+                bpm.<br><br>You can feel your heartbeats in several ways, such as by 
+                placing your fingers lightly but firmly over the inside of your 
+                wrist or on your neck just below the angle of your jaw. (Be careful 
+                not to put too much pressure on the neck; this can slow the heart 
+                down and can be dangerous in people with blockages of blood vessels 
+                in the neck.) You can also place your palm over your heart and count 
+                the number of beats that you feel.<br><br>If you have any questions 
+                or concerns about your exercise regimen, including your target heart 
+                rate, consult your doctor. 
+    <br><br></p></td></tr></tbody></table></td></tr></tbody></table>
+    <p align="center"><br></p>
+    <p align="center"><a href="mailto:copyright@health"><font size="1">copyright@Health 
+    Centre,Indian Institue Of Technology, Kanpur</font></a></p>
+    <p align="center">&nbsp;</p>
+    <p align="center">&nbsp;</p>
+    <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    </p>
+    <p></p><p>&nbsp; 
+    </p><p></p><meta content="Diets.com.sg Reach your Goal An on-line weight management program that provides you with custom daily meal plans using local Asian foods. " name="description"><meta content="diet, weight loss, weight loss tools, health, healthy lifestyle, low calorie diet, weight loss journal, exercise calendar, weight loss logbook, nutrition, nutritional intake, exercise, weight management, weight loss programs, weight loss plan, calorie calculator" name="keywords"><link title="regular" href="Calculators/ns_fstuff(1).css" type="text/css" rel="stylesheet"><meta content="Microsoft FrontPage 5.0" name="GENERATOR"><p></p><p></p><table cellspacing="0" cellpadding="0" width="760" bgcolor="#ffffff" border="0">
+    <tbody>
+    
+    <!-- saved from url=(0040)http://www.diets.com.sg/fst/cacalcal.asp -->
+    
+    
+    <script language="JavaScript" src="Calculators/calc-cal.js" type="text/javascript"></script>
+
+    
+    </tbody></table>
+    <table cellspacing="0" cellpadding="0" width="750" border="0">
+    <tbody>
+    <tr>
+        <td>
+        <p align="center">&nbsp;</p></td></tr></tbody></table>
+    <table cellspacing="0" cellpadding="0" width="760" bgcolor="#ffffff" border="0">
+    <tbody>
+    <tr valign="top">
+        <td width="4">
+        <p align="center"></p></td></tr></tbody></table>
+    <p align="center"><br><br><!-- saved from url=(0037)http://www.diets.com.sg/fst/cabmi.asp -->
+
+    <meta content="Diets.com.sg Reach your Goal An on-line weight management program that provides you with custom daily meal plans using local Asian foods. " name="description">
+    <meta content="diet, weight loss, weight loss tools, health, healthy lifestyle, low calorie diet, weight loss journal, exercise calendar, weight loss logbook, nutrition, nutritional intake, exercise, weight management, weight loss programs, weight loss plan, calorie calculator" name="keywords"><link title="regular" href="Calculators/ns_fstuff(2).css" type="text/css" rel="stylesheet">
+    <script language="JavaScript" src="Calculators/calc-bmi.js" type="text/javascript"></script>
+
+    <meta content="Microsoft FrontPage 5.0" name="GENERATOR"></p>
+</body>
+</center>
+</html>

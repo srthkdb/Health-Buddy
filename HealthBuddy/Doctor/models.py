@@ -14,6 +14,10 @@ class HCDept(models.Model):
 class Test(models.Model):
     test = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.test
+
+
 class Day(models.Model):
     day = models.CharField(max_length=10)
 
@@ -30,14 +34,22 @@ class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     department = models.ForeignKey(HCDept, on_delete=models.CASCADE)
     roomNo = models.CharField(max_length=15)
-    visitDays = models.ForeignKey(Day, on_delete=models.CASCADE)
-    timings = models.ForeignKey(Timing, on_delete = models.CASCADE)
+    visitDays = models.ManyToManyField(Day)
+    #timings = models.ForeignKey(Timing, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
 
 class Prescription(models.Model):
     date = models.DateTimeField()
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     medicines = models.ForeignKey(Medicine, on_delete=models.CASCADE)
-    remarks = models.TextField()
-    tests = models.ForeignKey(Test, on_delete=models.CASCADE)
+    remarks = models.TextField(blank=True)
+    tests = models.ForeignKey(Test, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        return self.id
+
 
 
