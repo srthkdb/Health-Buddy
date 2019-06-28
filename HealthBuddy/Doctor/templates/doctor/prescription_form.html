@@ -1,0 +1,73 @@
+{% extends 'doctor/base.html' %}
+{% block body %}
+
+<div class="container-fluid songs-container">
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                        <h3>Medicines</h3>
+                        <form action={% if pres %} {% url 'Doctor:change_prescription' patient.rollNo pres.id %} {%else%} {% url 'Doctor:create_prescription' patient.rollNo %} {%endif%} method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {%for field in med_form%}
+                                <div class="form-group">
+                                    <label class="control-label">{{ field.label_tag }}</label>
+                                    <div>{{ field }}</div>
+                                </div>
+                            {%endfor%}
+                            <input type="submit" value="Add Med" class="btn btn-primary">
+                        </form>
+                        <h3>Prescription</h3>
+                        <form action={% if pres %} {% url 'Doctor:change_prescription' patient.rollNo pres.id %} {%else%} {% url 'Doctor:create_prescription' patient.rollNo %} {%endif%} method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {%for field in pres_form%}
+                                <div class="form-group">
+                                    <label class="control-label">{{ field.label_tag }}</label>
+                                    <div>{{ field }}</div>
+                                </div>
+                            {%endfor%}
+                            <input type="submit" value="Submit" class="btn btn-primary">
+                        </form>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <h3>Added Medicines</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S No</th>
+                                <th>Medicine</th>
+                                <th>Times a day</th>
+                                <th>No of days</th>
+                                <th>When to take</th>
+                            </tr>
+                        </thead>
+                        {% if pres %}
+                        <tbody>
+                            {%for m in pres.presmedicine_set.all %}
+                            <tr>
+                                <th>{{ forloop.counter }}.</th>
+                                <th>{{m.medicine}}</th>
+                                <td>{{m.times_a_day}}</td>
+                                <td>{{m.no_of_days}}</td>
+                                <td>{{m.when_to_take}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        {%endif%}
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{%endblock%}

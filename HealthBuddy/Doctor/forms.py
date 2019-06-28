@@ -10,5 +10,5 @@ class PrescriptionForm(forms.ModelForm):
 class PresMedicineForm(forms.ModelForm):
 
     class Meta:
-        model = PresMedicineForm
+        model = PresMedicine
         fields = ['medicine', 'times_a_day', 'no_of_days', 'when_to_take']

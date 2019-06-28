@@ -5,31 +5,47 @@ from django.views.generic import View
 from .forms import PrescriptionForm, PresMedicineForm
 from django.views.generic import TemplateView
 from Patient.models import Patient
+from .models import Prescription
 import datetime
 
-def add_med(request):
-    temp_pres = request.user.doctor.temppres.prescription
-    form_class_med = PresMedicineForm
-
-
-def create_prescription(request, patient_id):
+def create_prescription(request, patient_roll, pres_id=None):
     form_class_pres = PrescriptionForm
     form_class_med = PresMedicineForm
-    template_name = 'users/prescription_form.html'
+    template_name = 'doctor/prescription_form.html'
+    patient = get_object_or_404(Patient, pk = patient_roll)
 
-    pres_form = self.form_class_pres(request.POST or None)
-    med_form = self.form_class_med(request.POST or None)
-    current_time = datetime.datetime.now()
+    if pres_id == None: 
+        pres_form = form_class_pres(request.POST or None)
+        med_form = form_class_med(request.POST or None)
+    else:
+        pres = get_object_or_404(Prescription, pk=pres_id)
+        pres_form = form_class_pres(request.POST or None, instance=pres)
+        med_form = form_class_med(request.POST or None)
 
-    if form.is_valid():
-        p = pres_form.save(commit=False)
-        m = med_form.save(commit=False)
-        p.date = current_time
-        p.doctor = request.user.doctor
-        p.patient = get_object_or_404(Patient, pk=patient_id)
-        p.save()
+    if request.POST and pres_form.is_valid() and med_form.is_valid():
+        if pres_id == None:
+            current_time = datetime.datetime.now()
+            p = pres_form.save(commit=False)
+            p.date = current_time
+            p.doctor = request.user.doctor
+            p.patient = patient
+            p.med_added = True
+            p.save()
 
-        m.prescription = p
-        m.save()
+            m = med_form.save(commit=False)
+            m.prescription = p
+            m.save()
 
-    return render(request, self.template_name, {'form': form})
+            return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'pres': p, 'patient': patient})
+        else:
+            p = pres_form.save(commit=False)
+            p.save()
+
+            m = med_form.save(commit=False)
+            m.prescription = p
+            m.save()
+            return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'pres': p, 'patient': patient})
+        
+        return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient})
+        
+    return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient})
