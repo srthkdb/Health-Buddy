@@ -1,8 +1,4 @@
-# from django.contrib import admin
-# from users.models import Test, bodyVital
+from django.contrib import admin
+from .models import Type
 
-# # Register your models here.
-
-# admin.site.register(Test)
-# admin.site.register(bodyVital)
-
+admin.site.register(Type)

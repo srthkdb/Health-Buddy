@@ -1,0 +1,13 @@
+{% extends 'users/base.html' %}
+{%block body%}
+<form action="{% url 'users:stud_pat_register' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {%for field in form%}
+        <div class="form-group">
+            <label class="control-label">{{ field.label_tag }}</label>
+            <div>{{ field }}</div>
+        </div>
+    {%endfor%}
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+{%endblock%}

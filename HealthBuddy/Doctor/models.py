@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import Permission, User
-from Pharmacy.models import Medicine
-from seven.models import Test, bodyVital
-
-#from users.models import Test
+from seven.models import TestList, bodyVital
+from Patient.models import Patient
 
 # Create your models here.
 class HCDept(models.Model):
@@ -11,8 +9,6 @@ class HCDept(models.Model):
 
     def __str__(self):
         return self.deptName
-
-
 
 class Day(models.Model):
     day = models.CharField(max_length=10)
@@ -30,15 +26,48 @@ class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     department = models.ForeignKey(HCDept, on_delete=models.CASCADE)
     roomNo = models.CharField(max_length=15)
-    visitDays = models.ForeignKey(Day, on_delete=models.CASCADE)
+    visitDays = models.ManyToManyField(Day)
     timings = models.ForeignKey(Timing, on_delete = models.CASCADE)
 
-class Prescription(models.Model):
-    date = models.DateTimeField()
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    medicines = models.ForeignKey(Medicine, on_delete=models.CASCADE)
-    remarks = models.TextField()
-    tests = models.ForeignKey(Test, on_delete=models.CASCADE)
-    vitals = models.ForeignKey(bodyVital, on_delete = models.CASCADE)
+    def __str__(self):
+        return self.user.username
 
+
+class Prescription(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    treatmentFor = models.CharField(max_length=150)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    remarks = models.TextField(blank=True)
+    tests = models.ManyToManyField(TestList, blank=True)
+    roomNo7 = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.patient.user.username
+
+class TempPres(models.Model):
+    doctor = models.OneToOneField(Doctor, on_delete = models.CASCADE)
+    prescription = models.OneToOneField(Prescription, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.doctor.user.username
+
+class PresMedicine(models.Model):
+    medicine = models.CharField(max_length=100)
+    BefOrAft = [
+        ('b', 'Before meal'),
+        ('a', 'After meal'),
+        ('n', 'Night')
+    ]
+    times_a_day = models.PositiveIntegerField()
+    no_of_days = models.PositiveIntegerField()
+    when_to_take = models.CharField(
+        choices= BefOrAft,
+        max_length=1,
+        default='a'
+    )
+    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.medicine
 
