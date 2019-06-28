@@ -139,7 +139,7 @@ i.red{
         
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">
+                    <a href="{% url 'users:logout' %}">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
                     </a>
                 </li>
@@ -218,17 +218,17 @@ i.red{
                         <div style="padding-top:30px" class="panel-body" >
 
                             <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                            
-                            <form id="loginform" class="form-horizontal" role="form">
-                                    
+                            {{ error_message}}
+                            <form id="loginform" class="form-horizontal" role="form" action="{% url 'users:login_user'%}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username">                                        
+                                    <input id="id_username" type="text" class="form-control" name="username" value="" placeholder="username">                                        
                                 </div>
                                 
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                    <input id="id_password" type="password" class="form-control" name="password" placeholder="password">
                                 </div>
                                     
 
@@ -246,7 +246,7 @@ i.red{
                                     <!-- Button -->
                                     <center>
                                     <div class="col-sm-14 controls">
-                                        <a id="btn-login" href="#" class="btn btn-success">Login  </a>
+                                        <input type="submit" value="Log In" class="btn btn-primary">
                                     </div>
                                     </center>
                                 </div>    

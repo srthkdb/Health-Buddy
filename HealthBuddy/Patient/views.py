@@ -7,11 +7,9 @@ from .forms import PatientRegForm
 from django.http import HttpResponseRedirect
 
 class PatientRegFormView(View):
-    #Credits: code structure for this class is adapted from newboston django video tutorials.
     form_class = PatientRegForm
     template_name = 'users/pat_registration_form.html'
 
-    #display blank form
     def get(self, request):
         if not request.user.is_authenticated:
             error_message = 'you are not autnenticated!'
@@ -20,7 +18,6 @@ class PatientRegFormView(View):
             form = self.form_class(None)
             return render(request, self.template_name, {'form': form})
 
-    #process form data
     def post(self, request):
         form = self.form_class(request.POST)
 
