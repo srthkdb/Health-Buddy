@@ -1,9 +1,8 @@
 from django import forms
-from Patient.models import Patient
+from .models import PatHistory
 
-
-class PatientRegForm(forms.ModelForm):
+class PatHistoryForm(forms.ModelForm):
 
     class Meta:
-        model = Patient
-        exclude = ['prescription', 'user']
+        model = PatHistory
+        fields = ['treatmentFor', 'remarks', 'file']

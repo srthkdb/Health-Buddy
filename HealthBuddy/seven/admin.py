@@ -1,6 +1,6 @@
 from django.contrib import admin
-from seven.models import bodyVital
+from seven.models import bodyVital, TestList
 
 # Register your models here.
 admin.site.register(bodyVital)
-#admin.site.register(Test)
+admin.site.register(TestList)

@@ -1,41 +1,37 @@
-from .models import Type
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User 
-from django.views.generic import View
-from .forms import PatientRegForm
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, Http404
+from Doctor.models import Prescription
+from .models import Patient
+from .forms import PatHistoryForm
 
-class PatientRegFormView(View):
-    #Credits: code structure for this class is adapted from newboston django video tutorials.
-    form_class = PatientRegForm
-    template_name = 'users/pat_registration_form.html'
+def myPres_details(request):
+        prescriptions = Prescription.objects.filter(patient=request.user.patient)
+        return render(request, 'Patient/myPrescriptions.html', {'prescriptions': prescriptions})
 
-    #display blank form
-    def get(self, request):
-        if not request.user.is_authenticated:
-            error_message = 'you are not autnenticated!'
-            return render(request, 'users/registration_form.html', {'error_message': error_message})
+def pres_details(request, pres_id=None, patient_roll=None):
+        if pres_id:
+                pres = get_object_or_404(Prescription, pk=pres_id)
+                patient = pres.patient
+                med = pres.presmedicine_set.all()
+                tests = pres.tests.all()
+                return render(request, 'Patient/view_pres.html',
+                              {'patient': patient, 'pres': pres, 'med': med, 'tests': tests})
+
+
         else:
-            form = self.form_class(None)
-            return render(request, self.template_name, {'form': form})
+                patient = get_object_or_404(Patient, rollNo=patient_roll)
+                return render(request, 'Patient/view_pres.html', {'patient': patient})
 
-    #process form data
-    def post(self, request):
-        form = self.form_class(request.POST)
 
+def create_file(request):
+        form = PatHistoryForm(request.POST or None, request.FILES or None)
+        patient = request.user.patient
         if form.is_valid():
-            patient = form.save(commit=False)
-            patient.user = request.user
-            if patient.is_dependent:
-                if not patient.dependentUser:
-                    error_message = 'please select a dependent user'
-                    return return render(request, self.template_name, {'form': form, 'error_message': error_message})
-                if not patient.dependentRelation:
-                    error_message = 'please select a dependent relation'
-                    return return render(request, self.template_name, {'form': form, 'error_message': error_message})
-        #can fill rest of the data with student search
-            patient.save()
-            return render(request, 'users/patient_profile', {'patient': patient})
-        return render(request, self.template_name, {'form': form})
+                file = form.save(commit=False)
+                file.patient = patient
+                file.file = request.FILES['file']
+                file.file_url = file.file.url
 
+                file.save()
+                return render(request, 'Patient/view_pres.html', {'patient': patient, 'error_message': 'File saved successfully!'})
+
+        return render(request, 'Patient/patHistory_form.html', {'form': form})
