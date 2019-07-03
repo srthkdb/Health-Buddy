@@ -2,6 +2,7 @@ from django import forms
 from .models import Prescription, PresMedicine
 
 class PrescriptionForm(forms.ModelForm):
+
     
     class Meta:
         model = Prescription
