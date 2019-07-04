@@ -1,13 +1,13 @@
 from .models import Type
-from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.shortcuts import render, get_object_or_404, reverse, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User 
 from django.views.generic import View
-from .forms import UserForm, DefUserForm, StffPatientRegForm, StudPatientRegForm
-from django.http import HttpResponseRedirect
+from .forms import UserForm, StffPatientRegForm, StudPatientRegForm
 from django.views.generic import TemplateView
 from Patient.models import Patient
 from students.models import students
+
 
 class Home(TemplateView):
     template_name = "users/base_home.html"
@@ -67,9 +67,9 @@ class UserFormView(View):
                 if user.is_active:
                     login(request, user)
                     if isStudent:
-                        return redirect('/home/register/stud_patient')
+                        return redirect('/register/stud_patient')
                     else:
-                        return redirect('/home/register/stff_patient/')
+                        return redirect('/register/stff_patient/')
         return render(request, self.template_name, {'form': form})
 
 class StffPatientRegFormView(View):
@@ -135,8 +135,7 @@ class StudPatientRegFormView(View):
 
 def logout_user(request):
     logout(request)
-    form = DefUserForm(request.POST or None)
-    return render(request, 'users/base_home.html', {"form": form})
+    return render(request, 'users/base_home.html', {'error_message': 'logged out!'})
 
 def login_user(request):
     baseHome = 'users/base_home.html'
@@ -149,45 +148,17 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                if user.type.types == 'phr':
-                    return render(request, 'users/phr_index.html', {})
-                if user.type.types == 'rec':
-                    return render(request, 'users/rec_index.html', {})
-                if user.type.types == 'doc':
-                    return render(request, 'users/doc_index.html', {})
-                if user.type.types == 'pat':
-                    return render(request, 'users/pat_index.html', {})
+                return render(request, baseHome, {'error_message': 'Logged in!'})
+                # if user.type.types == 'phr':
+                #     return render(request, 'users/phr_index.html', {})
+                # if user.type.types == 'rec':
+                #     return render(request, 'users/rec_index.html', {})
+                # if user.type.types == 'doc':
+                #     return render(request, 'users/doc_index.html', {})
+                # if user.type.types == 'pat':
+                #     return render(request, 'users/pat_index.html', {})
             else:
                 return render(request, baseHome, {'error_message': 'Your account has been disabled'})
         else:
             return render(request, baseHome, {'error_message': 'Invalid login'})
     return render(request, baseHome)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

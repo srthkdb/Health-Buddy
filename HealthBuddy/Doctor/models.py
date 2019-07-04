@@ -36,21 +36,16 @@ class Doctor(models.Model):
 class Prescription(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    treatmentFor = models.CharField(max_length=150)
+    treatmentFor = models.TextField(blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     remarks = models.TextField(blank=True)
     tests = models.ManyToManyField(TestList, blank=True)
     roomNo7 = models.TextField(blank=True)
+    med_added = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.patient.user.username
+        return self.patient.treatmentFor
 
-class TempPres(models.Model):
-    doctor = models.OneToOneField(Doctor, on_delete = models.CASCADE)
-    prescription = models.OneToOneField(Prescription, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.doctor.user.username
 
 class PresMedicine(models.Model):
     medicine = models.CharField(max_length=100)

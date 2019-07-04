@@ -1,0 +1,215 @@
+{%extends 'users/base.html'%}
+
+{%block body%}
+<div class="row">
+
+        <div class="panel panel-success">
+    <!--                panel heading-->
+            <div class="panel-heading">
+                <h5 class="panel-title">{{patient.user.first_name}}'s prescriptions</h5>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a href="#pres_details" class="nav-link active text-success" data-toggle="tab">Prescription Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#pres_list" class="nav-link text-success" data-toggle="tab">Prescription List</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="container tab-pane active" id="pres_details">
+                        <br>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                        <h6 class="panel-title">Prescription</h6>
+                                    </div>
+                            <div class="panel-body" style="display: block;">
+                                            {% if error_message%}
+                                            <div class="alert alert-warning">
+                                                <p><strong>{{ error_message }}</strong></p>
+                                            </div>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <table style="border-color: white; width:100%;" class="table table-responsive" align="center">
+                                                        <tr style="border-color: white;">
+                                                            <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td style="border-color: white; align:left;"><b>Patient</b></td>
+                                                            <td  style="border-color: white;">{{patient.user.first_name}} {{patient.user.last_name}}</td>
+                                                            <td  style=" border-color: white;"></td>
+                                                        </tr>
+                                                        <tr style="border-color: white;">
+                                                            <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td style="border-color: white; align:left;"><b>Treatment for</b></td>
+                                                            <td  style="border-color: white;">{%if treatmentFor%}{{pres.treatmentFor}}{%else%}NA{%endif%}</td>
+                                                            <td  style=" border-color: white;"></td>
+                                                        </tr>
+                                                        <tr style="border-color: white;">
+                                                            <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td style="border-color: white; align:left;"><b>Remarks</b></td>
+                                                            <td  style="border-color: white;">{%if remarks%}{{pres.remarks}}{%else%}NA{%endif%}</td>
+                                                            <td  style=" border-color: white;"></td>
+                                                        </tr>
+                                                        <tr style="border-color: white;">
+                                                            <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td style="border-color: white; align:left;"><b>Room no 7</b></td>
+                                                            <td  style="border-color: white;">{%if roomNo7%}{{pres.roomNo7}}{%else%}NA{%endif%}</td>
+                                                            <td  style=" border-color: white;"></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table style="border-color: white; width:100%;" class="table table-responsive" align="center">
+                                                        <tr style="border-color: white;">
+                                                            <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td style="border-color: white; align:left;"><b>Doctor</b></td>
+                                                            <td  style="border-color: white;">Dr {{pres.doctor.user.first_name}} {{pres.doctor.user.last_name}}</td>
+                                                            <td  style=" border-color: white;"></td>
+                                                        </tr>
+                                                        <tr style="border-color: white;">
+                                                            <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td style="border-color: white; align:left;"><b>Date</b></td>
+                                                            <td  style="border-color: white;">{{pres.date}}</td>
+                                                            <td  style=" border-color: white;"></td>
+                                                        </tr>
+                                                        <tr style="border-color: white;">
+                                                            <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td style="border-color: white; align:left;"><b>Tests</b></td>
+                                                            <td  style="border-color: white;">{%if tests%}{%for t in tests%}{{t.test}}{%endfor%}{%else%}NA{%endif%}</td>
+                                                            <td  style=" border-color: white;"></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">
+                                                            <h6 class="panel-title">Medicines</h6>
+                                                        </div>
+                                                        <div class="panel-body" style="display: block;">
+                                                            <div class="form-group">
+                                                                <table class="table table-success">
+                                                                    <thead>
+                                                                        <tr class="table-success">
+                                                                            <th></th>
+                                                                            <th>Medicine</th>
+                                                                            <th>Times a day</th>
+                                                                            <th>No of days</th>
+                                                                            <th>When to take</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    {% if med %}
+                                                                    <tbody>
+                                                                        {%for m in med %}
+                                                                        <tr>
+                                                                            <th>{{ forloop.counter }}.</th>
+                                                                            <th>{{m.medicine}}</th>
+                                                                            <td>{{m.times_a_day}}</td>
+                                                                            <td>{{m.no_of_days}}</td>
+                                                                            <td>{{m.when_to_take}}</td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                    </tbody>
+                                                                    {%endif%}
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                    </div>
+                        </div>
+                    </div>
+    <!--                        Patient History-->
+                    <div class="container tab-pane fade" id="pres_list"><br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h6 class="panel-title">History</h6>
+                                    </div>
+                                    <div class="panel-body" style="display: block;">
+                                        <ul class="nav nav-pills">
+                                            <li class="active"><a data-toggle="pill" href="#pr">Precriptions</a></li>
+                                            <li><a data-toggle="pill" href="#file">Patient's files</a></li>
+                                        </ul>
+                                        {% if error_message%}
+                                        <div class="alert alert-warning">
+                                            <p><strong>{{ error_message }}</strong></p>
+                                        </div>
+                                        {% endif %}
+                                        <div class="tab-content">
+                                            <div id="pr" class="tab-pane fade in active">
+                                                <div class="row">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S No</th>
+                                                                <th>Consultation Date</th>
+                                                                <th>Treatment For</th>
+                                                                <th>Doctor</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        {%for p in patient.prescription_set.all %}
+                                                        <tbody>
+                                                            <tr class="table-success">
+                                                                <td>{{ forloop.counter }}.</td>
+                                                                <td><a href="{%url 'Patient:pres_details' p.id%}">{{ p.date.date }}</a></td>
+                                                                <td>{{p.treatmentFor}}</td>
+                                                                <td>Dr {{ p.doctor.user.first_name }} {{ p.doctor.user.last_name }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div id="file" class="tab-pane fade">
+                                                <div class="row">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S No</th>
+                                                                <th>Treatment For</th>
+                                                                <th>Remarks</th>
+                                                                <th>File</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        {%for p in patient.pathistory_set.all %}
+                                                        <tbody>
+                                                            <tr class="table-success">
+                                                                <td>{{ forloop.counter }}.</td>
+                                                                <td>{{p.treatmentFor}}</td>
+                                                                <td>Dr {{ p.doctor.user.first_name }} {{ p.doctor.user.last_name }}</td>
+                                                                <td><a  href="{{p.file}}">
+                                                                        <button  style="float: left" type="button" class="btn btn-success btn-xs">
+                                                                            <span class="glyphicon glyphicon-download-alt"></span>
+                                                                        </button>
+                                                                    </a>
+                                                                </td>
+
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+</div>
+
+{%endblock%}

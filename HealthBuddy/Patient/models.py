@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import Permission, User
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     bloodGroup = models.CharField(max_length=10, blank=True)
-    drugAllergies = models.CharField(max_length=500, default='none')
+    allergies = models.CharField(max_length=500, default='none')
     significantMedicalHistory = models.CharField(max_length=5000, default='none')
     phoneNo = models.CharField(max_length=50)
     emergencyContactName = models.CharField(max_length=50)
@@ -24,6 +24,10 @@ class Patient(models.Model):
     gender = models.CharField(max_length=10, blank=True)
     hometown = models.CharField(max_length=30, blank=True)
     per_addr = models.CharField(max_length=100, blank=True)
+    age = models.IntegerField(blank=True)
+    height = models.CharField(max_length=20, blank=True)
+    weight = models.CharField(max_length=20, blank=True)
+    is_student = models.BooleanField(default=True)
 
     def __str__(self):
         return self.user.username
@@ -31,5 +35,6 @@ class Patient(models.Model):
 class PatHistory(models.Model):
     treatmentFor = models.CharField(max_length=150)
     remarks = models.TextField(blank=True)
-    files = models.FileField(blank=True)
+    file = models.FileField(blank=True)
+    file_url = models.CharField(max_length=100, blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
