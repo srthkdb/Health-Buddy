@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import Permission, User
 from seven.models import TestList, bodyVital
 from Patient.models import Patient
+# from Reception.models import Appointment
 
 # Create your models here.
 class HCDept(models.Model):
@@ -65,4 +66,3 @@ class PresMedicine(models.Model):
 
     def __str__(self):
         return self.medicine
-
