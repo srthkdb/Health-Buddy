@@ -45,7 +45,7 @@ class Prescription(models.Model):
     med_added = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.patient.treatmentFor
+        return self.treatmentFor
 
 
 class PresMedicine(models.Model):
