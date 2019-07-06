@@ -181,7 +181,7 @@
                                                 </div><hr>
 
                                                 <div class="row">
-                                                    <div class="col-sm-12" align='center'>
+                                                    <div class="col-sm-6" align='center'>
                                                         <div class="form_sep">
                                                             <button
                                                                     formnovalidate
@@ -189,6 +189,21 @@
                                                                     type="submit"
                                                                     form="pres_form"
                                                                     formaction="{% if pres %} {% url 'Doctor:save_pres' patient.rollNo pres.id %} {%else%} {% url 'Doctor:save_pres_new' patient.rollNo %} {%endif%}"
+                                                                    formmethod="post"
+                                                                    formenctype="multipart/form-data"
+                                                                    class="btn btn-success"
+                                                                    align="center"
+                                                            >Save</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6" align='center'>
+                                                        <div class="form_sep">
+                                                            <button
+                                                                    formnovalidate
+                                                                    value="Create Reference"
+                                                                    type="submit"
+                                                                    form="pres_form"
+                                                                    formaction="{% if pres %} {% url 'Doctor:refer' patient.rollNo pres.id %} {%else%} {% url 'Doctor:refer_new' patient.rollNo %} {%endif%}"
                                                                     formmethod="post"
                                                                     formenctype="multipart/form-data"
                                                                     class="btn btn-success"
