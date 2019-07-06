@@ -17,18 +17,24 @@ class Day(models.Model):
     def __str__(self):
         return self.day
 
-class Timing(models.Model):
-    timing = models.CharField(max_length= 10)
+class DayAndTime(models.Model):
+    visitDay = models.ManyToManyField(Day)
+    start_time = models.TimeField("Start Time")
+    end_time = models.TimeField("End Time")
 
-    def __str__(self):
-        return self.timing
+# class Timing(models.Model):
+#     timing = models.CharField(max_length= 10)
+#
+#     def __str__(self):
+#         return self.timing
 
 class Doctor(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     department = models.ForeignKey(HCDept, on_delete=models.CASCADE)
     roomNo = models.CharField(max_length=15)
-    visitDays = models.ManyToManyField(Day)
-    timings = models.ForeignKey(Timing, on_delete = models.CASCADE)
+#    visitDays = models.ManyToManyField(Day)
+#    timings = models.ForeignKey(Timing, on_delete = models.CASCADE)
+    visit_day_time = models.ForeignKey(DayAndTime, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.user.username

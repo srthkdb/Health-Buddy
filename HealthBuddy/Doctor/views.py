@@ -43,8 +43,10 @@ def create_pres_return(request, patient_roll, pres_id=None):
     return render(request, template_name,{'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'error_message': 'Error: Invalid form submission, cannot create reference'})
 
 
+
 #delete appointment by filtering from patient and not by using app_id
 def save_pres(request, patient_roll, pres_id=None, end=None):
+
     form_class_pres = PrescriptionForm
     form_class_med = PresMedicineForm
     template_name = 'Doctor/prescription_form.html'
