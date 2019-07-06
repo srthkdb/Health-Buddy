@@ -43,6 +43,7 @@ def create_appointment(request, patient_roll, doc_name, app_id=None):
             a.reqApproval = True
             a.patient = patient
             a.doctor = doctor
+            a.dateNtime = datetime.datetime.now()
             a.save()
 
             app_form = AppointmentForm(None)

@@ -40,18 +40,20 @@ def requestAppointment(request, pref_doc):
     app_form = AppointmentRequestForm(request.POST or None)
     patient = request.user.patient
     user = get_object_or_404(User, username=pref_doc)
+    template_name = ""
 
     if user.doctor:
         doctor = user.doctor
     else:
-        return render()
+        return render(request, template_name, {})
 
     if app_form.is_valid():
         a = app_form.save(commit=False)
         a.patient = patient
         a.doctor = doctor
         a.dateNtime = datetime.datetime.now()
+        a.save()
 
-        return render()
+        return render(request, template_name, {})
 
-    return render()
+    return render(request, template_name, {})

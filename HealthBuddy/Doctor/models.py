@@ -36,13 +36,16 @@ class Doctor(models.Model):
 
 class Prescription(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="doctor")
     treatmentFor = models.TextField(blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     remarks = models.TextField(blank=True)
     tests = models.ManyToManyField(TestList, blank=True)
     roomNo7 = models.TextField(blank=True)
     med_added = models.BooleanField(default=False)
+
+    doc_ref = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="doc_ref",default=None)
+    refer_remarks = models.TextField(blank=True)
 
     def __str__(self):
         return self.patient.treatmentFor
