@@ -137,10 +137,30 @@ def logout_user(request):
     logout(request)
     return render(request, 'users/base_home.html', {'error_message': 'logged out!'})
 
+def redirect(request, user):
+    # if user.type.types == 'phr':
+    #     return render(request, 'users/phr_index.html', {})
+    # if user.type.types == 'rec':
+    #     return render(request, 'users/rec_index.html', {})
+    if user.type.types == 'doc':
+        return render(request, 'Doctor/home_doctor.html', {})
+    # if user.type.types == 'pat':
+    #     return render(request, 'users/pat_index.html', {})
+    return render(request, 'users/base_home.html', {'error_message': 'Logged in!'})
+
+
 def login_user(request):
     baseHome = 'users/base_home.html'
     if request.user.is_authenticated:
-        return render(request, baseHome, {'error_message': 'You are already logged in!'})
+        # if user.type.types == 'phr':
+    #     return render(request, 'users/phr_index.html', {})
+    # if user.type.types == 'rec':
+    #     return render(request, 'users/rec_index.html', {})
+        if user.type.types == 'doc':
+            return render(request, 'Doctor/home_doctor.html', {})
+    # if user.type.types == 'pat':
+    #     return render(request, 'users/pat_index.html', {})
+        return render(request, 'users/base_home.html', {'error_message': 'Logged in!'})
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -148,15 +168,15 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, baseHome, {'error_message': 'Logged in!'})
                 # if user.type.types == 'phr':
-                #     return render(request, 'users/phr_index.html', {})
-                # if user.type.types == 'rec':
-                #     return render(request, 'users/rec_index.html', {})
-                # if user.type.types == 'doc':
-                #     return render(request, 'users/doc_index.html', {})
-                # if user.type.types == 'pat':
-                #     return render(request, 'users/pat_index.html', {})
+    #       return render(request, 'users/phr_index.html', {})
+            # if user.type.types == 'rec':
+            #     return render(request, 'users/rec_index.html', {})
+            if user.type.types == 'doc':
+                return render(request, 'Doctor/home_doctor.html', {})
+            # if user.type.types == 'pat':
+            #     return render(request, 'users/pat_index.html', {})
+                return render(request, 'users/base_home.html', {'error_message': 'Logged in!'})
             else:
                 return render(request, baseHome, {'error_message': 'Your account has been disabled'})
         else:
