@@ -7,7 +7,7 @@ import datetime
 from Reception.models import Appointment
 
 
-def save_pres(request, patient_roll, pres_id=None, app_id, end=None):
+def save_pres(request, patient_roll, app_id, pres_id=None, end=None):
     form_class_pres = PrescriptionForm
     form_class_med = PresMedicineForm
     template_name = 'Doctor/prescription_form.html'
