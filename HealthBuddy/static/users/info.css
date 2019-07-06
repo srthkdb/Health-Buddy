@@ -1,0 +1,18 @@
+.div{
+    border: solid black 2px;
+    border-radius: 25px;
+    padding: 20px;
+    font-size: 20px;
+    color: #216E2E;
+    background-color:white;
+}
+.indiv{
+    font-size: 20px;
+    padding-left: 50px;
+}
+.head{
+    color: #2C2F33; 
+}
+.bod{
+    background-color: #2C2F33
+}
