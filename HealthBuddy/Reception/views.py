@@ -4,6 +4,7 @@ from .models import Appointment
 from Doctor.models import Doctor
 from Patient.models import Patient
 import datetime
+from django.views.generic import TemplateView
 # List available doctors
 
 '''
@@ -20,17 +21,12 @@ import datetime
 
 
 '''
-
-def create_appointment(request, patient_roll, doc_name, app_id=None):
-    patient = get_object_or_404(Patient, pk=patient_roll)
-    user = get_object_or_404(User, username=doc_name)
-
-    if user.doctor:
-        doctor = user.doctor
-    else:
-        pass
+class reception_home(TemplateView):
     template_name = ""
-
+    
+def create_appointment(request, app_id=None):
+    template_name = ""
+    receptionist = request.user.reception
     if app_id == None:
         app_form = AppointmentForm(request.POST or None)
     else:
@@ -41,20 +37,19 @@ def create_appointment(request, patient_roll, doc_name, app_id=None):
         if app_id == None:
             a = app_form.save(commit=False)
             a.reqApproval = True
-            a.patient = patient
-            a.doctor = doctor
+            a.patient = Patient.objects.get(pk=a.patient_roll)
+            a.receptionist = receptionist
             a.dateNtime = datetime.datetime.now()
             a.save()
 
-            app_form = AppointmentForm(None)
-
-            return render(request, template_name, {'app_form' : app_form, 'patient' : patient, doctor: 'doctor', 'error_message': 'Appointment confirmed'})
+            return render(request, template_name, {'error_message': 'Appointment confirmed'})
 
         else:
             a = app_form.save(commit=False)
+            a.reqApproval = True
+            a.dateNtime = datetime.datetime.now()
             a.save()
-            app_form = AppointmentForm(None)
 
-            return render(request, template_name, {'app_form' : app_form, 'patient' : patient, doctor: 'doctor', 'error_message': 'Appointment confirmed'})
+            return render(request, template_name, {'error_message': 'Appointment confirmed'})
 
-    return render(request, template_name, {'app_form' : app_form, 'patient' : patient, doctor: 'doctor', 'error_message': 'Invalid'})
+    return render(request, template_name, {'app_form' : app_form, 'error_message': 'Invalid'})

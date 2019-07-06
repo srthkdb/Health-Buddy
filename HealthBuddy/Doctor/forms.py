@@ -1,6 +1,6 @@
 from django import forms
 from .models import Prescription, PresMedicine
-from Doctor.models import Doctor
+from Doctor.models import *
 
 class PrescriptionForm(forms.ModelForm):
 
@@ -14,3 +14,9 @@ class PresMedicineForm(forms.ModelForm):
     class Meta:
         model = PresMedicine
         fields = ['medicine', 'times_a_day', 'no_of_days', 'when_to_take']
+
+class CreateReferForm(forms.ModelForm):
+
+    class Meta:
+        model = References
+        fields = ['to_doc', 'remarks_from_doc']
