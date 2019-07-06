@@ -1,21 +1,22 @@
-{%extends 'users/base.html'%}
+
 {%extends 'Patient/base_profile_patient.html'%}
+<center>
 {% block body %}
 
-<div class="container-fluid songs-container">
+<div class="container-fluid songs-container" style="padding-top: 30px;">
 
     <div class="row">
         <div class="col-sm-12 col-md-12">
 
             <div class="panel panel-default">
                 <div class="panel-body">
-
-                    <h3>{{request.user.first_name}}'s Prescriptions</h3>
+                  <center>
+                    <h3 style="font-size:35px;">{{request.user.first_name}}'s Prescriptions</h3>
 
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
-
+                  </center>
                     <table class="table">
                         <thead>
                             <tr>
@@ -47,3 +48,4 @@
 </div>
 
 {% endblock %}
+</center>

@@ -1,9 +1,10 @@
 from django import forms
 from .models import Prescription, PresMedicine
+from Doctor.models import Doctor
 
 class PrescriptionForm(forms.ModelForm):
 
-    
+
     class Meta:
         model = Prescription
         fields = ['treatmentFor' ,'tests', 'roomNo7', 'remarks']

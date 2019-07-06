@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, Http404
 from Doctor.models import Prescription
 from .models import Patient
 from .forms import PatHistoryForm
+import datetime
 
 def myPres_details(request):
         prescriptions = Prescription.objects.filter(patient=request.user.patient)
@@ -15,7 +16,6 @@ def pres_details(request, pres_id=None, patient_roll=None):
                 tests = pres.tests.all()
                 return render(request, 'Patient/view_pres.html',
                               {'patient': patient, 'pres': pres, 'med': med, 'tests': tests})
-
 
         else:
                 patient = get_object_or_404(Patient, rollNo=patient_roll)
@@ -35,3 +35,23 @@ def create_file(request):
                 return render(request, 'Patient/view_pres.html', {'patient': patient, 'error_message': 'File saved successfully!'})
 
         return render(request, 'Patient/patHistory_form.html', {'form': form})
+
+def requestAppointment(request, pref_doc):
+    app_form = AppointmentRequestForm(request.POST or None)
+    patient = request.user.patient
+    user = get_object_or_404(User, username=pref_doc)
+
+    if user.doctor:
+        doctor = user.doctor
+    else:
+        return render()
+
+    if app_form.is_valid():
+        a = app_form.save(commit=False)
+        a.patient = patient
+        a.doctor = doctor
+        a.dateNtime = datetime.datetime.now()
+
+        return render()
+
+    return render()

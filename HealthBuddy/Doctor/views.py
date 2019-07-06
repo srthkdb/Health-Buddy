@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from .forms import PrescriptionForm, PresMedicineForm
+from .forms import *
 from Patient.models import Patient
 from .models import *
 from seven.models import TestList
 import datetime
+from Reception.models import Appointment, ReferredAppointment
 
 
 def save_pres(request, patient_roll, pres_id=None):
@@ -72,7 +73,7 @@ def add_med(request, patient_roll, pres_id=None):
     template_name = 'Doctor/prescription_form.html'
     patient = get_object_or_404(Patient, pk = patient_roll)
 
-    if pres_id == None: 
+    if pres_id == None:
         pres_form = form_class_pres(request.POST or None)
         med_form = form_class_med(request.POST or None)
     else:
@@ -108,3 +109,22 @@ def add_med(request, patient_roll, pres_id=None):
             return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'pres': p, 'patient': patient, 'error_message': 'medicine added'})
 
     return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient})
+
+def ReferAppointment(request, patient_roll, app_id):
+    patient = get_object_or_404(Patient, pk=patient_roll)
+    prev_doc = request.user.doctor
+    prev_app = get_object_or_404(Appointment, pk=app_id)
+    brief_str = 'Dr ' + prev_doc.user.first_name + ' ' + prev_doc.user.last_name + "'s' remarks: " + prev_app.refer_remarks
+    new_app = Appointment(
+        patient = patient,
+        dateNtime = datetime.datetime.now(),
+        brief = brief_str,
+        doctor = prev_app.doc_ref,
+        is_referred = True,
+    )
+    new_app.save()
+
+    r = ReferredAppointment(prev_app=prev_app, new_app=new_app)
+    r.save()
+
+    return render()
