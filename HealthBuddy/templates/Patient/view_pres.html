@@ -1,6 +1,7 @@
 {%extends 'users/base.html'%}
 
 {%block body%}
+{% load staticfiles %}
 <div class="row">
 
         <div class="panel panel-success">
@@ -42,19 +43,19 @@
                                                         <tr style="border-color: white;">
                                                             <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                             <td style="border-color: white; align:left;"><b>Treatment for</b></td>
-                                                            <td  style="border-color: white;">{%if treatmentFor%}{{pres.treatmentFor}}{%else%}NA{%endif%}</td>
+                                                            <td  style="border-color: white;">{%if pres.treatmentFor%}{{pres.treatmentFor}}{%else%}NA{%endif%}</td>
                                                             <td  style=" border-color: white;"></td>
                                                         </tr>
                                                         <tr style="border-color: white;">
                                                             <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                             <td style="border-color: white; align:left;"><b>Remarks</b></td>
-                                                            <td  style="border-color: white;">{%if remarks%}{{pres.remarks}}{%else%}NA{%endif%}</td>
+                                                            <td  style="border-color: white;">{%if pres.remarks%}{{pres.remarks}}{%else%}NA{%endif%}</td>
                                                             <td  style=" border-color: white;"></td>
                                                         </tr>
                                                         <tr style="border-color: white;">
                                                             <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                             <td style="border-color: white; align:left;"><b>Room no 7</b></td>
-                                                            <td  style="border-color: white;">{%if roomNo7%}{{pres.roomNo7}}{%else%}NA{%endif%}</td>
+                                                            <td  style="border-color: white;">{%if pres.roomNo7%}{{pres.roomNo7}}{%else%}NA{%endif%}</td>
                                                             <td  style=" border-color: white;"></td>
                                                         </tr>
                                                     </table>
@@ -76,7 +77,7 @@
                                                         <tr style="border-color: white;">
                                                             <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                             <td style="border-color: white; align:left;"><b>Tests</b></td>
-                                                            <td  style="border-color: white;">{%if tests%}{%for t in tests%}{{t.test}}{%endfor%}{%else%}NA{%endif%}</td>
+                                                            <td  style="border-color: white;">{%if pres.tests%}{%for t in tests%}{{t.test}}{%endfor%}{%else%}NA{%endif%}</td>
                                                             <td  style=" border-color: white;"></td>
                                                         </tr>
                                                     </table>

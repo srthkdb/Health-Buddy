@@ -48,7 +48,7 @@ class Prescription(models.Model):
     refer_remarks = models.TextField(blank=True)
 
     def __str__(self):
-        return self.patient.treatmentFor
+        return self.treatmentFor
 
 
 class PresMedicine(models.Model):
