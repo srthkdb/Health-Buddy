@@ -50,9 +50,6 @@ class Prescription(models.Model):
     roomNo7 = models.TextField(blank=True)
     med_added = models.BooleanField(default=False)
 
-    doc_ref = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="doc_ref",default=None)
-    refer_remarks = models.TextField(blank=True)
-
     def __str__(self):
         return self.treatmentFor
 
@@ -75,3 +72,13 @@ class PresMedicine(models.Model):
 
     def __str__(self):
         return self.medicine
+
+class References(models.Model):
+    from_doc = models.ForeignKey(Doctor, related_name="from_doc", on_delete=models.CASCADE)
+    to_doc = models.ForeignKey(Doctor, related_name="to_doc", on_delete=models.CASCADE)
+    remarks_from_doc = models.TextField(blank=True)
+    remarks_to_doc = models.TextField(blank=True)
+    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.to_doc.user.first_name

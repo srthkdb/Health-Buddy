@@ -36,7 +36,7 @@ def create_file(request):
 
         return render(request, 'Patient/patHistory_form.html', {'form': form})
 
-def requestAppointment(request, pref_doc):
+def requestAppointment(request):
     app_form = AppointmentRequestForm(request.POST or None)
     patient = request.user.patient
     user = get_object_or_404(User, username=pref_doc)
