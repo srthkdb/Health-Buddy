@@ -23,7 +23,7 @@ from django.views.generic import TemplateView
 '''
 class reception_home(TemplateView):
     template_name = ""
-    
+
 def create_appointment(request, app_id=None):
     template_name = ""
     receptionist = request.user.reception
@@ -47,6 +47,7 @@ def create_appointment(request, app_id=None):
         else:
             a = app_form.save(commit=False)
             a.reqApproval = True
+            a.receptionist = receptionist
             a.dateNtime = datetime.datetime.now()
             a.save()
 
