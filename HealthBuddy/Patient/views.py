@@ -36,24 +36,27 @@ def create_file(request):
 
         return render(request, 'Patient/patHistory_form.html', {'form': form})
 
-def requestAppointment(request):
-    app_form = AppointmentRequestForm(request.POST or None)
+def requestAppointment(request, app_id=None):
     patient = request.user.patient
-    user = get_object_or_404(User, username=pref_doc)
     template_name = ""
-
-    if user.doctor:
-        doctor = user.doctor
+    if app_id == None:
+        app_req_form = AppointmentRequestForm(request.POST or None)
     else:
-        return render(request, template_name, {})
+        app = get_object_or_404(Appointment, pk=app_id)
+        app_req_form = AppointmentRequestForm(request.POST or None, instance=app)
+    if app_req_form.is_valid():
+        if app_id:
+            a = app_req_form.save(commit=False)
+            a.dateNtime = datetime.datetime.now()
+            a.save()
 
-    if app_form.is_valid():
-        a = app_form.save(commit=False)
-        a.patient = patient
-        a.doctor = doctor
-        a.dateNtime = datetime.datetime.now()
-        a.save()
+        else:
+            a = app_req_form.save(commit=False)
+            a.patient = patient
+            a.patient_roll = patient.rollNo
+            a.dateNtime = datetime.datetime.now()
+            a.save()
 
-        return render(request, template_name, {})
+        return render(request, template_name, {'form' : app_req_form, 'error_message': "request sent"})
 
-    return render(request, template_name, {})
+    return render(request, template_name, {'form' : app_req_form, 'error_message' : "Invalid request"})
