@@ -264,8 +264,8 @@ body {
 #pie-chart-widget .legend li:not(:first-child) {
     border-left: 1px solid #fff;
 }
-#pie-chart-widget .legend .video {   
-    border-top: 4px solid #4DAF7C; 
+#pie-chart-widget .legend .video {
+    border-top: 4px solid #4DAF7C;
 }
 #pie-chart-widget .legend .audio {
     border-top: 4px solid #EAC85D;
