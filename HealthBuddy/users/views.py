@@ -1,7 +1,7 @@
 from .models import Type
 from django.shortcuts import render, get_object_or_404, reverse, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
 from django.views.generic import View
 from .forms import UserForm, StffPatientRegForm, StudPatientRegForm
 from django.views.generic import TemplateView
@@ -41,10 +41,10 @@ class UserFormView(View):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             isStudent = form.cleaned_data['isStudent']
-            
+
             if password1!=password2:
                 return render(request, self.template_name, {'form': form})
-            
+
 
             if request.user.is_authenticated:
                 logout(request)
@@ -62,7 +62,7 @@ class UserFormView(View):
             )
             types.save()
             user = authenticate(username=username, password=password2)
-              
+
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -172,10 +172,10 @@ def login_user(request):
     #       return render(request, 'users/phr_index.html', {})
             # if user.type.types == 'rec':
             #     return render(request, 'users/rec_index.html', {})
-            if user.type.types == 'doc':
-                return render(request, 'Doctor/home_doctor.html', {})
-            # if user.type.types == 'pat':
-            #     return render(request, 'users/pat_index.html', {})
+                if user.type.types == 'doc':
+                    return render(request, 'Doctor/home_doctor.html', {})
+                # if user.type.types == 'pat':
+                #     return render(request, 'users/pat_index.html', {})
                 return render(request, 'users/base_home.html', {'error_message': 'Logged in!'})
             else:
                 return render(request, baseHome, {'error_message': 'Your account has been disabled'})

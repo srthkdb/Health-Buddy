@@ -1,13 +1,21 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import *
 from Patient.models import Patient
 from .models import *
 from seven.models import TestList
 import datetime
 from Reception.models import Appointment
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url = "/")
 #saves pres and renders reference form
 def create_pres_return(request, patient_roll, pres_id=None):
+    if request.user.type.types != 'doc':
+        return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+    if pres_id:
+        pres = get_object_or_404(Prescription, pk=pres_id)
+        if pres.doctor.user.username != request.user.username:
+            return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
     form_class_pres = PrescriptionForm
     form_class_med = PresMedicineForm
     template_name = 'Doctor/prescription_form.html'
@@ -43,10 +51,15 @@ def create_pres_return(request, patient_roll, pres_id=None):
     return render(request, template_name,{'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'error_message': 'Error: Invalid form submission, cannot create reference'})
 
 
-
+@login_required(login_url = "/")
 #delete appointment by filtering from patient and not by using app_id
 def save_pres(request, patient_roll, pres_id=None, end=None):
-
+    if request.user.type.types != 'doc':
+        return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+    if pres_id:
+        pres = get_object_or_404(Prescription, pk=pres_id)
+        if pres.doctor.user.username != request.user.username:
+            return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
     form_class_pres = PrescriptionForm
     form_class_med = PresMedicineForm
     template_name = 'Doctor/prescription_form.html'
@@ -92,7 +105,15 @@ def save_pres(request, patient_roll, pres_id=None, end=None):
 
     return render(request, template_name,{'pres_form': pres_form, 'med_form': med_form, 'patient': patient})
 
+@login_required(login_url = "/")
 def delete_med(request, patient_roll, pres_id, med_id):
+    if request.user.type.types != 'doc':
+        return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+    if pres_id:
+        pres = get_object_or_404(Prescription, pk=pres_id)
+        if pres.doctor.user.username != request.user.username:
+            return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+
     patient = get_object_or_404(Patient, pk=patient_roll)
     pres = get_object_or_404(Prescription, pk=pres_id)
     form_class_pres = PrescriptionForm
@@ -112,7 +133,15 @@ def delete_med(request, patient_roll, pres_id, med_id):
     return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'pres': pres, 'patient': patient,
                                            'error_message': 'Medicine removed'})
 
+@login_required(login_url = "/")
 def add_med(request, patient_roll, pres_id=None):
+    if request.user.type.types != 'doc':
+        return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+    if pres_id:
+        pres = get_object_or_404(Prescription, pk=pres_id)
+        if pres.doctor.user.username != request.user.username:
+            return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+
     form_class_pres = PrescriptionForm
     form_class_med = PresMedicineForm
     template_name = 'Doctor/prescription_form.html'
@@ -134,7 +163,7 @@ def add_med(request, patient_roll, pres_id=None):
             p.doctor = request.user.doctor
             p.patient = patient
             p.med_added = True
-            p.app
+            # p.app
             p.save()
 
             m = med_form.save(commit=False)
@@ -156,7 +185,15 @@ def add_med(request, patient_roll, pres_id=None):
 
     return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient})
 
+@login_required(login_url = "/")
 def create_reference(request, patient_roll, pres_id=None):
+    if request.user.type.types != 'doc':
+        return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+    if pres_id:
+        pres = get_object_or_404(Prescription, pk=pres_id)
+        if pres.doctor.user.username != request.user.username:
+            return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+
     form_class = CreateReferForm
     template_name = 'Doctor/prescription_form.html'
     form = form_class(request.POST or None)

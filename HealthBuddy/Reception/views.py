@@ -5,6 +5,7 @@ from Doctor.models import Doctor
 from Patient.models import Patient
 import datetime
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 # List available doctors
 
 '''
@@ -21,9 +22,12 @@ from django.views.generic import TemplateView
 
 
 '''
+
+@login_required(login_url = "/")
 class reception_home(TemplateView):
     template_name = ""
 
+@login_required(login_url = "/")
 def create_appointment(request, app_id=None):
     template_name = ""
     receptionist = request.user.reception
