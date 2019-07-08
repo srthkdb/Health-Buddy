@@ -15,16 +15,14 @@ class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, blank=True)
     dateNtime = models.DateTimeField(auto_now_add=True)
-    brief = models.TextField(blank=True)                 #treatment for
+    brief = models.TextField(blank=True)
     reqApproval = models.BooleanField(default=False)
     option = [
         ('w', 'Waiting'),
         ('e', 'Examining'),
         ('t', 'Terminated')
     ]
-    status = models.CharField(max_length=2, choices=option, default='w')          #completed = True, pending = false
-    is_referred = models.BooleanField(default=False)
-    receptionist = models.ForeignKey(Reception, on_delete=models.CASCADE)
+    status = models.CharField(max_length=2, choices=option, default='w')
 
     def __str__(self):
-        return (self.patient.user.username, self.doctor.user.username)
+        return self.patient.user.username
