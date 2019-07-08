@@ -5,6 +5,5 @@ from .models import *
 admin.site.register(HCDept)
 admin.site.register(PresMedicine)
 admin.site.register(Day)
-admin.site.register(DayAndTime)
 admin.site.register(Prescription)
 admin.site.register(Doctor)

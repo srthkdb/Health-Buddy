@@ -5,7 +5,7 @@ from django.contrib.auth.models import Permission, User
 class Medicine(models.Model):
     name = models.CharField(max_length=500)
     quantity = models.IntegerField(default=0)
-
+    
     def __str__(self):
         return self.name
 
@@ -14,3 +14,7 @@ class Pharmacy(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+
+
