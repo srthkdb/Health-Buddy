@@ -1,0 +1,112 @@
+{%extends 'users/base.html'%}
+
+{% block body %}
+<div class="row">
+    <div class="panel panel-success">
+<!--                panel heading-->
+        <div class="panel-heading">
+            <h5 class="panel-title">Appointments</h5>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a href="#new_app" class="nav-link active text-success" data-toggle="tab">New Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#app_req" class="nav-link text-success" data-toggle="tab">Appointment requests</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#ref" class="nav-link text-success" data-toggle="tab">Referrals</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="container tab-pane active" id="new_app">
+                    <br>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h6 class="panel-title">Create Appointment</h6>
+                        </div>
+                        <div class="panel-body" style="display: block;">
+                            <form id="pres_form"  action="{%url 'Reception:create_appointment_new' %}" method="post" enctype="multipart/form-data">
+                                 {% csrf_token %}
+                                {% if error_message or form.non_field_errors%}
+                                <div class="alert alert-warning">
+                                    <p><strong>{{ form.non_field_errors }}</strong></p>
+                                    <p><strong>{{ error_message }}</strong></p>
+                                </div>
+                                {% endif %}
+    
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6" align="center">
+                                                {{ form.patient_roll.errors }}
+                                                <label for="{{ form.patient_roll.id_for_label }}" class="req">Patient Roll/Pf No</label><br>
+                                                {{ form.patient_roll }}
+                                            </div>
+                                            <div class="col-md-6" align="center">
+                                                {{ form.doctor.errors }}
+                                                <label for="{{ form.doctor.id_for_label }}" class="req">Doctor</label><br>
+                                                {{ form.doctor }}
+                                            </div>
+                                        </div><br>
+                                        <div class="row" align="center">
+                                            {{ form.brief.errors }}
+                                            <label for="{{ form.brief.id_for_label }}">Brief</label><br>
+                                            {{ form.brief }}
+                                        </div>
+                                    </div>
+                                </div><br>
+                                <div class="form-group">
+                                    <div class="col-sm-12" align="center">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+<!--                        Patient History-->
+                <div class="container tab-pane fade" id="app_req"><br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">Appointment requests</h6>
+                                </div>
+                                <div class="panel-body" style="display: block;">
+                                    {% if error_message%}
+                                    <div class="alert alert-warning">
+                                        <p><strong>{{ error_message }}</strong></p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container tab-pane fade" id="ref"><br>
+                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">Referrals</h6>
+                                </div>
+                                <div class="panel-body" style="display: block;">
+                                    {% if error_message%}
+                                    <div class="alert alert-warning">
+                                        <p><strong>{{ error_message }}</strong></p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
