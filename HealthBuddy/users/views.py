@@ -171,7 +171,12 @@ def login_user(request):
                 login(request, user)
                 if user.type:
                     # if user.type.types == 'phr':
-                    #     return redirect(reverse())
+
+                          #return render(request, 'users/phr_index.html', {})
+                     # if user.type.types == 'rec':
+                     #     return render(request, 'users/rec_index.html', {})
+                    if user.type.types == 'doc':
+                        return render(request, 'Doctor/home_doc.html', {})
                     # if user.type.types == 'pat':
                     #     return render(request, 'Patient/view_pres.html', {})
                     if user.type.types == 'doc':
