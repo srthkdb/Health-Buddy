@@ -7,6 +7,7 @@ from .forms import UserForm, StffPatientRegForm, StudPatientRegForm
 from django.views.generic import TemplateView
 from Patient.models import Patient
 from students.models import students
+from django.urls import reverse
 
 
 class Home(TemplateView):
@@ -168,16 +169,22 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                if user.type is not None:
+                if user.type:
                     # if user.type.types == 'phr':
+
                           #return render(request, 'users/phr_index.html', {})
                      # if user.type.types == 'rec':
                      #     return render(request, 'users/rec_index.html', {})
                     if user.type.types == 'doc':
                         return render(request, 'Doctor/home_doc.html', {})
                     # if user.type.types == 'pat':
-                    #     return render(request, 'users/pat_index.html', {})
-                return render(request, 'users/base_home.html', {'error_message': 'Logged in!'})
+                    #     return render(request, 'Patient/view_pres.html', {})
+                    if user.type.types == 'doc':
+                        return render(request, 'Doctor/home_doc.html', {})
+                    # if user.type.types == 'rec':
+                    #     return render(request, 'Reception/app_form.html', {})
+                else:
+                    return render(request, baseHome, {'error_message': 'User has no type'})
             else:
                 return render(request, baseHome, {'error_message': 'Your account has been disabled'})
         else:

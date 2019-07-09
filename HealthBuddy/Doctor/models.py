@@ -47,8 +47,8 @@ class Doctor(models.Model):
 
 
 class Prescription(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="doctor")
+    # date = models.DateTimeField(auto_now_add=True)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     treatmentFor = models.TextField(blank=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     remarks = models.TextField(blank=True)
@@ -58,6 +58,15 @@ class Prescription(models.Model):
 
     def __str__(self):
         return self.treatmentFor
+
+
+class PresDetails(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    pres = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.doctor.user.username
 
 
 class PresMedicine(models.Model):
@@ -75,6 +84,7 @@ class PresMedicine(models.Model):
         default='a'
     )
     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+    provided = models.BooleanField(default=False)
 
     def __str__(self):
         return self.medicine
@@ -87,4 +97,4 @@ class References(models.Model):
     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.to_doc.user.first_name
+        return self.to_doc.user.username

@@ -2,23 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f1cb8fd-27df-4ac0-828e-8cf5f9c5fe40" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/HealthBuddy/templates/Reception/app_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Doctor/static/Doctor/script_base_profile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Doctor/static/Doctor/style_base_profile.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Doctor/templates/Doctor/base_profile_doctor.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Patient/static/Patient/script_base_profile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Patient/static/Patient/style_base_profile.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Patient/templates/Patient/base_profile_patient.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Reception/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Reception/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Reception/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Reception/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Reception/static/Reception/script_base_profile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Reception/static/Reception/style_base_profile.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Reception/templates/Reception/base_profile_reception.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Reception/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Reception/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/Reception/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Reception/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/users/static/users/script_base_profile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/users/static/users/style_base_profile.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HealthBuddy/users/templates/users/__init__.py" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/HealthBuddy/templates/Doctor/refer_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HealthBuddy/templates/Pharmacy/pres_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/Doctor/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Doctor/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/Doctor/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Doctor/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/Doctor/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Doctor/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/Doctor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Doctor/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/HealthBuddy/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/HealthBuddy/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/Patient/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Patient/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/Patient/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Patient/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/Pharmacy/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/Pharmacy/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/templates/Doctor/home_doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/templates/Doctor/home_doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/templates/Doctor/home_doctor.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/templates/Doctor/prescription_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/templates/Doctor/prescription_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/templates/Patient/myPrescriptions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/templates/Patient/patHistory_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthBuddy/templates/Patient/view_pres.html" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/templates/Patient/view_pres.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HealthBuddy/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HealthBuddy/users/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,19 +30,48 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Reception/app_form.html">
+        <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+            <state relative-caret-position="2036">
+              <caret line="235" selection-start-line="235" selection-end-line="235" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/users/views.py">
+        <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Doctor/refer_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="173" column="31" lean-forward="true" selection-start-line="173" selection-start-column="31" selection-end-line="173" selection-end-column="31" />
+            <state relative-caret-position="313">
+              <caret line="24" column="67" lean-forward="true" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Patient/view_pres.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1173">
+              <caret line="222" column="78" lean-forward="true" selection-start-line="222" selection-start-column="78" selection-end-line="222" selection-end-column="78" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -51,22 +80,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/views.py">
+        <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
-              <folding>
-                <element signature="e#0#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="27" column="15" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
+            <state relative-caret-position="302">
+              <caret line="64" column="10" selection-start-line="64" selection-start-column="4" selection-end-line="64" selection-end-column="10" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -74,62 +91,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/HealthBuddy/urls.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/admin.py">
+        <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Doctor/home_doc.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="403">
+              <caret line="149" column="63" selection-start-line="149" selection-start-column="47" selection-end-line="149" selection-end-column="63" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/forms.py">
+        <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HealthBuddy/Patient/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-261">
+              <caret line="8" column="67" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -139,27 +114,45 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>home_doctor</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>home_doc</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/HealthBuddy/users/views.py" />
         <option value="$PROJECT_DIR$/HealthBuddy/Reception/views.py" />
         <option value="$PROJECT_DIR$/HealthBuddy/Reception/models.py" />
         <option value="$PROJECT_DIR$/HealthBuddy/Reception/forms.py" />
         <option value="$PROJECT_DIR$/HealthBuddy/Reception/urls.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/HealthBuddy.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/HealthBuddy/templates/Patient/view_pres.html" />
+        <option value="$PROJECT_DIR$/HealthBuddy/HealthBuddy/urls.py" />
+        <option value="$PROJECT_DIR$/HealthBuddy/templates/Pharmacy/pres_view.html" />
+        <option value="$PROJECT_DIR$/HealthBuddy/Pharmacy/views.py" />
+        <option value="$PROJECT_DIR$/HealthBuddy/users/views.py" />
+        <option value="$PROJECT_DIR$/HealthBuddy/Patient/urls.py" />
+        <option value="$PROJECT_DIR$/HealthBuddy/Patient/views.py" />
+        <option value="$PROJECT_DIR$/HealthBuddy/templates/Doctor/refer_form.html" />
+        <option value="$PROJECT_DIR$/HealthBuddy/templates/Doctor/prescription_form.html" />
+        <option value="$PROJECT_DIR$/HealthBuddy/Doctor/admin.py" />
+        <option value="$PROJECT_DIR$/HealthBuddy/Doctor/models.py" />
+        <option value="$PROJECT_DIR$/HealthBuddy/templates/Doctor/home_doc.html" />
+        <option value="$PROJECT_DIR$/HealthBuddy/Doctor/urls.py" />
+        <option value="$PROJECT_DIR$/HealthBuddy/Doctor/views.py" />
       </list>
     </option>
   </component>
@@ -191,7 +184,27 @@
               <item name="HealthBuddy" type="b2602c69:ProjectViewProjectNode" />
               <item name="HealthBuddy" type="462c0819:PsiDirectoryNode" />
               <item name="HealthBuddy" type="462c0819:PsiDirectoryNode" />
+              <item name="Doctor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HealthBuddy" type="b2602c69:ProjectViewProjectNode" />
               <item name="HealthBuddy" type="462c0819:PsiDirectoryNode" />
+              <item name="HealthBuddy" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HealthBuddy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HealthBuddy" type="462c0819:PsiDirectoryNode" />
+              <item name="HealthBuddy" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Doctor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HealthBuddy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HealthBuddy" type="462c0819:PsiDirectoryNode" />
+              <item name="HealthBuddy" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Patient" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -200,6 +213,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/HealthBuddy/templates/Reception" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -232,25 +247,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1562612500669</updated>
-      <workItem from="1562612502211" duration="412000" />
+      <workItem from="1562612502211" duration="17627000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="412000" />
+    <option name="totallyTimeSpent" value="17627000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="63" y="17" width="1217" height="702" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24935952" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15542272" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32864675" />
+      <window_info anchor="bottom" id="Terminal" weight="0.5659051" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -277,35 +292,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HealthBuddy/users/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="173" column="31" lean-forward="true" selection-start-line="173" selection-start-column="31" selection-end-line="173" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HealthBuddy/Patient/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-261">
@@ -318,7 +304,7 @@
     <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -328,7 +314,7 @@
     <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
@@ -345,18 +331,306 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Patient/patHistory_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="33" selection-end-column="10" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/HealthBuddy/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Pharmacy/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Pharmacy/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Pharmacy/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/users/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Pharmacy/pres_view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2652">
+          <caret line="156" column="35" selection-start-line="156" selection-start-column="35" selection-end-line="156" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#1898#1904#0" expanded="true" />
+            <element signature="e#1904#1910#0" expanded="true" />
+            <element signature="e#1910#1916#0" expanded="true" />
+            <element signature="e#1916#1922#0" expanded="true" />
+            <element signature="e#1922#1928#0" expanded="true" />
+            <element signature="e#1928#1934#0" expanded="true" />
+            <element signature="e#1934#1940#0" expanded="true" />
+            <element signature="e#1940#1946#0" expanded="true" />
+            <element signature="e#1946#1952#0" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#2584#2590#0" expanded="true" />
+            <element signature="e#2590#2596#0" expanded="true" />
+            <element signature="e#2596#2602#0" expanded="true" />
+            <element signature="e#2602#2608#0" expanded="true" />
+            <element signature="e#2608#2614#0" expanded="true" />
+            <element signature="e#2614#2620#0" expanded="true" />
+            <element signature="e#2620#2626#0" expanded="true" />
+            <element signature="e#2626#2632#0" expanded="true" />
+            <element signature="e#2632#2638#0" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#2;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#2;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#3287#3293#0" expanded="true" />
+            <element signature="e#3293#3299#0" expanded="true" />
+            <element signature="e#3299#3305#0" expanded="true" />
+            <element signature="e#3305#3311#0" expanded="true" />
+            <element signature="e#3311#3317#0" expanded="true" />
+            <element signature="e#3317#3323#0" expanded="true" />
+            <element signature="e#3323#3329#0" expanded="true" />
+            <element signature="e#3329#3335#0" expanded="true" />
+            <element signature="e#3335#3341#0" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#2;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#2;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#3;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#3;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#3973#3979#0" expanded="true" />
+            <element signature="e#3979#3985#0" expanded="true" />
+            <element signature="e#3985#3991#0" expanded="true" />
+            <element signature="e#3991#3997#0" expanded="true" />
+            <element signature="e#3997#4003#0" expanded="true" />
+            <element signature="e#4003#4009#0" expanded="true" />
+            <element signature="e#4009#4015#0" expanded="true" />
+            <element signature="e#4015#4021#0" expanded="true" />
+            <element signature="e#4021#4027#0" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#3;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#3;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#4995#5001#0" expanded="true" />
+            <element signature="e#5001#5007#0" expanded="true" />
+            <element signature="e#5007#5013#0" expanded="true" />
+            <element signature="e#5013#5019#0" expanded="true" />
+            <element signature="e#5019#5025#0" expanded="true" />
+            <element signature="e#5025#5031#0" expanded="true" />
+            <element signature="e#5031#5037#0" expanded="true" />
+            <element signature="e#5037#5043#0" expanded="true" />
+            <element signature="e#5043#5049#0" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#5691#5697#0" expanded="true" />
+            <element signature="e#5697#5703#0" expanded="true" />
+            <element signature="e#5703#5709#0" expanded="true" />
+            <element signature="e#5709#5715#0" expanded="true" />
+            <element signature="e#5715#5721#0" expanded="true" />
+            <element signature="e#5721#5727#0" expanded="true" />
+            <element signature="e#5727#5733#0" expanded="true" />
+            <element signature="e#5733#5739#0" expanded="true" />
+            <element signature="e#5739#5745#0" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#6333#6339#0" expanded="true" />
+            <element signature="e#6339#6345#0" expanded="true" />
+            <element signature="e#6345#6351#0" expanded="true" />
+            <element signature="e#6351#6357#0" expanded="true" />
+            <element signature="e#6357#6363#0" expanded="true" />
+            <element signature="e#6363#6369#0" expanded="true" />
+            <element signature="e#6369#6375#0" expanded="true" />
+            <element signature="e#6375#6381#0" expanded="true" />
+            <element signature="e#6381#6387#0" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#2;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HealthBuddy/Reception/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HealthBuddy/HealthBuddy/urls.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Patient/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Patient/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+            <element signature="e#303#871#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Patient/view_pres.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="222" column="78" lean-forward="true" selection-start-line="222" selection-start-column="78" selection-end-line="222" selection-end-column="78" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Doctor/prescription_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="242" column="75" lean-forward="true" selection-start-line="242" selection-start-column="75" selection-end-line="242" selection-end-column="75" />
+          <folding>
+            <element signature="e#3041#3047#0" expanded="true" />
+            <element signature="e#3047#3053#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Doctor/refer_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="24" column="67" lean-forward="true" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="67" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="64" column="10" selection-start-line="64" selection-start-column="4" selection-end-line="64" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/Doctor/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2036">
+          <caret line="235" selection-start-line="235" selection-end-line="235" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthBuddy/templates/Doctor/home_doc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="149" column="63" selection-start-line="149" selection-start-column="47" selection-end-line="149" selection-end-column="63" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
