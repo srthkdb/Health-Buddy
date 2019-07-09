@@ -80,11 +80,15 @@
       <div class="panelbody">
         <table class="table table-default">
           <tbody>
+            {% for appointment in request.user.doctor.appointment_set.all %}
+              {% if appointment.status == 'w' %}
             <tr>
-              <td>Name</td>
-              <td>App id</td>
-              <td>status</td>
+              <td>{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</td>
+              <td>{{appointment.patient.rollNo}}</td>
+              <td>{{appointment.dateNtime}}</td>
             </tr>
+              {%endif%}
+            {%endfor%}
           </tbody>
         </table>
 
@@ -98,14 +102,18 @@
       <div class="panelbody">
         <table class="table table-default">
           <tbody>
+          {% if request.user.doctor.to_doc.all %}
+            {% for r in request.user.doctor.to_doc.all %}
             <tr>
-              <td>Name</td>
-              <td>App id</td>
-              <td>status</td>
+                <td><a href="{%url 'Doctor:ref_pres' r.id %}">{{r.prescription.patient.user.first_name}} {{r.prescription.patient.user.last_name}}</a></td>
+              <td>Dr. {{r.from_doc.user.first_name}} {{r.from_doc.user.first_name}}</td>
+              <!-- <td>{{appointment.dateNtime}}</td> -->
             </tr>
+
+            {%endfor%}
+          {%endif%}
           </tbody>
         </table>
-
       </div>
     </div>
 
@@ -118,14 +126,17 @@
       <div class="panelbody">
         <table class="table table-default">
           <tbody>
+            {% for appointment in request.user.doctor.appointment_set.all %}
+              {% if appointment.status == 'e' %}
             <tr>
-              <td>Name</td>
-              <td>App id</td>
-              <td>status</td>
+              <td>{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</td>
+              <td>{{appointment.patient.rollNo}}</td>
+              <td>{{appointment.dateNtime}}</td>
             </tr>
+              {%endif%}
+            {%endfor%}
           </tbody>
         </table>
-
       </div>
     </div>
 
@@ -136,14 +147,15 @@
       <div class="panelbody">
         <table class="table table-default">
           <tbody>
+            {% for pres in request.user.doctor.prescription_set.all %}
             <tr>
-              <td>Name</td>
-              <td>App id</td>
-              <td>status</td>
+                <td><a href="{%url 'Doctor:create_prescription' pres.patient.rollNo %}"> {{pres.patient.user.first_name}} {{pres.patient.user.last_name}}</a></td>
+              <td>{{pres.patient.rollNo}}</td>
+              <td>{{pres.date}}</td>
             </tr>
+            {%endfor%}
           </tbody>
         </table>
-
       </div>
     </div>
 
