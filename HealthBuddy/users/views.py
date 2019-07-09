@@ -8,6 +8,9 @@ from django.views.generic import TemplateView
 from Patient.models import Patient
 from students.models import students
 from django.urls import reverse
+from Patient.forms import AppointmentRequestForm
+from Doctor.models import *
+from Reception.models import *
 
 
 class Home(TemplateView):
@@ -141,12 +144,16 @@ def logout_user(request):
 def redirect_home(request, user):
     # if user.type.types == 'phr':
     #     return render(request, 'users/phr_index.html', {})
-    # if user.type.types == 'rec':
-    #     return render(request, 'users/rec_index.html', {})
+    if user.type.types == 'rec':
+        return render(request, 'Reception/home_reception.html', {
+            'appointment_set' : Appointment.objects.all(),
+            'refer_list' : References.objects.all(),
+        })
     if user.type.types == 'doc':
         return render(request, 'Doctor/home_doc.html', {})
-    # if user.type.types == 'pat':
-    #     return render(request, 'users/pat_index.html', {})
+    if user.type.types == 'pat':
+        return render(request, 'Patient/home_patient.html', {'req_form': AppointmentRequestForm(None)})
+
     return render(request, 'users/base_home.html', {'error_message': 'Logged in!'})
 
 
@@ -155,12 +162,16 @@ def login_user(request):
     if request.user.is_authenticated:
         # if user.type.types == 'phr':
     #     return render(request, 'users/phr_index.html', {})
-    # if user.type.types == 'rec':
-    #     return render(request, 'users/rec_index.html', {})
+        if request.user.type.types == 'rec':
+            return render(request, 'Reception/home_reception.html', {
+                'appointment_set' : Appointment.objects.all(),
+                'refer_list' : References.objects.all(),
+            })
         if request.user.type.types == 'doc':
             return render(request, 'Doctor/home_doc.html', {})
-    # if user.type.types == 'pat':
-    #     return render(request, 'users/pat_index.html', {})
+        if request.user.type.types == 'pat':
+            return render(request, 'Patient/home_patient.html', {'req_form': AppointmentRequestForm(None)})
+
         return render(request, 'users/base_home.html', {'error_message': 'Logged in!'})
     if request.method == "POST":
         username = request.POST['username']
@@ -171,18 +182,19 @@ def login_user(request):
                 login(request, user)
                 if user.type:
                     # if user.type.types == 'phr':
-
                           #return render(request, 'users/phr_index.html', {})
-                     # if user.type.types == 'rec':
-                     #     return render(request, 'users/rec_index.html', {})
+
+                    if user.type.types == 'pat':
+                        return render(request, 'Patient/home_patient.html', {
+                            'req_form': AppointmentRequestForm(None)
+                            })
                     if user.type.types == 'doc':
                         return render(request, 'Doctor/home_doc.html', {})
-                    # if user.type.types == 'pat':
-                    #     return render(request, 'Patient/view_pres.html', {})
-                    if user.type.types == 'doc':
-                        return render(request, 'Doctor/home_doc.html', {})
-                    # if user.type.types == 'rec':
-                    #     return render(request, 'Reception/app_form.html', {})
+                    if user.type.types == 'rec':
+                        return render(request, 'Reception/home_reception.html', {
+                            'appointment_set' : Appointment.objects.all(),
+                            'refer_list' : References.objects.all(),
+                        })
                 else:
                     return render(request, baseHome, {'error_message': 'User has no type'})
             else:

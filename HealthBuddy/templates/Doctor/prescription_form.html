@@ -212,7 +212,7 @@
                                                     </div><hr>
 
                                                 <div class="row">
-                                                    <div class="col-sm-6" align='center'>
+                                                    <div class="col-sm-4" align='center'>
                                                         <div class="form_sep">
                                                             <button
                                                                     formnovalidate
@@ -227,7 +227,23 @@
                                                             >Save</button>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6" align='center'>
+                                                    <div class="col-sm-4" align='center'>
+                                                        <div class="form_sep">
+                                                            <button
+                                                                    formnovalidate
+                                                                    value="Create Reference"
+                                                                    type="submit"
+                                                                    form="pres_form"
+                                                                    formaction="{% if pres %} {% url 'Doctor:save_and_end' patient.rollNo pres.id 1 %} {%else%} {% url 'Doctor:create_and_end' patient.rollNo 1 %} {%endif%}"
+                                                                    formmethod="post"
+                                                                    formenctype="multipart/form-data"
+                                                                    class="btn btn-success"
+                                                                    align="left"
+                                                                    formtarget="_blank"
+                                                            >Save And End</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4" align='center'>
                                                         <div class="form_sep">
                                                             <button
                                                                     formnovalidate
