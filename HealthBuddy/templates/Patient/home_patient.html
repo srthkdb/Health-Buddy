@@ -1,0 +1,220 @@
+{%extends 'users/base.html'%}
+{% block scripts %}
+{% load staticfiles %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="//www.chartjs.org/assets/Chart.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- <script  src="{% static 'Doctor/home_jquery.js' %}"></script> -->
+<link rel="stylesheet" type="text/css" href="/static/Patient/home.css" />
+<script>
+
+</script>
+{% endblock %}
+{% block body %}
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'users:home' %}"><strong>HealthBuddy</strong></a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href = "{% url 'users:home' %}">
+                        <span class="" aria-hidden="true"></span>&nbsp;<i class="fa fa-user fa-1.5x"></i> {{request.user.first_name}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'users:logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- PROFILE SIDEBAR -->
+
+<div class="col-lg-3 col-md-4" style="padding-left:0px; padding-right:0px;" id="col-1">
+    <div class="card hovercard">
+        <div class="cardheader">
+        </div>
+        <div class="avatar">
+            <img alt="" src="http://lorempixel.com/100/100/people/9/">
+        </div>
+        <div class="info">
+            <div class="title">
+                <a target="_blank" href="https://scripteden.com/" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
+            </div>
+            <div class="desc">{{request.user.patient.rollNo}}</div>
+        </div>
+        <div class="bottom">
+        <div class="sidebar-items">
+            <a href="" class="dropdown-btn">Health Profile</a>
+        </div>
+        <div class="sidebar-items">
+            <a href="{% url 'Patient:pat_details' request.user.patient.rollNo %}" class="dropdown-btn">Medical History</a>
+        </div>
+        <div class="sidebar-items">
+            <a a href="" data-toggle="modal" data-target="#appointmentRequestForm">Request Appointment</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- DISPLAY CARDS -->
+
+<div class="col-lg-4 col-md-4">
+    <div class="panel" id="waiting-list">
+        <div class="panel-heading">
+            <h4 class="text-uppercase"><strong>Pending Appointments</strong></h4>
+        </div>
+        <div class="panelbody">
+        <table class="table table-default">
+            <tbody>
+            {% for appointment in request.user.patient.appointment_set.all %}
+                {% if appointment.status != 't' %}
+            <tr>
+                <td><a href="#">Dr. {{appointment.doctor.user.first_name}} {{appointment.doctor.user.last_name}}</a></td>
+                {%if appointment.reqApproval%}
+                <td><span class="label label-success">Approved</span></td>
+                {%else%}
+                <td><span class="label label-danger">Pending</span></td>
+                {%endif%}
+                <td>{{appointment.dateNtime}}</td>
+            </tr>
+                {%endif%}
+            {%endfor%}
+            </tbody>
+        </table>
+
+        </div>
+    </div>
+
+    <div class="panel" id="waiting-list">
+        <div class="panel-heading">
+        <h4 class="text-uppercase"><strong>Referred List</strong></h4>
+        </div>
+        <div class="panelbody">
+        <table class="table table-default">
+            <tbody>
+            {% if request.user.patient.prescription.references_set.all %}
+            {% for r in request.user.patient.prescription.references_set.all %}
+
+            <tr>
+                <td>{{appointment.prescription.patient.user.first_name}} {{appointment.prescription.patient.user.last_name}}</td>
+                <td>{{appointment.from_doc.user.first_name}} {{appointment.from_doc.user.first_name}}</td>
+            </tr>
+            {%endfor%}
+            {%endif%}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    </div>
+    <div class="col-lg-4 col-md-4">
+    <div class="panel" id="waiting-list">
+        <div class="panel-heading">
+        <h4 class="text-uppercase"><strong>Prescriptions</strong></h4>
+        </div>
+        <div class="panelbody">
+        <table class="table table-default">
+            <tbody>
+            {% for pres in request.user.patient.prescription_set.all %}
+                <tr>
+                    <td class="head"><strong>{{forloop.counter}}.</strong></td>
+                    {%for detail in pres.presdetails_set.all %}
+                    <td><a href="{% url 'Patient:pres_details' pres.pk %}">Dr. {{detail.doctor.user.first_name}} {{detail.doctor.user.last_name}}</a></td>
+                    <td>{{detail.date}}</td>
+                    {%endfor%}
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div class="panel" id="waiting-list">
+        <div class="panel-heading">
+        <h4 class="text-uppercase"><strong>My Patients</strong></h4>
+        </div>
+        <div class="panelbody">
+        <table class="table table-default">
+            <tbody>
+            {% for appointment in request.user.doctor.appointment_set.all %}
+                {% if appointment.status == 't' %}
+            <tr>
+                <td>{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</td>
+                <td>{{appointment.patient.rollNo}}</td>
+                <td>{{appointment.dateNtime}}</td>
+            </tr>
+                {%endif%}
+            {%endfor%}
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="appointmentRequestForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title"><strong>Request An Appointment</strong></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form id="app_form"  action="{% if app_id %}{% url 'Patient:request' app_id %} {% else %} {% url 'Patient:request_new' %} {%endif%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="md-form mb-5">
+                {{ req_form.brief.errors }}
+                <label for="{{ req_form.brief.id_for_label }}" class="req">Symptoms/Brief</label>
+                {{ req_form.brief }}
+            </div>
+
+            <div class="md-form mb-4">
+                {{ req_form.doctor.errors }}
+                <label for="{{ req_form.doctor.id_for_label }}">Which Doctor Would you prefer?</label>
+                {{ req_form.doctor }}
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <center>
+            <button 
+            type="submit" 
+            value="submit" 
+            form="app_form" 
+            class="btn btn-default btn">
+            </button>
+        </center>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

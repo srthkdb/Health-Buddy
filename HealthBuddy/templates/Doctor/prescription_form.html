@@ -59,7 +59,7 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
-                                            <h6 class="panel-title">Prescription</h6>
+                                            <h6 class="panel-title">Prescription &nbsp;&nbsp; <a href="{%url 'Doctor:create_prescription' patient.rollNo%}"><span class="glyphicon glyphicon-refresh" align="left"></span></a></h6>
                                         </div>
                                         <div class="panel-body" style="display: block;">
                                             <form id="pres_form"  action="{% if pres %} {% url 'Doctor:save_pres' patient.rollNo pres.id %} {%else%} {% url 'Doctor:save_pres_new' patient.rollNo %} {%endif%}" method="post" enctype="multipart/form-data">
@@ -212,7 +212,7 @@
                                                     </div><hr>
 
                                                 <div class="row">
-                                                    <div class="col-sm-6" align='center'>
+                                                    <div class="col-sm-4" align='center'>
                                                         <div class="form_sep">
                                                             <button
                                                                     formnovalidate
@@ -223,11 +223,27 @@
                                                                     formmethod="post"
                                                                     formenctype="multipart/form-data"
                                                                     class="btn btn-success"
-                                                                    align="center"
+                                                                    align="right"
                                                             >Save</button>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6" align='center'>
+                                                    <div class="col-sm-4" align='center'>
+                                                        <div class="form_sep">
+                                                            <button
+                                                                    formnovalidate
+                                                                    value="Create Reference"
+                                                                    type="submit"
+                                                                    form="pres_form"
+                                                                    formaction="{% if pres %} {% url 'Doctor:save_and_end' patient.rollNo pres.id 1 %} {%else%} {% url 'Doctor:create_and_end' patient.rollNo 1 %} {%endif%}"
+                                                                    formmethod="post"
+                                                                    formenctype="multipart/form-data"
+                                                                    class="btn btn-success"
+                                                                    align="left"
+                                                                    formtarget="_blank"
+                                                            >Save And End</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4" align='center'>
                                                         <div class="form_sep">
                                                             <button
                                                                     formnovalidate
@@ -238,8 +254,9 @@
                                                                     formmethod="post"
                                                                     formenctype="multipart/form-data"
                                                                     class="btn btn-success"
-                                                                    align="center"
-                                                            >Save</button>
+                                                                    align="left"
+                                                                    formtarget="_blank"
+                                                            >Refer</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -247,6 +264,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
 
         <!--                        Patient History-->
@@ -274,9 +292,10 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>S No</th>
-                                                                    <th>Consultation Date</th>
+                                                                    <th>Consultations</th>
                                                                     <th>Treatment For</th>
                                                                     <th>Doctor</th>
+                                                                    <th>Edit</th>
                                                                 </tr>
                                                             </thead>
 
@@ -284,9 +303,28 @@
                                                             <tbody>
                                                                 <tr class="table-success">
                                                                     <td>{{ forloop.counter }}.</td>
-                                                                    <td><a href="{%url 'Patient:pres_details' p.id%}" target="_blank">{{ p.date.date }}</a></td>
+                                                                    <td>
+                                                                        <ul>
+                                                                            {%for d in p.presdetails_set.all%}
+                                                                                <li>{{ d.date }} - By: Dr {{d.doctor.user.first_name}} {{d.doctor.user.last_name}}</li>
+                                                                            {%endfor%}
+                                                                        </ul>
+                                                                    </td>
                                                                     <td>{{p.treatmentFor}}</td>
                                                                     <td>Dr {{ p.doctor.user.first_name }} {{ p.doctor.user.last_name }}</td>
+                                                                    <td>
+                                                                        <button
+                                                                        formnovalidate
+                                                                        value="Edit"
+                                                                        type="submit"
+                                                                        form="pres_form"
+                                                                        formaction="{%url 'Doctor:edit_prescription' p.id %}"
+                                                                        formmethod="post"
+                                                                        formenctype="multipart/form-data"
+                                                                        class="btn btn-default btn-xs"
+                                                                        align="center"
+                                                                        ><span class="glyphicon glyphicon-pencil"></span></button>
+                                                                    </td>
                                                                 </tr>
                                                             {% endfor %}
                                                             </tbody>

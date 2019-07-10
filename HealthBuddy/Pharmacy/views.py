@@ -6,7 +6,7 @@ from .forms import PharQuantity
 # Create your views here.
 
 
-def presView(request, patient_roll, pres_id= None):
+def presView(request, patient_roll, pres_id=None):
     form_class = PharQuantity
     patient = get_object_or_404(Patient, rollNo=patient_roll)
     pres = get_object_or_404(Prescription, pk=pres_id)
