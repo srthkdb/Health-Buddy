@@ -19,3 +19,6 @@ class PharMedicineForm(forms.ModelForm):
         model = Medicine
         fields = ['name', 'quantity']
 
+class PresSearch(forms.Form):
+        patient_roll = forms.CharField()
+

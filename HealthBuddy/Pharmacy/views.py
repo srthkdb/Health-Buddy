@@ -5,6 +5,24 @@ from .models import *
 from .forms import PharQuantity
 # Create your views here.
 
+def searchPres(request):
+    form_class = PresSearch
+    form = form_class(request.POST or None)
+    if form.is_valid():
+        roll = form.cleaned_data['patient_roll']
+        patient = get_object_or_404(Patient, pk=roll)
+        med_list = Medicine.objects.all()
+        form_class1 = PharQuantity
+        form1 = form_class1(request.POST or None)
+        context = {
+            'form': form1,
+            'med_list': med_list,
+            'patient': patient
+        }
+        return render(request, 'Pharmacy/pres_view.html', context)
+
+    return render(request, 'Pharmacy/phar_base.html', {'form': form})
+
 
 def presView(request, patient_roll, pres_id=None):
     form_class = PharQuantity
