@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from Doctor.models import PresMedicine, Prescription
 from Patient.models import Patient
 from .models import *
-from .forms import PharQuantity
+from .forms import PharQuantity, PresSearch
 # Create your views here.
 
 def searchPres(request):
