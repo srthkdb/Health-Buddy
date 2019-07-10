@@ -2,3 +2,5 @@ README.md~
 .gitignore~
 *.pyc
 /HealthBuddy/.idea
+/HealthBuddy/env
+/HealthBuddy/python
