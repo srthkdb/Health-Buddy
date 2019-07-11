@@ -22,10 +22,10 @@
                     <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
 
                 </ul>
-            
+
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href = "{% url 'users:home' %}"
+                        <a href = "{% url 'users:redirect_home' %}"
                             <span class="" aria-hidden="true"></span>&nbsp; {{request.user.first_name}}
                         </a>
                     </li>
@@ -67,46 +67,155 @@
                                                     <p>{{ med_form.non_field_errors }}</p>
                                                     <p>{{ pres_form.non_field_errors }}</p>
                                                     <p><strong>{{ error_message }}</strong></p>
-
                                                 </div>
                                                 {% endif %}
 
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <div class="panel panel-info">
-                                                                <div class="panel-heading">
-                                                                    <h6 class="panel-title">Tests</h6>
-                                                                </div>
-                                                                <div class="panel-body" style="display: block;">
-                                                                    <div class="form-group col-sm-4">
-                                                                        <div class="fieldWrapper">
-                                                                            {{ testpres_form.test.errors }}
-                                                                            <label for="{{ testpres_form.test.id_for_label }}" class="req">Test</label><br>
-                                                                            {{ testpres_form.test }}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group col-sm-3">
-                                                                        <div class="fieldWrapper">
-                                                                            {{ testpres_form.value.errors }}
-                                                                            <label for="{{ testpres_form.value.id_for_label }}" class="req">Result</label><br>
-                                                                            {{ testpres_form.value }}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group col-sm-1">
-                                                                        <br>
-                                                                        <button align="right"
-                                                                                value="Add"
-                                                                                type="submit"
-                                                                                form="testpres_form"
-                                                                                formaction="{% url 'seven:create_testpres' pres.id %}"
-                                                                                formmethod="post"
-                                                                                formenctype="multipart/form-data"
-                                                                                class="btn btn-success">
-                                                                            <span class='glyphicon glyphicon-plus'></span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                          <div class="panel panel-primary">
+                                                              <div class="panel-heading">
+                                                                  <h6 class="panel-title">Prescription</h6>
+                                                              </div>
+                                                              <div class="panel-body" style="display: block;">
+                                                                      {% if error_message%}
+                                                                      <div class="alert alert-warning">
+                                                                          <p><strong>{{ error_message }}</strong></p>
+                                                                      </div>
+                                                                      {% endif %}
+                                                                      <div class="row">
+                                                                          <div class="col-md-6">
+                                                                              <table style="border-color: white; width:100%;" class="table table-responsive" align="center">
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                                      <td style="border-color: white; align:left;"><b>Patient</b></td>
+                                                                                      <td  style="border-color: white;">{{patient.user.first_name}} {{patient.user.last_name}}</td>
+                                                                                      <td  style=" border-color: white;"></td>
+                                                                                  </tr>
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                                      <td style="border-color: white; align:left;"><b>Treatment for</b></td>
+                                                                                      <td  style="border-color: white;">{%if pres.treatmentFor%}{{pres.treatmentFor}}{%else%}NA{%endif%}</td>
+                                                                                      <td  style=" border-color: white;"></td>
+                                                                                  </tr>
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                                      <td style="border-color: white; align:left;"><b>Remarks</b></td>
+                                                                                      <td  style="border-color: white;">{%if pres.remarks%}{{pres.remarks}}{%else%}NA{%endif%}</td>
+                                                                                      <td  style=" border-color: white;"></td>
+                                                                                  </tr>
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                                      <td style="border-color: white; align:left;"><b>Room no 7</b></td>
+                                                                                      <td  style="border-color: white;">{%if pres.roomNo7%}{{pres.roomNo7}}{%else%}NA{%endif%}</td>
+                                                                                      <td  style=" border-color: white;"></td>
+                                                                                  </tr>
+                                                                              </table>
+                                                                          </div>
+                                                                          <div class="col-md-6">
+                                                                              <table style="border-color: white; width:100%;" class="table table-responsive" align="center">
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                                      <td style="border-color: white; align:left;"><b>Doctor</b></td>
+                                                                                      <td  style="border-color: white;">Dr {{pres.doctor.user.first_name}} {{pres.doctor.user.last_name}}</td>
+                                                                                      <td  style=" border-color: white;"></td>
+                                                                                  </tr>
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                                      <td style="border-color: white; align:left;"><b>Date</b></td>
+                                                                                      <td  style="border-color: white;">{{pres.date}}</td>
+                                                                                      <td  style=" border-color: white;"></td>
+                                                                                  </tr>
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                                                      <td style="border-color: white; align:left;"><b>Tests</b></td>
+                                                                                      {%if pres.testpres_set.all %}
+                                                                                      <td  style="border-color: white;">{%for t in pres.testpres_set.all %}{{ t.test }}<br>{%endfor%}</td>
+                                                                                      <td  style="border-color: white;">{%for t in pres.testpres_set.all %}{{ t.value }}<br>{%endfor%}</td>
+                                                                                      {%else%}
+                                                                                      <td>NA</td>
+                                                                                      {%endif%}
+                                                                                  </tr>
+                                                                              </table>
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="row">
+                                                                          <div class="col-md-12">
+                                                                              <div class="panel panel-info">
+                                                                                  <div class="panel-heading">
+                                                                                      <h6 class="panel-title">Medicines</h6>
+                                                                                  </div>
+                                                                                  <div class="panel-body" style="display: block;">
+                                                                                      <div class="form-group">
+                                                                                          <table class="table table-success">
+                                                                                              <thead>
+                                                                                                  <tr class="table-success">
+                                                                                                      <th></th>
+                                                                                                      <th>Medicine</th>
+                                                                                                      <th>Times a day</th>
+                                                                                                      <th>No of days</th>
+                                                                                                      <th>When to take</th>
+                                                                                                  </tr>
+                                                                                              </thead>
+                                                                                              {% if med %}
+                                                                                              <tbody>
+                                                                                                  {%for m in med %}
+                                                                                                  <tr>
+                                                                                                      <th>{{ forloop.counter }}.</th>
+                                                                                                      <th>{{m.medicine}}</th>
+                                                                                                      <td>{{m.times_a_day}}</td>
+                                                                                                      <td>{{m.no_of_days}}</td>
+                                                                                                      <td>{{m.when_to_take}}</td>
+                                                                                                  </tr>
+                                                                                              {% endfor %}
+                                                                                              </tbody>
+                                                                                              {%endif%}
+                                                                                          </table>
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>
+
+                                                                      </div>
+                                                            <div class="row">
+                                                              <div class="col-md-12">
+                                                              <div class="panel panel-info">
+                                                                  <div class="panel-heading">
+                                                                      <h6 class="panel-title">Tests</h6>
+                                                                  </div>
+                                                                  <div class="panel-body" style="display: block;">
+                                                                      <div class="form-group col-sm-4">
+                                                                          <div class="fieldWrapper">
+                                                                              {{ testpres_form.test.errors }}
+                                                                              <label for="{{ testpres_form.test.id_for_label }}" class="req">Test</label><br>
+                                                                              {{ testpres_form.test }}
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="form-group col-sm-3">
+                                                                          <div class="fieldWrapper">
+                                                                              {{ testpres_form.value.errors }}
+                                                                              <label for="{{ testpres_form.value.id_for_label }}" class="req">Result</label><br>
+                                                                              {{ testpres_form.value }}
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="form-group col-sm-1">
+                                                                          <br>
+                                                                          <button align="right"
+                                                                                  value="Add"
+                                                                                  type="submit"
+                                                                                  form="testpres_form"
+                                                                                  formaction="{% url 'seven:create_testpres' pres.id %}"
+                                                                                  formmethod="post"
+                                                                                  formenctype="multipart/form-data"
+                                                                                  class="btn btn-success">
+                                                                              <span class='glyphicon glyphicon-plus'></span>
+                                                                          </button>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              </div>
+                                                          </div>
+                                                        </div>
+                                                        </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="panel panel-info">
@@ -380,3 +489,4 @@
         </div>
     </div>
 {% endblock %}
+

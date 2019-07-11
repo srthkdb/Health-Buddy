@@ -22,10 +22,10 @@
                     <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
 
                 </ul>
-            
+
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href = "{% url 'users:home' %}"
+                        <a href = "{% url 'users:redirect_home' %}"
                             <span class="" aria-hidden="true"></span>&nbsp; {{request.user.first_name}}
                         </a>
                     </li>
@@ -181,6 +181,23 @@
                                                                                 {{ pres_form.tests }}
                                                                             </div>
                                                                         </div>
+                                                                        {%if pres%}
+                                                                        <div class="form-group col-sm-4">
+                                                                            <div class="fieldWrapper">
+                                                                                <table style="border-color: white; width:100%;" class="table table-responsive" align="center">
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td style="border-color: white; align:left;"><b>Tests</b></td>
+                                                                                      {%if pres.testpres_set.all %}
+                                                                                      <td  style="border-color: white;">{%for t in pres.testpres_set.all %}{{ t.test }}<br>{%endfor%}</td>
+                                                                                      <td  style="border-color: white;">{%for t in pres.testpres_set.all %}{{ t.value }}<br>{%endfor%}</td>
+                                                                                      {%else%}
+                                                                                      <td>NA</td>
+                                                                                      {%endif%}
+                                                                                  </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                        {%endif%}
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="form-group col-sm-4">
