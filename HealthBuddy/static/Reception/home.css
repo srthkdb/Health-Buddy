@@ -258,13 +258,21 @@
     background-color: #daff99;
 }
 
-.btn{ 
-    border-radius: 3%; 
-    width:80px; 
-    height:32px; 
+.btn{
+    border-radius: 3%;
+    width:80px;
+    height:32px;
     line-height:18px;
     color: white;
-    background-color: #427fed; 
+    background-color: #427fed;
+}
+
+.btn.btn-danger{
+  border-radius: 5%;
+  width: 120px;
+  height: 50px;
+  color: white;
+  background-color: red;
 }
 
 .btn:hover{

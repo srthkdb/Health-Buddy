@@ -32,7 +32,7 @@ def create_appointment(request, app_id=None):
             a.dateNtime = datetime.datetime.now()
             a.save()
 
-            return redirect('/login_user/')
+            return redirect('/home/')
 
         else:
             a = form.save(commit=False)
@@ -41,6 +41,14 @@ def create_appointment(request, app_id=None):
             a.dateNtime = datetime.datetime.now()
             a.save()
 
-            return redirect('/login_user/')
+            return redirect('/home/')
 
-    return redirect('/login_user/')
+    return redirect('/home/')
+
+@login_required(login_url='/')
+def clearList(request):
+    if request.user.type.types == 'rec':
+        Appointment.objects.filter(status='t').delete()
+        return redirect('/home/')
+    else:
+        return render(request, 'users/home_base.html', {'error_message' : 'You are not authorised to perform this action'})
