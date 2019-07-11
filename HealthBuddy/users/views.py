@@ -197,6 +197,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                
                 if user.type:
                     if user.type.types == 'phr':
                         return render(request, 'Pharmacy/home_pharmacy.html', {

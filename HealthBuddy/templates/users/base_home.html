@@ -1,6 +1,13 @@
 {%extends 'users/base.html'%}
 
-{%block body%}
+{% block scripts %}
+<style>
+body{
+    background-color: #bfe7f2;
+}
+</style>
+{% endblock %}
+{% block body %}
 {% load staticfiles %}
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
