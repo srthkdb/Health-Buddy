@@ -26,7 +26,8 @@
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
                 <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
-                <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
 
             </ul>
 
@@ -49,9 +50,10 @@
   <div class="col-lg-3 col-md-4" style="padding-left:0px; padding-right:0px;" id="col-1">
       <div class="card hovercard">
           <div class="cardheader">
+          <img src = "{% static 'Doctor/medical-records.jpg'%}" height = "145px" width = "100%"/>
           </div>
           <div class="avatar">
-              <img alt="" src="">
+              <img alt="" src="{% static 'Doctor/happydoctor.jpg'%}">
           </div>
           <div class="info">
               <div class="title">

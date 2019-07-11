@@ -19,7 +19,8 @@
             <div class="collapse navbar-collapse" id="topNavBar">
                 <ul class="nav navbar-nav">
                     <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
-                    <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                    <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
 
                 </ul>
 
@@ -248,7 +249,7 @@
                                                         <div class="form_sep">
                                                             <button
                                                                     formnovalidate
-                                                                    value="Create Reference"
+                                                                    value="Save and End"
                                                                     type="submit"
                                                                     form="pres_form"
                                                                     formaction="{% if pres %} {% url 'Doctor:save_and_end' patient.rollNo pres.id 1 %} {%else%} {% url 'Doctor:create_and_end' patient.rollNo 1 %} {%endif%}"

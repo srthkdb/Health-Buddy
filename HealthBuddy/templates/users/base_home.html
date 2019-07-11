@@ -1,14 +1,23 @@
 {%extends 'users/base.html'%}
-
-{% block scripts %}
-<style>
-body{
-    background-color: #bfe7f2;
-}
-</style>
-{% endblock %}
-{% block body %}
+{%block scripts%}
 {% load staticfiles %}
+<style>
+    body{
+        {% comment %} background-image: linear-gradient(to bottom, #222222 5%, #555555, #ffffff 40%) {% endcomment %}
+        background-color: #eeeeee;
+    }  
+
+    nav{
+        background-image: linear-gradient(to bottom, #222222, #666666);
+        box-shadow:  2px 0px 4px #000;
+    }
+    nav a {
+        color: #white;
+    }
+</style>
+{%endblock%}
+{%block body%}
+
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
 
@@ -26,7 +35,8 @@ body{
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
                 <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
-                <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
 
             </ul>
 

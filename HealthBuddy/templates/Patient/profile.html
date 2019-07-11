@@ -11,7 +11,7 @@
 </script>
 {% endblock %}
 {%block body%}
-
+<center>
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
 
@@ -29,7 +29,8 @@
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
                 <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
-                <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
 
             </ul>
 
@@ -49,7 +50,7 @@
     </div>
 </nav>
 <div class="media"><br>
-    <div class="row">
+    <div class="row" style="padding-top:0px; padding-left:15px;">
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -142,7 +143,7 @@
                                                 <td  style="  border-color: white;"></td>
                                             </tr>
                                             {%endif%}
-                                            {%if user.is_dependent %}
+                                            {%if patient.is_dependent %}
                                             <tr style="border-color: white;">
                                                 <td  style="  border-color: white;"></td>
                                                 <td style="  border-color: white;"><b>Dependent user</b></td>
@@ -240,5 +241,5 @@
         </div>
     </div>
 </div>
-
+<center>
 {%endblock%}
