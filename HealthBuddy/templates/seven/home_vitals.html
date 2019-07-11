@@ -49,13 +49,14 @@
   <div class="col-lg-3 col-md-4" style="padding-left:0px; padding-right:0px;" id="col-1">
       <div class="card hovercard">
           <div class="cardheader">
+          <img src = "{% static 'Doctor/medical-records.jpg'%}" height = "145px" width = "100%"/>
           </div>
           <div class="avatar">
-              <img alt="" src="http://lorempixel.com/100/100/people/9/">
+              <img alt="" src="{% static 'Reception/vitals.jpg' %}">
           </div>
           <div class="info">
               <div class="title">
-                  <a target="_blank" href="https://scripteden.com/" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
+                  <a target="_blank" href="" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
               </div>
               <div class="desc">staff</div>
           </div>
@@ -64,10 +65,10 @@
                 <a href="#myprofile" class="dropdown-btn">Health Profile</a>
             </div>
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="#myprofile" class="dropdown-btn">Records</a>
             </div>
             <div class="sidebar-items">
-                <a href="" class="dropdown-btn" data-toggle="modal" data-target="#createappointment">New Appointment</a>
+                <a href="" class="dropdown-btn" data-toggle="modal" data-target="#createappointment">Tests</a>
             </div>
           </div>
       </div>
@@ -107,7 +108,7 @@
 
   </div>
 
-<div class="modal fade" id="createappointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+{% comment %} <div class="modal fade" id="createappointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -150,7 +151,7 @@
     </form>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 <!--<div> -->
 
 {% endblock %}
