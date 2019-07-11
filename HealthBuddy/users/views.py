@@ -138,7 +138,8 @@ class StudPatientRegFormView(View):
 
             return render(request, 'users/patient_profile')
         return render(request, self.template_name, {'form': form})
-
+        
+@login_required(login_url='/', redirect_field_name=None)
 def logout_user(request):
     logout(request)
     return render(request, 'users/base_home.html', {'error_message': 'logged out!'})
@@ -170,26 +171,8 @@ def redirect_home(request):
 def login_user(request):
     baseHome = 'users/base_home.html'
     if request.user.is_authenticated:
-        if request.user.type.types == 'phr':
-                return render(request, 'Pharmacy/home_pharmacy.html', {
-                    'appointment_set': Appointment.objects.filter(dateNtime__range = ((datetime.now() - timedelta(hours=5)), datetime.now()), status = 't')
-                })
-        if request.user.type.types == 'rec':
-            return render(request, 'Reception/home_reception.html', {
-                'appointment_set' : Appointment.objects.all(),
-                'refer_list' : References.objects.all(),
-                'form' : AppointmentForm(None),
-            })
-        if request.user.type.types == 'doc':
-            return render(request, 'Doctor/home_doc.html', {})
-        if request.user.type.types == 'pat':
-            return render(request, 'Patient/home_patient.html', {'req_form': AppointmentRequestForm(None)})
-        if request.user.type.types == 'vit':
-            return render(request, 'seven/home_vitals.html', {
-                'appointment_set': Appointment.objects.filter(dateNtime__range = ((datetime.now() - timedelta(hours=5)), datetime.now()), status = 'e')
-            })
+        logout(request)
 
-        return render(request, 'users/base_home.html', {'error_message': 'Logged in!'})
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']

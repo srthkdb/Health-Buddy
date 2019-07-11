@@ -1,4 +1,4 @@
-{%extends 'users/base.html'%}
+{% extends 'users/base.html' %}
 {% block scripts %}
 {% load staticfiles %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,10 +68,10 @@
         </div>
         <div class="bottom">
         <div class="sidebar-items">
-            <a href="" class="dropdown-btn">Health Profile</a>
+            <a href="{% url 'Patient:pat_details' request.user.patient.rollNo %}" class="dropdown-btn">Health Profile</a>
         </div>
         <div class="sidebar-items">
-            <a href="{% url 'Patient:pat_details' request.user.patient.rollNo %}" class="dropdown-btn">Medical History</a>
+            <a href="{%url 'Patient:pres_details_new' %}" class="dropdown-btn">Medical History</a>
         </div>
         <div class="sidebar-items">
             <a a href="" data-toggle="modal" data-target="#appointmentRequestForm">Request Appointment</a>
@@ -108,30 +108,8 @@
 
         </div>
     </div>
-
-    <div class="panel" id="waiting-list">
-        <div class="panel-heading">
-        <h4 class="text-uppercase"><strong>Referred List</strong></h4>
-        </div>
-        <div class="panelbody">
-        <table class="table table-default">
-            <tbody>
-            {% if request.user.patient.prescription.references_set.all %}
-            {% for r in request.user.patient.prescription.references_set.all %}
-
-            <tr>
-                <td>{{appointment.prescription.patient.user.first_name}} {{appointment.prescription.patient.user.last_name}}</td>
-                <td>{{appointment.from_doc.user.first_name}} {{appointment.from_doc.user.first_name}}</td>
-            </tr>
-            {%endfor%}
-            {%endif%}
-            </tbody>
-        </table>
-        </div>
-    </div>
-
-    </div>
-    <div class="col-lg-4 col-md-4">
+</div>
+<div class="col-lg-4 col-md-4">
     <div class="panel" id="waiting-list">
         <div class="panel-heading">
         <h4 class="text-uppercase"><strong>Prescriptions</strong></h4>
@@ -152,23 +130,24 @@
         </table>
         </div>
     </div>
-
+</div>
+<div class="col-lg-8 col-md-8">
     <div class="panel" id="waiting-list">
         <div class="panel-heading">
-        <h4 class="text-uppercase"><strong>My Patients</strong></h4>
+        <h4 class="text-uppercase"><strong>Referred List</strong></h4>
         </div>
         <div class="panelbody">
         <table class="table table-default">
             <tbody>
-            {% for appointment in request.user.doctor.appointment_set.all %}
-                {% if appointment.status == 't' %}
+            {% if request.user.patient.prescription.references_set.all %}
+            {% for r in request.user.patient.prescription.references_set.all %}
+
             <tr>
-                <td>{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</td>
-                <td>{{appointment.patient.rollNo}}</td>
-                <td>{{appointment.dateNtime}}</td>
+                <td>{{appointment.prescription.patient.user.first_name}} {{appointment.prescription.patient.user.last_name}}</td>
+                <td>{{appointment.from_doc.user.first_name}} {{appointment.from_doc.user.first_name}}</td>
             </tr>
-                {%endif%}
             {%endfor%}
+            {%endif%}
             </tbody>
         </table>
         </div>
@@ -208,7 +187,7 @@
             value="submit"
             form="app_form"
             class="btn btn-default btn">
-            </button>
+            submit</button>
         </center>
       </div>
     </form>

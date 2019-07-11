@@ -258,7 +258,19 @@
     background-color: #daff99;
 }
 
-.btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
+.btn{ 
+    border-radius: 3%; 
+    width:80px; 
+    height:32px; 
+    line-height:18px;
+    color: white;
+    background-color: #427fed; 
+}
+
+.btn:hover{
+    color: white;
+    background-color: #53a93f;
+}
 
 .sidebar-items{
   text-align: left;

@@ -1,7 +1,22 @@
 {%extends 'users/base.html'%}
-
-{%block body%}
+{%block scripts%}
 {% load staticfiles %}
+<style>
+     {% comment %} body{
+        background-image: linear-gradient(to bottom, #222222 5%, #555555, #ffffff 40%)
+    }  {% endcomment %}
+
+    nav{
+        background-image: linear-gradient(to bottom, #222222, #666666);
+        box-shadow:  2px 0px 4px #000;
+    }
+    nav a {
+        color: #white;
+    }
+</style>
+{%endblock%}
+{%block body%}
+
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
 
