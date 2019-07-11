@@ -101,7 +101,7 @@
                 {%else%}
                 <td><span class="label label-danger">Pending</span></td>
                 {%endif%}
-                <td>{{appointment.dateNtime}}</td>
+                <td class="text text-primary">{{appointment.dateNtime}}</td>
             </tr>
                 {%endif%}
             {%endfor%}
@@ -121,11 +121,12 @@
             <tbody>
             {% for pres in request.user.patient.prescription_set.all %}
                 <tr>
-                    <td class="head"><strong>{{forloop.counter}}.</strong></td>
-                    {%for detail in pres.presdetails_set.all %}
-                    <td><a href="{% url 'Patient:pres_details' pres.pk %}">Dr. {{detail.doctor.user.first_name}} {{detail.doctor.user.last_name}}</a></td>
-                    <td>{{detail.date}}</td>
-                    {%endfor%}
+                    <td class="text text-primary"><strong>{{forloop.counter}}.</strong></td>
+                     <td class="text text-primary">{%for detail in pres.presdetails_set.all %}
+                            <ul><li><a href="{% url 'Patient:pres_details' pres.pk %}">Dr. {{detail.doctor.user.first_name}} {{detail.doctor.user.last_name}} - {{detail.date.date}}</a></li></ul>
+                        {%endfor%}
+                        </td>
+
                 </tr>
             {%endfor%}
             </tbody>
@@ -142,11 +143,12 @@
         <table class="table table-default">
             <tbody>
             {% if request.user.patient.prescription.references_set.all %}
-            {% for r in request.user.patient.prescription.references_set.all %}
+            {% for appointment in request.user.patient.prescription.references_set.all %}
 
             <tr>
-                <td>{{appointment.prescription.patient.user.first_name}} {{appointment.prescription.patient.user.last_name}}</td>
-                <td>{{appointment.from_doc.user.first_name}} {{appointment.from_doc.user.first_name}}</td>
+                <td class="text text-primary">{{appointment.from_doc.user.first_name}} {{appointment.from_doc.user.last_name}}</td>
+                <td class="text text-primary">{{appointment.to_doc.user.first_name}} {{appointment.to_doc.user.last_name}}</td>
+                <td class="text text-primary">{{appointment.prescription.patient.user.first_name}} {{appointment.prescription.patient.user.last_name}}</td>
             </tr>
             {%endfor%}
             {%endif%}

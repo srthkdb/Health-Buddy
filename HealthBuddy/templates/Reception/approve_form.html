@@ -1,0 +1,77 @@
+{%extends 'users/base.html'%}
+
+{%block body%}
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'users:home' %}"><strong style = "font-size:18px">HealthBuddy</strong></a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href = "{% url 'users:redirect_home' %}"
+                        <span class="" aria-hidden="true"></span>&nbsp; {{request.user.first_name}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'users:logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h6 class="panel-title">Approval Form</h6>
+    </div>
+    <div class="panel-body" style="display: block;">
+        {% if error_message%}
+        <div class="alert alert-warning">
+            <p><strong>{{ error_message }}</strong></p>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {%if form%}
+                            <form class="form-horizontal" action="{%url 'Reception:approve' a.id%}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {%for field in form%}
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">{{ field.label_tag }}</label>
+                                        <div class="col-sm-10">{{ field }}</div>
+                                    </div>
+                                {%endfor%}
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

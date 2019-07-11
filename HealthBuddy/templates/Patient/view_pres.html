@@ -211,8 +211,14 @@
                                                         <tbody>
                                                             <tr class="table-success">
                                                                 <td>{{ forloop.counter }}.</td>
-                                                                <td><a href="{%url 'Patient:pres_details' p.id%}">{{ p.date.date }}</a></td>
-                                                                <td>{{p.treatmentFor}}</td>
+                                                                <td>
+                                                                    <ul>
+                                                                        {%for d in p.presdetails_set.all%}
+                                                                            <li>{{ d.date }} - By: Dr {{d.doctor.user.first_name}} {{d.doctor.user.last_name}}</li>
+                                                                        {%endfor%}
+                                                                    </ul>
+                                                                </td>
+                                                                <td><a href="{%url 'Patient:pres_details' p.id%}">{{p.treatmentFor}}</a></td>
                                                                 <td>Dr {{ p.doctor.user.first_name }} {{ p.doctor.user.last_name }}</td>
                                                             </tr>
                                                         {% endfor %}
@@ -238,7 +244,7 @@
                                                             <tr class="table-success">
                                                                 <td>{{ forloop.counter }}.</td>
                                                                 <td>{{p.treatmentFor}}</td>
-                                                                <td>Dr {{ p.doctor.user.first_name }} {{ p.doctor.user.last_name }}</td>
+                                                                <td>{{ p.remarks}}</td>
                                                                 <td><a  href="{{p.file}}">
                                                                         <button  style="float: left" type="button" class="btn btn-success btn-xs">
                                                                             <span class="glyphicon glyphicon-download-alt"></span>
@@ -253,7 +259,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="add_file" class="tab-pane fade in active">
+                                            <div id="add_file" class="tab-pane fade">
                                                 <div class="row">
 
                                                     <div class="col-sm-12 col-md-7">

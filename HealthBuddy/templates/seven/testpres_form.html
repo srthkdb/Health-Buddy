@@ -63,14 +63,6 @@
                                         <div class="panel-body" style="display: block;">
                                             <form id="testpres_form"  action="{% if testpres %} {% url 'seven:change_testpres' pres.id testpres.id %} {%else%} {% url 'seven:create_testpres' pres.id %} {%endif%}" method="post" enctype="multipart/form-data">
                                                 {% csrf_token %}
-                                                {% if error_message or med_form.non_field_errors or pres_form.non_field_errors%}
-                                                <div class="alert alert-warning">
-                                                    <p>{{ med_form.non_field_errors }}</p>
-                                                    <p>{{ pres_form.non_field_errors }}</p>
-                                                    <p><strong>{{ error_message }}</strong></p>
-                                                </div>
-                                                {% endif %}
-
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                           <div class="panel panel-primary">
@@ -123,7 +115,7 @@
                                                                                   <tr style="border-color: white;">
                                                                                       <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                                                       <td style="border-color: white; align:left;"><b>Date</b></td>
-                                                                                      <td  style="border-color: white;">{{pres.date}}</td>
+                                                                                      <td  style="border-color: white;">{%for d in pres.presdetails_set.all%} {{d.date}}&nbsp;{%endfor%}</td>
                                                                                       <td  style=" border-color: white;"></td>
                                                                                   </tr>
                                                                                   <tr style="border-color: white;">

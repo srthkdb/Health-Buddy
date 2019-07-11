@@ -89,14 +89,14 @@
               <td><span class="label label-success">Approved</span></td>
               <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
                 {%elif appointment.status == 'e' %}<span class="label label-info">Examining</span>{%endif%}</td>
-              <td>{{appointment.patient.rollNo}}</td>
+              <td class="text text-primary">{{appointment.patient.rollNo}}</td>
               {%else%}
               <td><span class="label label-danger">Pending</span></td>
               <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
                 {%else%}<span class="label label-info">Examining</span>{%endif%}</td>
-              <td>{{appointment.patient.rollNo}}</td>
+              <td class="text text-primary">{{appointment.patient.rollNo}}</td>
               {%endif%}
-              <td>{{appointment.dateNtime}}</td>
+              <td class="text text-primary">{{appointment.dateNtime}}</td>
             </tr>
             {%endfor%}
           </tbody>
@@ -138,14 +138,12 @@
         </form>
       </div>
       <div class="modal-footer">
-        <center>
             <button
             type="submit"
             value="submit"
             form="form"
             class="btn btn-default btn">
             </button>
-        </center>
       </div>
     </form>
     </div>
