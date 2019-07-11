@@ -138,7 +138,7 @@ class StudPatientRegFormView(View):
 
             return render(request, 'users/patient_profile')
         return render(request, self.template_name, {'form': form})
-        
+
 @login_required(login_url='/', redirect_field_name=None)
 def logout_user(request):
     logout(request)
@@ -182,27 +182,7 @@ def login_user(request):
                 login(request, user)
                 
                 if user.type:
-                    if user.type.types == 'phr':
-                        return render(request, 'Pharmacy/home_pharmacy.html', {
-                            'appointment_set': Appointment.objects.filter(dateNtime__range = ((datetime.now() - timedelta(hours=5)), datetime.now()), status = 't')
-                        })
-                    if user.type.types == 'pat':
-                        return render(request, 'Patient/home_patient.html', {
-                            'req_form': AppointmentRequestForm(None)
-                            })
-                    if user.type.types == 'doc':
-                        return render(request, 'Doctor/home_doc.html', {})
-                    if user.type.types == 'rec':
-                        return render(request, 'Reception/home_reception.html', {
-                            'appointment_set' : Appointment.objects.all(),
-                            'refer_list' : References.objects.all(),
-                            'form' : AppointmentForm(None),
-                        })
-                    if user.type.types == 'vit':
-                        return render(request, 'seven/home_vitals.html', {
-                            'appointment_set': Appointment.objects.filter(dateNtime__range = ((datetime.now() - timedelta(hours=5)), datetime.now()), status = 'e')
-                        })
-
+                    return redirect('/home/')
                 else:
                     return render(request, baseHome, {'error_message': 'User has no type'})
             else:
