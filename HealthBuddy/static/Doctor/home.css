@@ -14,12 +14,6 @@ html, body{
     height:100%;
 }
 
-
-.card.hovercard{
-  margin-top: 0px;
-}
-
-
 .card.people .card-top.blue {
     background-color: #427fed;
 }
@@ -37,13 +31,13 @@ html, body{
     box-sizing: border-box;
 }
 
-.btn{ 
-    border-radius: 3%; 
-    width:80px; 
-    height:32px; 
+.btn{
+    border-radius: 3%;
+    width:80px;
+    height:32px;
     line-height:18px;
     color: white;
-    background-color: #427fed; 
+    background-color: #427fed;
 }
 
 .btn:hover{
@@ -93,7 +87,6 @@ html, body{
     background-color: rgba(214, 224, 226, 0.2);
 }
 .card.hovercard {
-    /* padding-top: 20px; */
     margin: 0px 0 20px 0;
     background-color: rgba(214, 224, 226, 0.2);
     border-top-width: 0;
