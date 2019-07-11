@@ -1,0 +1,155 @@
+{%extends 'users/base.html'%}
+{% block scripts %}
+{% load staticfiles %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="//www.chartjs.org/assets/Chart.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/Reception/home.css" />
+
+{% endblock %}
+{% block body %}
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'users:home' %}"><strong>HealthBuddy</strong></a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href = "{% url 'users:redirect_home' %}">
+                        <span class="" aria-hidden="true"></span>&nbsp;<i class="fa fa-user fa-1.5x"></i> {{request.user.first_name}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'users:logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- <div class="row"> -->
+  <div class="col-lg-3 col-md-4" style="padding-left:0px; padding-right:0px;" id="col-1">
+      <div class="card hovercard">
+          <div class="cardheader">
+          </div>
+          <div class="avatar">
+              <img alt="" src="http://lorempixel.com/100/100/people/9/">
+          </div>
+          <div class="info">
+              <div class="title">
+                  <a target="_blank" href="https://scripteden.com/" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
+              </div>
+              <div class="desc">staff</div>
+          </div>
+          <div class="bottom">
+            <div class="sidebar-items">
+                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+            </div>
+            <div class="sidebar-items">
+                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+            </div>
+            <div class="sidebar-items">
+                <a href="" class="dropdown-btn" data-toggle="modal" data-target="#createappointment">New Appointment</a>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-8 col-md-8">
+    <div class="panel" id="waiting-list">
+      <div class="panel-heading">
+        <h4 class="text-uppercase"><strong>List Of Patients</strong></h4>
+      </div>
+      <div class="panelbody">
+        <table class="table table-default">
+          <tbody>
+            {% for appointment in appointment_set %}
+            <tr>
+              {%with appointment.patient.prescription_set.reverse|first as pres%}
+              <td><a href="{% url 'seven:create_testpres' pres.id %}">{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</a></td>
+              {%endwith%}
+              {%if appointment.reqApproval%}
+              <td><span class="label label-success">Approved</span></td>
+              <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
+                {%elif appointment.status == 'e' %}<span class="label label-info">Examining</span>{%endif%}</td>
+              <td>{{appointment.patient.rollNo}}</td>
+              {%else%}
+              <td><span class="label label-danger">Pending</span></td>
+              <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
+                {%else%}<span class="label label-info">Examining</span>{%endif%}</td>
+              <td>{{appointment.patient.rollNo}}</td>
+              {%endif%}
+              <td>{{appointment.dateNtime}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+<div class="modal fade" id="createappointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title"><strong>Request An Appointment</strong></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form id="form" action="{% url 'Reception:create_appointment_new' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+          <div class="md-form mb-5">
+              {{ form.patient_roll.errors }}
+              <label for="{{ form.patient_roll.id_for_label }}" class="req">Patient's Roll Number</label>
+              {{ form.patient_roll }}
+          </div>
+          <div class="md-form mb-5">
+              {{ form.brief.errors }}
+              <label for="{{ form.brief.id_for_label }}" class="req">Symptoms/Brief</label>
+              {{ form.brief }}
+          </div>
+          <div class="md-form mb-4">
+              {{ form.doctor.errors }}
+              <label for="{{ form.doctor.id_for_label }}" class="req">Doctor</label>
+              {{ form.doctor }}
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <center>
+            <button
+            type="submit"
+            value="submit"
+            form="form"
+            class="btn btn-default btn">
+            </button>
+        </center>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<!--<div> -->
+
+{% endblock %}

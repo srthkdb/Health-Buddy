@@ -67,7 +67,7 @@
                 <a href="#myprofile" class="dropdown-btn">Health Profile</a>
             </div>
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="" class="dropdown-btn" data-toggle="modal" data-target="#createappointment">New Appointment</a>
             </div>
           </div>
       </div>
@@ -93,7 +93,7 @@
               <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
                 {%else%}<span class="label label-info">Examining</span>{%endif%}</td>
               <td>{{appointment.patient.rollNo}}</td>
-              <td><a class="btn" href="" data-toggle="">Approve</a>
+              <td><a class="btn" href="" data-toggle="">Approve</a></td>
               {%endif%}
             </tr>
             {%endfor%}
@@ -125,6 +125,51 @@
     </div>
 
   </div>
+
+<div class="modal fade" id="createappointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title"><strong>Request An Appointment</strong></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form id="form" action="{% url 'Reception:create_appointment_new' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+          <div class="md-form mb-5">
+              {{ form.patient_roll.errors }}
+              <label for="{{ form.patient_roll.id_for_label }}" class="req">Patient's Roll Number</label>
+              {{ form.patient_roll }}
+          </div>
+          <div class="md-form mb-5">
+              {{ form.brief.errors }}
+              <label for="{{ form.brief.id_for_label }}" class="req">Symptoms/Brief</label>
+              {{ form.brief }}
+          </div>
+          <div class="md-form mb-4">
+              {{ form.doctor.errors }}
+              <label for="{{ form.doctor.id_for_label }}" class="req">Doctor</label>
+              {{ form.doctor }}
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <center>
+            <button
+            type="submit"
+            value="submit"
+            form="form"
+            class="btn btn-default btn">
+            </button>
+        </center>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
 <!--<div> -->
 
 {% endblock %}
