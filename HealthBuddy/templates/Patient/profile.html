@@ -11,7 +11,7 @@
 </script>
 {% endblock %}
 {%block body%}
-
+<center>
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
 
@@ -49,7 +49,7 @@
     </div>
 </nav>
 <div class="media"><br>
-    <div class="row">
+    <div class="row" style="padding-top:0px; padding-left:15px;">
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -142,7 +142,7 @@
                                                 <td  style="  border-color: white;"></td>
                                             </tr>
                                             {%endif%}
-                                            {%if user.is_dependent %}
+                                            {%if patient.is_dependent %}
                                             <tr style="border-color: white;">
                                                 <td  style="  border-color: white;"></td>
                                                 <td style="  border-color: white;"><b>Dependent user</b></td>
@@ -240,5 +240,5 @@
         </div>
     </div>
 </div>
-
+<center>
 {%endblock%}

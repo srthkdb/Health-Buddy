@@ -12,6 +12,20 @@
   padding-right: 0px;
 }
 
+.btn{ 
+    border-radius: 3%; 
+    width:80px; 
+    height:32px; 
+    line-height:18px;
+    color: white;
+    background-color: #427fed; 
+}
+
+.btn:hover{
+    color: white;
+    background-color: #53a93f;
+}
+
 .card.hovercard {
     padding-top: 20px;
     margin: 10px 0 20px 0;
@@ -258,7 +272,6 @@
     background-color: #daff99;
 }
 
-.btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
 
 .sidebar-items{
   text-align: left;
@@ -284,10 +297,17 @@
     top: 20px;
     left: 40px;
   }
+  .col-lg-8.col-md-8 {
+    top: 20px;
+    left: 40px;
+  }
 }
 
 @media only screen and (min-width: 990px) {
   .col-lg-4.col-md-4 {
+    top: 20px;
+  }
+  .col-lg-8.col-md-8 {
     top: 20px;
   }
 }

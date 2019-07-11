@@ -4,6 +4,7 @@ from .models import Patient
 from .forms import *
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
 @login_required(login_url = "/")
 def create_file(request):
@@ -63,9 +64,15 @@ def requestAppointment(request, app_id=None):
             a.save()
 
         app_req_form = AppointmentRequestForm(None)
-        return redirect('/login_user')
+        return redirect('/home')
         
     app_req_form = AppointmentRequestForm(None)
         # return render(request, template_name, {'form' : app_req_form, 'error_message': "request sent"})
-    return redirect('/login_user')
+    return redirect('/home')
     # return render(request, template_name, {'form' : app_req_form, 'error_message' : "Invalid request"})
+
+@login_required(login_url='/')
+def Details(request, patient_roll):
+    template_name = "Patient/profile.html"
+    patient = get_object_or_404(Patient, pk=patient_roll)
+    return render(request, template_name, {'patient' : patient})
