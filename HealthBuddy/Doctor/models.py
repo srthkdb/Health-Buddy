@@ -43,7 +43,7 @@ class Doctor(models.Model):
     visit_day_time = models.ForeignKey(DayAndTime, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.user.username
+        return self.user.first_name
 
 
 class Prescription(models.Model):

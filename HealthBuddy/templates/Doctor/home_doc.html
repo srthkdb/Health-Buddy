@@ -63,13 +63,13 @@
           </div>
           <div class="bottom">
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="#myprofile" class="dropdown-btn">My cases</a>
             </div>
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="#myprofile" class="dropdown-btn">Waiting list</a>
             </div>
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="#myprofile" class="dropdown-btn">Referrals</a>
             </div>
           </div>
       </div>
@@ -92,7 +92,8 @@
                 {%else%}
                 <td><span class="label label-danger">Pending</span></td>
               {%endif%}
-              <td>{{appointment.dateNtime}}</td>
+              <td class="text text-primary">{{appointment.dateNtime}}</td>
+                <td class="text text-primary">{{appointment.brief}}</td>
             </tr>
               {%endif%}
             {%endfor%}
@@ -113,8 +114,9 @@
             {% for r in request.user.doctor.to_doc.all %}
             <tr>
               <td><a href="{%url 'Doctor:ref_pres' r.id %}">{{r.prescription.patient.user.first_name}} {{r.prescription.patient.user.last_name}}</a></td>
-              <td>Dr. {{r.from_doc.user.first_name}} {{r.from_doc.user.last_name}}</td>
-              <td>{{r.remarks_from_doc}}</td>
+              <td class="text text-primary">Dr. {{r.from_doc.user.first_name}} {{r.from_doc.user.last_name}}</td>
+              <td class="text text-primary">{{r.remarks_from_doc}}</td>
+
             </tr>
 
             {%endfor%}
@@ -136,14 +138,17 @@
             {% for appointment in request.user.doctor.appointment_set.all %}
               {% if appointment.status == 'e' %}
               <tr>
-                <td><a href="{%url 'Doctor:create_prescription' appointment.patient.rollNo %}">{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</a></td>
-                <td>{{appointment.patient.rollNo}}</td>
+                  {% with appointment.patient.prescription_set.reverse|first as pres %}
+                <td><a href="{%url 'Doctor:edit_prescription' pres.id %}">{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</a></td>
+                  {%endwith%}
+                <td class="text text-primary">{{appointment.patient.rollNo}}</td>
                 {%if appointment.reqApproval%}
                   <td><span class="label label-success">Approved</span></td>
                   {%else%}
                   <td><span class="label label-danger">Pending</span></td>
                 {%endif%}
-                <td>{{appointment.dateNtime}}</td>
+                <td class="text text-primary">{{appointment.dateNtime}}</td>
+                  <td class="text text-primary">{{appointment.brief}}</td>
               </tr>
               {%endif%}
             {%endfor%}
@@ -162,8 +167,8 @@
             {% for pres in request.user.doctor.prescription_set.all %}
             <tr>
                 <td><a href="{%url 'Doctor:create_prescription' pres.patient.rollNo %}"> {{pres.patient.user.first_name}} {{pres.patient.user.last_name}}</a></td>
-              <td>{{pres.patient.rollNo}}</td>
-              <td>{{pres.date}}</td>
+              <td class="text text-primary">{{pres.patient.rollNo}}</td>
+              <td class="text text-primary">{{pres.date}}</td>
             </tr>
             {%endfor%}
           </tbody>

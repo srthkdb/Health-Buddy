@@ -9,6 +9,7 @@ import datetime
 
 def delete_test(request, pres_id, testpres_id):
     pres = get_object_or_404(Prescription, pk=pres_id)
+    med = pres.presmedicine_set.all()
     testpres = get_object_or_404(TestPres, pk=testpres_id)
     patient = pres.patient
     form_class_testpres = TestPresForm
@@ -20,16 +21,17 @@ def delete_test(request, pres_id, testpres_id):
         t.save()
         testpres_form = form_class_testpres(None)
         return render(request, template_name,
-                       {'testpres_form': testpres_form, 'error_message': 'Test Removed', 'pres': pres})
+                       {'testpres_form': testpres_form, 'error_message': 'Test Removed', 'pres': pres, 'med': med})
     testpres_form = form_class_testpres(None)
     return render(request, template_name,
-                  {'testpres_form': testpres_form, 'error_message': 'Test Removed', 'pres': pres})
+                  {'testpres_form': testpres_form, 'error_message': 'Test Removed', 'pres': pres, 'med': med})
 
 
 def add_test(request, pres_id, testpres_id=None):
     form_class_testpres = TestPresForm
     template_name = 'seven/testpres_form.html'
     pres = get_object_or_404(Prescription, pk=pres_id)
+    med = pres.presmedicine_set.all()
     patient = pres.patient
 
     if testpres_id is None:
@@ -49,7 +51,7 @@ def add_test(request, pres_id, testpres_id=None):
             testpres_form = form_class_testpres(None)
 
             return render(request, template_name,
-                        {'testpres_form': testpres_form, 'pres': pres, 'error_message': 'Form Saved', 'patient': patient})
+                        {'testpres_form': testpres_form, 'pres': pres, 'error_message': 'Form Saved', 'patient': patient, 'med': med})
 
     return render(request, template_name,
-                  {'testpres_form': testpres_form, 'pres': pres, 'patient' : patient})
+                  {'testpres_form': testpres_form, 'pres': pres, 'patient' : patient, 'med': med})

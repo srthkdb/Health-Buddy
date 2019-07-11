@@ -63,22 +63,23 @@
           </div>
           <div class="bottom">
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="{%url 'Reception:pat_list'%}" class="dropdown-btn">Patient Search</a>
             </div>
-            <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+              <div class="sidebar-items">
+                <a href="{%url 'Reception:stud_list'%}" class="dropdown-btn">Student Search</a>
             </div>
             <div class="sidebar-items">
                 <a href="" class="dropdown-btn" data-toggle="modal" data-target="#createappointment">New Appointment</a>
             </div>
           </div>
+          <div class="remove-btn" align="center">
+            <a class="btn btn-danger" href="{%url 'Reception:clear' %}">
+              <strong>Clear trash <br>appointments</strong>
+            </a>
+          </div>
       </div>
 
-      <div class="remove-btn" align="center">
-        <a class="btn btn-danger" href="{%url 'Reception:clear' %}">
-          <strong>Clear trash <br>appointments</strong>
-        </a>
-      </div>
+
 
   </div>
   <div class="col-lg-8 col-md-8">
@@ -95,14 +96,16 @@
               {%if appointment.reqApproval%}
               <td><span class="label label-success">Approved</span></td>
               <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
-                {%else%}<span class="label label-info">Examining</span>{%endif%}</td>
+                {%elif appointment.status == 'e' %}<span class="label label-info">Examining</span>{%else%}
+                  <span class="label label-danger">terminated</span>{%endif%}</td>
               <td>{{appointment.patient.rollNo}}</td>
               {%else%}
               <td><span class="label label-danger">Pending</span></td>
               <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
-                {%else%}<span class="label label-info">Examining</span>{%endif%}</td>
+                {%elif appointment.status == 'e' %}<span class="label label-info">Examining</span>{%else%}
+                  <span class="label label-danger">terminated</span>{%endif%}</td>
               <td>{{appointment.patient.rollNo}}</td>
-              <td><a class="btn" href="" data-toggle="">Approve</a></td>
+              <td><a class="btn" href="{%url 'Reception:approve' appointment.id%}" data-toggle="">Approve</a></td>
               {%endif%}
             </tr>
             {%endfor%}

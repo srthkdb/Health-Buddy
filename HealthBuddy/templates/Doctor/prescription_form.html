@@ -257,7 +257,6 @@
                                                                     formenctype="multipart/form-data"
                                                                     class="btn btn-success"
                                                                     align="left"
-                                                                    formtarget="_blank"
                                                             >Save And End</button>
                                                         </div>
                                                     </div>
@@ -273,7 +272,6 @@
                                                                     formenctype="multipart/form-data"
                                                                     class="btn btn-success"
                                                                     align="left"
-                                                                    formtarget="_blank"
                                                             >Refer</button>
                                                         </div>
                                                     </div>
@@ -363,15 +361,21 @@
                                                                 </tr>
                                                             </thead>
 
-                                                            {%for p in patient.PatHistory_set.all %}
-                                                            <tbody>
-                                                                <tr class="table-success">
-                                                                    <td>{{ forloop.counter }}.</td>
-                                                                    <td>{{p.treatmentFor}}</td>
-                                                                    <td>{{p.remarks}}</td>
-                                                                    <td><a href="{%url 'Patient:pres_details' p.id%}" target="_blank">{{ p.date.date }}</a></td>
-                                                                </tr>
-                                                            {% endfor %}
+                                                            {%for p in patient.pathistory_set.all %}
+                                                                <tbody>
+                                                                    <tr class="table-success">
+                                                                        <td>{{ forloop.counter }}.</td>
+                                                                        <td>{{p.treatmentFor}}</td>
+                                                                        <td>{{ p.remarks}}</td>
+                                                                        <td><a  href="{{p.file}}">
+                                                                                <button  style="float: left" type="button" class="btn btn-success btn-xs">
+                                                                                    <span class="glyphicon glyphicon-download-alt"></span>
+                                                                                </button>
+                                                                            </a>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                {% endfor %}
                                                             </tbody>
                                                         </table>
                                                     </div>
