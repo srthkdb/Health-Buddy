@@ -5,7 +5,7 @@
     body{
         {% comment %} background-image: linear-gradient(to bottom, #222222 5%, #555555, #ffffff 40%) {% endcomment %}
         background-color: #eeeeee;
-    }  
+    }
 
     nav{
         background-image: linear-gradient(to bottom, #222222, #666666);
@@ -46,11 +46,19 @@
                       <span class="" aria-hidden="true"></span>&nbsp; {{request.user.first_name}}
                   </a>
               </li>
-                <li>
-                    <a href="{% url 'users:logout' %}">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
-                    </a>
-                </li>
+              {% if request.user.is_authenticated %}
+              <li>
+                  <a href="{% url 'users:logout' %}">
+                      <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                  </a>
+              </li>
+              {%else%}
+              <li>
+                  <a href="#login">
+                      <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; Login
+                  </a>
+              </li>
+              {%endif%}
             </ul>
         </div>
 
@@ -284,12 +292,12 @@
                         <div class = "panel-body">
                         <center>
                             <img src = "{% static 'users/egc.jpg'%}"width = "30%"/>
-                            
+
                         </center><br>
                         <strong>Routine ECG</strong><br>
                             Timing<br>
                             8: 00 AM to 2:00 PM (Monday to Saturday)<br>
-                        </div>  
+                        </div>
                     </div>
                     <div class = "panel">
                         <div class = "panel-heading">
@@ -298,13 +306,13 @@
                         <div class = "panel-body">
                         <center>
                             <img src = "{% static 'users/Pathology.jpg'%}"width = "30%"/>
-                            
+
                         </center><br>
                         <strong>Path-Way Diagnosis Lab</strong><br>
                             Timing<br>
                             7: 30 AM to 12: 00 Noon<br>
                             5: 00 PM to 7: 00 PM<br>
-                        </div>  
+                        </div>
                     </div>
                     <div class = "panel">
                         <div class = "panel-heading">
@@ -313,12 +321,12 @@
                         <div class = "panel-body">
                         <center>
                             <img src = "{% static 'users/physiotherapy.jpg'%}"width = "30%"/>
-                            
+
                         </center><br>
                         <strong>Dr. Sanjay Bhagat (M. P. T.)</strong><br>
                             Timing<br>
                             3: 00 AM to 9: 00 PM ( Monday to Saturday )<br>
-                        </div>  
+                        </div>
                     </div>
                     <div class = "panel">
                         <div class = "panel-heading">
@@ -327,11 +335,11 @@
                         <div class = "panel-body">
                         <center>
                             <img src = "{% static 'users/x-ray.jpg'%}"width = "30%"/>
-                            
+
                         </center><br>
                             <strong>Timing</strong><br>
                             8: 00 AM to 12: 00 PM<br>
-                        </div>  
+                        </div>
                     </div>
                     <div class = "panel">
                         <div class = "panel-heading">
@@ -340,7 +348,7 @@
                         <div class = "panel-body">
                         <center>
                             <img src = "{% static 'users/dressing.jpg'%}"width = "30%"/>
-                            
+
                         </center><br>
                         <strong>Monday to Friday</strong><br>
                             8: 30 AM to 12: 00 Noon<br>
@@ -349,7 +357,7 @@
                             8: 30 AM to 12: 00 Noon<br>
                         <strong>Sunday - Holiday</strong><br>
                             9: 00 AM to 10: 00 AM (Morning)<br>
-                        </div>  
+                        </div>
                     </div>
                     <div class = "panel">
                         <div class = "panel-heading">
@@ -358,9 +366,9 @@
                         <div class = "panel-body">
                         <center>
                             <img src = "{% static 'users/labour-room.jpg'%}"width = "30%"/>
-                            
+
                         </center><br>
-                        </div>  
+                        </div>
                     </div>
                     <div class = "panel">
                         <div class = "panel-heading">
@@ -369,9 +377,9 @@
                         <div class = "panel-body">
                         <center>
                             <img src = "{% static 'users/specialty-clinics.jpg'%}" width = "30%"/>
-                            
+
                         </center><br>
-                        </div>  
+                        </div>
                     </div>
             </div>
         </div>
