@@ -1,0 +1,192 @@
+{%extends 'users/base.html'%}
+{% block scripts %}
+{% load staticfiles %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="//www.chartjs.org/assets/Chart.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/Reception/home.css" />
+<script src="{% static "search/jquery.filtertable.js" %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="{% static "search/jquery.filtertable.min.js" %}"></script>
+<script>
+    $(document).ready(function() {
+        $('#med_table').filterTable(); // apply filterTable to all tables on this page
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#pres_table').filterTable(); // apply filterTable to all tables on this page
+    });
+</script>
+<style>
+.btn-wrap-text {
+	    white-space: normal;
+	    word-wrap: break-word;
+	}
+</style>
+{% endblock %}
+{%block body%}
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'users:home' %}"><strong>HealthBuddy</strong></a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href = "{% url 'users:redirect_home' %}">
+                        <span class="" aria-hidden="true"></span>&nbsp;<i class="fa fa-user fa-1.5x"></i> {{request.user.first_name}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'users:logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<center>
+    <div class="container" id="med_list"><br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="overflow: auto">
+                        <h4 class="panel-title" style="top-align:center;">List of Medicines
+                            <button data-toggle="modal" data-target="#addMeicineForm" class="btn btn-info" style="float: right; " >Add medicine</button></h4>
+                    </div>
+                    <div class="panel-body" style="display: block;">
+                        <div class="row">
+                            <table class="table" id="med_table">
+                                <thead>
+                                    <tr>
+                                        <th>S No</th>
+                                        <th>Medicine Name</th>
+                                        <th>Quantity Present</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                        {%for m in med_list %}
+                                        <tr class="table-success">
+                                            <td>{{ forloop.counter }}.</td>
+                                            <td>{{m.name}}</td>
+                                            <td>{{m.quantity}}</td>
+                                            <td>
+                                            <form id="change_quantity_form" action="{% url 'Pharmacy:med_list_edit' m.id 1 %}"  method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                {{ form.quantity_provided.errors }}
+                                                {{ form.quantity_provided }}
+                                                <button
+                                                        formnovalidate
+                                                        value="Add"
+                                                        type="submit"
+                                                        form="change_quantity_form"
+                                                        formaction="{%url 'Pharmacy:med_list_edit'  m.id 0 %}"
+                                                        formmethod="post"
+                                                        formenctype="multipart/form-data"
+                                                        class="btn btn-default btn-xs"
+                                                        align="center"
+                                                >Add</button>
+                                                <button
+                                                        formnovalidate
+                                                        value="Delete"
+                                                        type="submit"
+                                                        form="change_quantity_form"
+                                                        formaction="{%url 'Pharmacy:med_list_edit' m.id 1 %}"
+                                                        formmethod="post"
+                                                        formenctype="multipart/form-data"
+                                                        class="btn btn-default btn-xs"
+                                                        align="center"
+                                                >remove</button>
+                                            </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+<div class="modal fade" id="addMeicineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title"><strong>Add Medicine</strong></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form id="med_form"  action="{% url 'Pharmacy:add_new_med' %} " method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="md-form mb-5">
+                {{ med_form.name.errors }}
+                <label for="{{ med_form.name.id_for_label }}" class="req">Name of medicine</label>
+                {{ med_form.name }}
+            </div>
+
+            <div class="md-form mb-4">
+                {{ med_form.quantity.errors }}
+                <label for="{{ med_form.quantity.id_for_label }}">Quantity of medicine</label>
+                {{ med_form.quantity }}
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <center>
+            <button
+            type="submit"
+            value="submit"
+            form="med_form"
+            class="btn btn-default btn">
+            submit</button>
+        </center>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+{%endblock%}
+
+{% block scpt %}
+    {%load staticfiles%}
+    <script src="{% static "search/jquery.filtertable.js" %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static "search/jquery.filtertable.min.js" %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#med_table').filterTable(); // apply filterTable to all tables on this page
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#pres_table').filterTable(); // apply filterTable to all tables on this page
+        });
+    </script>
+
+{% endblock %}
