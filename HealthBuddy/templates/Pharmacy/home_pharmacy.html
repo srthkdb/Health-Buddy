@@ -55,7 +55,7 @@
           </div>
           <div class="info">
               <div class="title">
-                  <a target="_blank" href="" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
+                  <a href="{% url 'users:redirect_home' %}" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
               </div>
               <div class="desc">staff</div>
           </div>
