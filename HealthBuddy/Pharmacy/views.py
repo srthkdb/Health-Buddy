@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from Doctor.models import PresMedicine, Prescription
 from Patient.models import Patient
 from .models import *
-from .forms import PharQuantity, PresSearch
+from .forms import *
 # Create your views here.
 
 def searchPres(request):
@@ -112,11 +112,10 @@ def change_quantity(request, med_id, patient_roll, pres_id):
 
 def database(request, med_id, is_deleted):
     form_class = PharQuantity
-    template_name = 'Pharmacy/pres_view.html'
+    template_name = 'Pharmacy/med_list.html'
     
     med_list = Medicine.objects.all()
     form = form_class(request.POST or None)
-    temp_list = []
 
     if form.is_valid():
         q_changed = form.cleaned_data['quantity_provided']
@@ -130,9 +129,8 @@ def database(request, med_id, is_deleted):
                 context = {
                     'med_list': med_list,
                     'form': form,
-                    'temp_list': temp_list,
-                    'error_message': 'Quantity not sufficient'
-
+                    'error_message': 'Quantity not sufficient',
+                    'med_form': PharMedicineForm(None)
                 }
 
                 return render(request, template_name, context)
@@ -144,17 +142,28 @@ def database(request, med_id, is_deleted):
         change_med_get.save()
         change_med_get.refresh_from_db()
         form = form_class(None)
-        temp_list = []
-        a = {'error_message': 'Quantity changed', 'med_list': med_list, 'temp_list':temp_list, 'form': form}
-        return render(request, template_name, a)
+        a = {'error_message': 'Quantity changed', 'med_list': med_list, 'form': form, 'med_form': PharMedicineForm(None)}
+        return render(request, 'Pharmacy/med_list.html', a)
         
     context = {
         'med_list': med_list,
         'form': form,
-        'temp_list': temp_list
-
+        'error_message': "quantity not changed.",
+        'med_form': PharMedicineForm(None)
     }
 
     return render(request, template_name, context)
 
+def med_list_view(request):
+    med_list = Medicine.objects.all()
+    return render(request, 'Pharmacy/med_list.html',{'med_list':med_list, 'form': PharQuantity(None), 'med_form': PharMedicineForm(None)})
 
+def add_new_med(request):
+    form_class = PharMedicineForm
+    form = form_class(request.POST or None)
+    med_list = Medicine.objects.all()
+    if form.is_valid():
+        f = form.save()
+
+        return render(request, 'Pharmacy/med_list.html',{'med_list':med_list, 'form': PharQuantity(None), 'med_form' : form })
+    return render(request, 'Pharmacy/med_list.html',{'med_list':med_list, 'form': PharQuantity(None),'med_form' : form, 'error':'Couldn\'t add medicine' })

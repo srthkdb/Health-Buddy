@@ -61,21 +61,24 @@
           </div>
           <div class="bottom">
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Medicine List</a>
+                <a href="{% url 'Pharmacy:med_list' %}" class="dropdown-btn">Medicine List</a>
             </div>
-            <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
-            </div>
-            <div class="sidebar-items">
-                <a href="" class="dropdown-btn" data-toggle="modal" data-target="#createappointment">Records</a>
-            </div>
+            
           </div>
       </div>
   </div>
   <div class="col-lg-8 col-md-8">
     <div class="panel" id="waiting-list">
       <div class="panel-heading">
-        <h4 class="text-uppercase"><strong>List Of Patients</strong></h4>
+        <h4 class="text-uppercase"><strong>List Of Patients</strong>
+
+            <form id="search_pres" action="{% url 'Pharmacy:searchPres' %}" method="post" enctype="multipart/form-data" align ="right" style="color:black">
+                {% csrf_token %}
+                {{ form.patient_roll.errors }}
+                {{ form.patient_roll }}
+
+                <input type="submit" value="GO!" class = "btn btn-success btn-md">
+            </form></h4>
       </div>
       <div class="panelbody">
         <table class="table table-default">

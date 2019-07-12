@@ -179,7 +179,7 @@
                                                                             <td>{{m.times_a_day}}</td>
                                                                             <td>{{m.no_of_days}}</td>
                                                                             <td>{{m.when_to_take}}</td>
-                                                                            <td><input type="checkbox" value="{{m.provided}}"></td>
+                                                                            <td><input type="checkbox" value="{{m.provided}}" disabled></td>
                                                                         </tr>
                                                                     {% endfor %}
                                                                     </tbody>
@@ -264,9 +264,9 @@
                                                         <tbody>
                                                             <tr class="table-success">
                                                                 <td>{{ forloop.counter }}.</td>
-                                                                <td class="text text-primary">{%for d in p.presdetails_set.all%} {{ d.date.date }} {%endfor%}</td>
-                                                                <td class="text text-primary">{{p.treatmentFor}}</td>
-                                                                <td class="text text-primary">Dr {{ p.doctor.user.first_name }} {{ p.doctor.user.last_name }}</td>
+                                                                <td class="text text-primary">{%for d in p.presdetails_set.all%} {{ d.date.date }}<br> {%endfor%}</td>
+                                                                <td class="text text-primary">{%for d in p.presdetails_set.all%} {{ p.treatmentFor }}<br> {%endfor%}</td>
+                                                                <td class="text text-primary">{% for d in p.presdetails_set.all %}Dr {{ d.doctor.user.first_name }} {{ d.doctor.user.last_name }} <br>{% endfor %} </td>
                                                             </tr>
                                                         {% endfor %}
                                                         </tbody>
@@ -343,6 +343,7 @@
             <a class="btn btn-success" href="{%url 'users:redirect_home'%}">Submit</a>
         </center>
       </div>
+    </form>
     </div>
   </div>
 </div>
@@ -350,3 +351,21 @@
 </center>
 
 {%endblock%}
+
+{% block scpt %}
+    {%load staticfiles%}
+    <script src="{% static "search/jquery.filtertable.js" %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static "search/jquery.filtertable.min.js" %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#med_table').filterTable(); // apply filterTable to all tables on this page
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#pres_table').filterTable(); // apply filterTable to all tables on this page
+        });
+    </script>
+
+{% endblock %}
