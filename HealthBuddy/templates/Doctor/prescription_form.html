@@ -19,13 +19,14 @@
             <div class="collapse navbar-collapse" id="topNavBar">
                 <ul class="nav navbar-nav">
                     <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
-                    <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                    <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
 
                 </ul>
-            
+
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href = "{% url 'users:home' %}"
+                        <a href = "{% url 'users:redirect_home' %}"
                             <span class="" aria-hidden="true"></span>&nbsp; {{request.user.first_name}}
                         </a>
                     </li>
@@ -181,6 +182,23 @@
                                                                                 {{ pres_form.tests }}
                                                                             </div>
                                                                         </div>
+                                                                        {%if pres%}
+                                                                        <div class="form-group col-sm-4">
+                                                                            <div class="fieldWrapper">
+                                                                                <table style="border-color: white; width:100%;" class="table table-responsive" align="center">
+                                                                                  <tr style="border-color: white;">
+                                                                                      <td style="border-color: white; align:left;"><b>Tests</b></td>
+                                                                                      {%if pres.testpres_set.all %}
+                                                                                      <td  style="border-color: white;">{%for t in pres.testpres_set.all %}{{ t.test }}<br>{%endfor%}</td>
+                                                                                      <td  style="border-color: white;">{%for t in pres.testpres_set.all %}{{ t.value }}<br>{%endfor%}</td>
+                                                                                      {%else%}
+                                                                                      <td>NA</td>
+                                                                                      {%endif%}
+                                                                                  </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                        {%endif%}
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="form-group col-sm-4">
@@ -231,7 +249,7 @@
                                                         <div class="form_sep">
                                                             <button
                                                                     formnovalidate
-                                                                    value="Create Reference"
+                                                                    value="Save and End"
                                                                     type="submit"
                                                                     form="pres_form"
                                                                     formaction="{% if pres %} {% url 'Doctor:save_and_end' patient.rollNo pres.id 1 %} {%else%} {% url 'Doctor:create_and_end' patient.rollNo 1 %} {%endif%}"
@@ -239,7 +257,6 @@
                                                                     formenctype="multipart/form-data"
                                                                     class="btn btn-success"
                                                                     align="left"
-                                                                    formtarget="_blank"
                                                             >Save And End</button>
                                                         </div>
                                                     </div>
@@ -255,7 +272,6 @@
                                                                     formenctype="multipart/form-data"
                                                                     class="btn btn-success"
                                                                     align="left"
-                                                                    formtarget="_blank"
                                                             >Refer</button>
                                                         </div>
                                                     </div>
@@ -345,15 +361,21 @@
                                                                 </tr>
                                                             </thead>
 
-                                                            {%for p in patient.PatHistory_set.all %}
-                                                            <tbody>
-                                                                <tr class="table-success">
-                                                                    <td>{{ forloop.counter }}.</td>
-                                                                    <td>{{p.treatmentFor}}</td>
-                                                                    <td>{{p.remarks}}</td>
-                                                                    <td><a href="{%url 'Patient:pres_details' p.id%}" target="_blank">{{ p.date.date }}</a></td>
-                                                                </tr>
-                                                            {% endfor %}
+                                                            {%for p in patient.pathistory_set.all %}
+                                                                <tbody>
+                                                                    <tr class="table-success">
+                                                                        <td>{{ forloop.counter }}.</td>
+                                                                        <td>{{p.treatmentFor}}</td>
+                                                                        <td>{{ p.remarks}}</td>
+                                                                        <td><a  href="{{p.file}}">
+                                                                                <button  style="float: left" type="button" class="btn btn-success btn-xs">
+                                                                                    <span class="glyphicon glyphicon-download-alt"></span>
+                                                                                </button>
+                                                                            </a>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                {% endfor %}
                                                             </tbody>
                                                         </table>
                                                     </div>

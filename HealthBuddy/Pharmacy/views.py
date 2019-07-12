@@ -56,14 +56,7 @@ def change_quantity(request, med_id, patient_roll, pres_id):
     med_list = Medicine.objects.all()
     med = PresMedicine.objects.filter(prescription=pres)
     form = form_class(request.POST or None)
-    context = {
-        'patient': patient,
-        'pres': pres,
-        'med_list': med_list,
-        'med': med,
-        'form': form,
-
-    }
+    temp_list = []
 
     if form.is_valid():
         q_changed = form.cleaned_data['quantity_provided']
@@ -72,19 +65,50 @@ def change_quantity(request, med_id, patient_roll, pres_id):
 
         if q_changed <= change_med_get.quantity:
             new = change_med_get.quantity - q_changed
-            change_med_filter.update(quantity = new)
+            change_med_get.quantity = new
+            change_med_get.save()
             change_med_get.refresh_from_db()
-            context['error_message'] = 'Quantity changed'
             form = form_class(None)
-            context['form'] = form
-            return render(request, template_name, context)
+            temp_list = []
+            for m in med_list:
+                for pm in med:
+                    if pm.medicine == m.name:
+                        temp_list.append(m)
+            a = {'error_message': 'Quantity changed', 'patient': patient, 'pres': pres, 'med_list': med_list, 'med': med, 'temp_list':temp_list, 'form': form}
+            return render(request, template_name, a)
         else:
-            context['error_message'] = 'Quantity not sufficient'
+            for m in med_list:
+                for pm in med:
+                    if pm.medicine == m.name:
+                        temp_list.append(m)
             form = form_class(None)
-            context['form'] = form
+            context = {
+                'patient': patient,
+                'pres': pres,
+                'med_list': med_list,
+                'med': med,
+                'form': form,
+                'temp_list': temp_list,
+                'error_message': 'Quantity not sufficient'
+
+            }
+
             return render(request, template_name, context)
 
-    context['error_message'] = 'Error: Quantity not changed'
+    for m in med_list:
+        for pm in med:
+            if pm.medicine == m.name:
+                temp_list.append(m)
+    context = {
+        'patient': patient,
+        'pres': pres,
+        'med_list': med_list,
+        'med': med,
+        'form': form,
+        'temp_list': temp_list
+
+    }
+
     return render(request, template_name, context)
 
 

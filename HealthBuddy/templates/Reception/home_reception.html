@@ -19,14 +19,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'users:home' %}"><strong>HealthBuddy</strong></a>
+            <a class="navbar-brand" href="{% url 'users:redirect_home' %}"><strong>HealthBuddy</strong></a>
         </div>
 
         <!-- Items -->
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
                 <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
-                <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
 
             </ul>
 
@@ -49,28 +50,40 @@
   <div class="col-lg-3 col-md-4" style="padding-left:0px; padding-right:0px;" id="col-1">
       <div class="card hovercard">
           <div class="cardheader">
+          <img src = "{% static 'Doctor/medical-records.jpg'%}" height = "145px" width = "100%"/>
           </div>
           <div class="avatar">
-              <img alt="" src="http://lorempixel.com/100/100/people/9/">
+              <img alt="" src="{% static 'Reception/reception1.jpg' %}">
           </div>
           <div class="info">
               <div class="title">
-                  <a target="_blank" href="https://scripteden.com/" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
+                  <a href="{% url 'users:redirect_home' %}" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
               </div>
               <div class="desc">Reception</div>
           </div>
           <div class="bottom">
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="{%url 'Reception:pat_list'%}" class="dropdown-btn">Patient Search</a>
+            </div>
+              <div class="sidebar-items">
+                <a href="{% url 'Reception:stud_list'%}" class="dropdown-btn">Student Search</a>
             </div>
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="" class="dropdown-btn" data-toggle="modal" data-target="#createappointment">New Appointment</a>
             </div>
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="{% url 'users:register'%}" class="dropdown-btn" target = "_blank">Register</a>
             </div>
           </div>
+          <div class="remove-btn" align="center">
+            <a class="btn btn-danger" href="{%url 'Reception:clear' %}">
+              <strong>Clear trash <br>appointments</strong>
+            </a>
+          </div>
       </div>
+
+
+
   </div>
   <div class="col-lg-8 col-md-8">
     <div class="panel" id="waiting-list">
@@ -82,18 +95,20 @@
           <tbody>
             {% for appointment in appointment_set %}
             <tr>
-              <td><a href=''>{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</a></td>
+              <td><a href="{% url 'Patient:pat_details' appointment.patient.rollNo %}">{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</a></td>
               {%if appointment.reqApproval%}
               <td><span class="label label-success">Approved</span></td>
               <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
-                {%else%}<span class="label label-info">Examining</span>{%endif%}</td>
+                {%elif appointment.status == 'e' %}<span class="label label-info">Examining</span>{%else%}
+                  <span class="label label-danger">terminated</span>{%endif%}</td>
               <td>{{appointment.patient.rollNo}}</td>
               {%else%}
               <td><span class="label label-danger">Pending</span></td>
               <td>{% if appointment.status == 'w' %}<span class="label label-warning">Waiting</span>
-                {%else%}<span class="label label-info">Examining</span>{%endif%}</td>
+                {%elif appointment.status == 'e' %}<span class="label label-info">Examining</span>{%else%}
+                  <span class="label label-danger">terminated</span>{%endif%}</td>
               <td>{{appointment.patient.rollNo}}</td>
-              <td><a class="btn" href="" data-toggle="">Approve</a>
+              <td><a class="btn" href="{%url 'Reception:approve' appointment.id%}" data-toggle="">Approve</a></td>
               {%endif%}
             </tr>
             {%endfor%}
@@ -114,8 +129,8 @@
             {% for r in refer_list %}
             <tr>
               <td><a href="{%url 'Doctor:ref_pres' r.id %}">{{r.prescription.patient.user.first_name}} {{r.prescription.patient.user.last_name}}</a></td>
-              <td>Dr. {{r.from_doc.user.first_name}} {{r.from_doc.user.first_name}}</td>
-              <td>Dr. {{r.to_doc.user.first_name}} {{r.to_doc.user.first_name}}</td>
+              <td>Dr. {{r.from_doc.user.first_name}} {{r.from_doc.user.last_name}}</td>
+              <td>Dr. {{r.to_doc.user.first_name}} {{r.to_doc.user.last_name}}</td>
             </tr>
             {%endfor%}
           {%endif%}
@@ -125,6 +140,50 @@
     </div>
 
   </div>
+
+<div class="modal fade" id="createappointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title"><strong>Create An Appointment</strong></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form id="form" action="{% url 'Reception:create_appointment_new' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+          <div class="md-form mb-5">
+              {{ form.patient_roll.errors }}
+              <label for="{{ form.patient_roll.id_for_label }}" class="req">Patient's Roll Number</label>
+              {{ form.patient_roll }}
+          </div>
+          <div class="md-form mb-5">
+              {{ form.brief.errors }}
+              <label for="{{ form.brief.id_for_label }}" class="req">Symptoms/Brief</label>
+              {{ form.brief }}
+          </div>
+          <div class="md-form mb-4">
+              {{ form.doctor.errors }}
+              <label for="{{ form.doctor.id_for_label }}" class="req">Doctor</label>
+              {{ form.doctor }}
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <center>
+            <button
+            type="submit"
+            value="submit"
+            form="form"
+            class="btn btn-default btn">
+            Submit</button>
+        </center>
+      </div>
+    </div>
+  </div>
+</div>
 <!--<div> -->
 
 {% endblock %}

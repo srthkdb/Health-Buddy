@@ -63,19 +63,18 @@ def redirect_ref_form(request, patient_roll, pres_id=None):
 @login_required(login_url = "/")
 #delete appointment by filtering from patient and not by using app_id
 def save_pres(request, patient_roll, pres_id=None, end=None):
-    if request.user.type.types != 'doc':
-        return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
-    if pres_id:
-        pres = get_object_or_404(Prescription, pk=pres_id)
-        if pres.doctor.user.username != request.user.username:
-            return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+    # if request.user.type.types != 'doc':
+    #     return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
+    # if pres_id:
+    #     pres = get_object_or_404(Prescription, pk=pres_id)
+    #     if pres.doctor.user.username != request.user.username:
+    #         return render(request, 'users/base_home.html', {"error_message" : "you are not autharised to view this page"})
     form_class_pres = PrescriptionForm
     form_class_med = PresMedicineForm
     template_name = 'Doctor/prescription_form.html'
     patient = get_object_or_404(Patient, pk=patient_roll)
-    applist = Appointment.objects.filter(patient=patient, doctor=request.user.doctor)
-    num = applist.count()
-    app = applist.get(pk=num)
+    applist = Appointment.objects.filter(patient=patient)
+    app = applist.reverse()[0]
 
     if pres_id == None:
         pres_form = form_class_pres(request.POST or None)
@@ -93,15 +92,16 @@ def save_pres(request, patient_roll, pres_id=None, end=None):
             p.med_added = True
 
             p.save()
-            current_time = datetime.datetime.now()
-            det = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
-            det.save()
+            # current_time = datetime.datetime.now()
+            # det = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
+            # det.save()
             med_form = form_class_med(None)
             pres_form = form_class_pres(None)
             app.status = 'e'
             app.save()
             if end:
-                app.delete()
+                app.status = 't'
+                app.save()
             return render(request, template_name,
                           {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'error_message': 'form saved'})
         else:
@@ -116,7 +116,9 @@ def save_pres(request, patient_roll, pres_id=None, end=None):
             app.status = 'e'
             app.save()
             if end:
-                app.delete()
+                # app.delete()
+                app.status = 't'
+                app.save()
             return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'error_message': 'form saved'})
 
 
@@ -240,12 +242,12 @@ def edit_pres(request, pres_id):
     #temp stores list of usernames of all users that have saved the prescription
     temp = []
 
-    for p in pres.presdetails_set.all():
-        temp.append(p.doctor.user.username)
+    # for p in pres.presdetails_set.all():
+    #     temp.append(p.doctor.user.username)
 
-    if request.user.username in temp:
-        pres_form = form_class_pres(None, instance=pres)
-        return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'pres': pres})
+    # if request.user.username in temp:
+    pres_form = form_class_pres(None, instance=pres)
+    return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'pres': pres})
 
     return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'error_message': 'You do not have rights to edit this prescription.'})
 

@@ -26,13 +26,14 @@
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
                 <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
-                <li class="#"><a href="{% url 'users:contact'%}"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
 
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href = "{% url 'users:home' %}">
+                    <a href = "{% url 'users:redirect_home' %}">
                         <span class="" aria-hidden="true"></span>&nbsp;<i class="fa fa-user fa-1.5x"></i> {{request.user.first_name}}
                     </a>
                 </li>
@@ -49,25 +50,26 @@
   <div class="col-lg-3 col-md-4" style="padding-left:0px; padding-right:0px;" id="col-1">
       <div class="card hovercard">
           <div class="cardheader">
+          <img src = "{% static 'Doctor/medical-records.jpg'%}" height = "145px" width = "100%"/>
           </div>
           <div class="avatar">
-              <img alt="" src="http://lorempixel.com/100/100/people/9/">
+              <img alt="" src="{% static 'Doctor/happydoctor.jpg'%}">
           </div>
           <div class="info">
               <div class="title">
-                  <a target="_blank" href="https://scripteden.com/" class="">Dr. {{request.user.first_name}} {{request.user.last_name}}</a>
+                  <a href="{% url 'users:redirect_home' %}" class="">Dr. {{request.user.first_name}} {{request.user.last_name}}</a>
               </div>
               <div class="desc">{{request.user.doctor.department}}</div>
           </div>
           <div class="bottom">
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="#myprofile" class="dropdown-btn">My cases</a>
             </div>
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="#myprofile" class="dropdown-btn">Waiting list</a>
             </div>
             <div class="sidebar-items">
-                <a href="#myprofile" class="dropdown-btn">Health Profile</a>
+                <a href="#myprofile" class="dropdown-btn">Referrals</a>
             </div>
           </div>
       </div>
@@ -83,9 +85,15 @@
             {% for appointment in request.user.doctor.appointment_set.all %}
               {% if appointment.status == 'w' %}
             <tr>
-              <td>{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</td>
+              <td><a href="{%url 'Doctor:create_prescription' appointment.patient.rollNo %}">{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</a></td>
               <td>{{appointment.patient.rollNo}}</td>
-              <td>{{appointment.dateNtime}}</td>
+              {%if appointment.reqApproval%}
+                <td><span class="label label-success">Approved</span></td>
+                {%else%}
+                <td><span class="label label-danger">Pending</span></td>
+              {%endif%}
+              <td class="text text-primary">{{appointment.dateNtime}}</td>
+                <td class="text text-primary">{{appointment.brief}}</td>
             </tr>
               {%endif%}
             {%endfor%}
@@ -105,9 +113,10 @@
           {% if request.user.doctor.to_doc.all %}
             {% for r in request.user.doctor.to_doc.all %}
             <tr>
-                <td><a href="{%url 'Doctor:ref_pres' r.id %}">{{r.prescription.patient.user.first_name}} {{r.prescription.patient.user.last_name}}</a></td>
-              <td>Dr. {{r.from_doc.user.first_name}} {{r.from_doc.user.first_name}}</td>
-              <!-- <td>{{appointment.dateNtime}}</td> -->
+              <td><a href="{%url 'Doctor:ref_pres' r.id %}">{{r.prescription.patient.user.first_name}} {{r.prescription.patient.user.last_name}}</a></td>
+              <td class="text text-primary">Dr. {{r.from_doc.user.first_name}} {{r.from_doc.user.last_name}}</td>
+              <td class="text text-primary">{{r.remarks_from_doc}}</td>
+
             </tr>
 
             {%endfor%}
@@ -128,11 +137,19 @@
           <tbody>
             {% for appointment in request.user.doctor.appointment_set.all %}
               {% if appointment.status == 'e' %}
-            <tr>
-              <td>{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</td>
-              <td>{{appointment.patient.rollNo}}</td>
-              <td>{{appointment.dateNtime}}</td>
-            </tr>
+              <tr>
+                  {% with appointment.patient.prescription_set.reverse|first as pres %}
+                <td><a href="{%url 'Doctor:edit_prescription' pres.id %}">{{appointment.patient.user.first_name}} {{appointment.patient.user.last_name}}</a></td>
+                  {%endwith%}
+                <td class="text text-primary">{{appointment.patient.rollNo}}</td>
+                {%if appointment.reqApproval%}
+                  <td><span class="label label-success">Approved</span></td>
+                  {%else%}
+                  <td><span class="label label-danger">Pending</span></td>
+                {%endif%}
+                <td class="text text-primary">{{appointment.dateNtime}}</td>
+                  <td class="text text-primary">{{appointment.brief}}</td>
+              </tr>
               {%endif%}
             {%endfor%}
           </tbody>
@@ -150,8 +167,8 @@
             {% for pres in request.user.doctor.prescription_set.all %}
             <tr>
                 <td><a href="{%url 'Doctor:create_prescription' pres.patient.rollNo %}"> {{pres.patient.user.first_name}} {{pres.patient.user.last_name}}</a></td>
-              <td>{{pres.patient.rollNo}}</td>
-              <td>{{pres.date}}</td>
+              <td class="text text-primary">{{pres.patient.rollNo}}</td>
+              <td class="text text-primary">{{pres.date}}</td>
             </tr>
             {%endfor%}
           </tbody>
