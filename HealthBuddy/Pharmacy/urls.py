@@ -4,6 +4,8 @@ from . import views
 app_name = "Pharmacy"
 
 urlpatterns = [
+    path('', views.searchPres, name="searchPres"),
+    path('pres/<int:patient_roll>/', views.presView, name="pres_empty"),
     path('pres/<int:patient_roll>/<int:pres_id>/', views.presView , name = "pres"),
     path('pres/change_quantity/<int:patient_roll>/<int:pres_id>/<int:med_id>/', views.change_quantity, name="change_quantity")
 ]
