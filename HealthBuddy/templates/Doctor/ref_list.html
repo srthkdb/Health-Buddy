@@ -1,0 +1,109 @@
+{%extends 'users/base.html'%}
+{% block scripts %}
+{% load staticfiles %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="//www.chartjs.org/assets/Chart.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/Reception/home.css" />
+<script src="{% static "search/jquery.filtertable.js" %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="{% static "search/jquery.filtertable.min.js" %}"></script>
+<script>
+    $(document).ready(function() {
+        $('#med_table').filterTable(); // apply filterTable to all tables on this page
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#pres_table').filterTable(); // apply filterTable to all tables on this page
+    });
+</script>
+<style>
+.btn-wrap-text {
+	    white-space: normal;
+	    word-wrap: break-word;
+	}
+</style>
+{% endblock %}
+{%block body%}
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'users:home' %}"><strong>HealthBuddy</strong></a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="#"><a href="http://www.iitk.ac.in/hc/HealthCalci/healthcalci.htm" target="_blank"><span class="#" aria-hidden="true"></span>&nbsp; Health Calculator</a></li>
+                <li class="#"><a href="{% url 'users:contact'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Contact Us</a></li>
+                <li class="#"><a href="{% url 'users:HC_Info'%}" target = "_blank"><span class="#" aria-hidden="true"></span>&nbsp; Info</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href = "{% url 'users:redirect_home' %}">
+                        <span class="" aria-hidden="true"></span>&nbsp;<i class="fa fa-user fa-1.5x"></i> {{request.user.first_name}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'users:logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<center>
+    <div class="container" id="ref_list"><br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="overflow: auto">
+                        <h4 class="panel-title" style="top-align:center;">Referred Patients</h4>
+                    </div>
+                    <div class="panel-body" style="display: block;">
+                        <div class="row">
+                            <table class="table" id="med_table">
+                                <thead>
+                                    <tr>
+                                        <th>S No</th>
+                                        <th>Patient Name</th>
+                                        <th>Referred to</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                        {%for p in ref_list %}
+                                        <tr class="table-success">
+                                            <td>{{ forloop.counter }}.</td>
+                                            <td>{{p.prescription.patient.user.first_name}} {{p.prescription.patient.user.last_name}}</td>
+                                            <td>Dr. {{p.to_doc.user.first_name}} {{p.to_doc.user.last_name}}</td>
+                                            {% with p.prescription.presdetails_set.reverse|first as last %}
+                                            <td>{{ last.date }}</td>
+                                            {%  endwith %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+
+{%endblock%}

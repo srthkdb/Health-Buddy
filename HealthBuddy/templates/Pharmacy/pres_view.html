@@ -131,13 +131,22 @@
                                                         </tr>
                                                         <tr style="border-color: white;">
                                                             <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                            <td style="border-color: white; align:left;"><b>Tests</b></td>
+                                                            <td style="border-color: white; align:left;"><b>Vitals</b></td>
                                                             {%if pres.testpres_set.all %}
                                                             <td  style="border-color: white;">{%for t in pres.testpres_set.all %}{{ t.test }}<br>{%endfor%}</td>
                                                             <td  style="border-color: white;">{%for t in pres.testpres_set.all %}{{ t.value }}<br>{%endfor%}</td>
                                                             {%else%}
                                                             <td>NA</td>
                                                             {%endif%}
+                                                            <td  style=" border-color: white;"></td>
+                                                        </tr>
+                                                        <tr style="border-color: white;">
+                                                            <td  style="border-color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                            <td style="border-color: white; align:left;"><b>Test</b></td>
+                                                            {%if pres.tests.all %}
+                                                            <td  style="border-color: white;">{% for t in pres.tests.all %}{{t}}<br>{%endfor%}</td>
+                                                            {%endif%}
+                                                            <td  style=" border-color: white;"></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -170,7 +179,7 @@
                                                                             <td>{{m.times_a_day}}</td>
                                                                             <td>{{m.no_of_days}}</td>
                                                                             <td>{{m.when_to_take}}</td>
-                                                                            <td><input type="checkbox" value="{{m.provided}}"></td>
+                                                                            <td><input type="checkbox" value="{{m.provided}}" disabled></td>
                                                                         </tr>
                                                                     {% endfor %}
                                                                     </tbody>
@@ -255,9 +264,9 @@
                                                         <tbody>
                                                             <tr class="table-success">
                                                                 <td>{{ forloop.counter }}.</td>
-                                                                <td class="text text-primary">{%for d in p.presdetails_set.all%} {{ d.date.date }} {%endfor%}</td>
-                                                                <td class="text text-primary">{{p.treatmentFor}}</td>
-                                                                <td class="text text-primary">Dr {{ p.doctor.user.first_name }} {{ p.doctor.user.last_name }}</td>
+                                                                <td class="text text-primary">{%for d in p.presdetails_set.all%} {{ d.date.date }}<br> {%endfor%}</td>
+                                                                <td class="text text-primary">{%for d in p.presdetails_set.all%} {{ p.treatmentFor }}<br> {%endfor%}</td>
+                                                                <td class="text text-primary">{% for d in p.presdetails_set.all %}Dr {{ d.doctor.user.first_name }} {{ d.doctor.user.last_name }} <br>{% endfor %} </td>
                                                             </tr>
                                                         {% endfor %}
                                                         </tbody>
@@ -342,3 +351,21 @@
 </center>
 
 {%endblock%}
+
+{% block scpt %}
+    {%load staticfiles%}
+    <script src="{% static "search/jquery.filtertable.js" %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static "search/jquery.filtertable.min.js" %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#med_table').filterTable(); // apply filterTable to all tables on this page
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#pres_table').filterTable(); // apply filterTable to all tables on this page
+        });
+    </script>
+
+{% endblock %}

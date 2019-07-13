@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .forms import *
 from Patient.models import Patient
 from .models import *
-import datetime
+from datetime import datetime, timedelta
 from Reception.models import Appointment
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
@@ -15,10 +15,6 @@ class HomeView(TemplateView):
 def redirect_ref_form(request, patient_roll, pres_id=None):
     if request.user.type.types != 'doc':
         return render(request, 'users/base_home.html', {"error_message": "you are not autharised to view this page"})
-    if pres_id:
-        pres = get_object_or_404(Prescription, pk=pres_id)
-        if pres.doctor.user.username != request.user.username:
-            return render(request, 'users/base_home.html', {"error_message": "you are not autharised to view this page"})
     form_class_pres = PrescriptionForm
     form_class_med = PresMedicineForm
     template_name = 'Doctor/prescription_form.html'
@@ -37,14 +33,15 @@ def redirect_ref_form(request, patient_roll, pres_id=None):
 
     if pres_form.is_valid():
         if pres_id == None:
-            # current_time = datetime.datetime.now()
+            # current_time = datetime.now()
             p = pres_form.save(commit=False)
             # p.date = current_time
             p.doctor = request.user.doctor
             p.patient = patient
             p.med_added = True
             p.save()
-            current_time = datetime.datetime.now()
+            pres_form.save_m2m()
+            current_time = datetime.now()
             det = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
             det.save()
 
@@ -52,11 +49,13 @@ def redirect_ref_form(request, patient_roll, pres_id=None):
         else:
             p = pres_form.save(commit=False)
             p.save()
-            current_time = datetime.datetime.now()
-            det = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
-            det.save()
+            pres_form.save_m2m()
+            current_time = datetime.now()
+            if pres.presdetails_set.filter(date__range = (current_time - timedelta(hours=24), current_time)) is None:
+                time = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
+                time.save()
 
-            return render(request, 'Doctor/refer_form.html',{'form': form, 'pres': p})
+            return render(request, 'Doctor/refer_form.html', {'form': form, 'pres': p})
     return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'error_message': 'Error: Invalid form submission, cannot create reference'})
 
 
@@ -76,7 +75,7 @@ def save_pres(request, patient_roll, pres_id=None, end=None):
     applist = Appointment.objects.filter(patient=patient)
     app = applist.reverse()[0]
 
-    if pres_id == None:
+    if pres_id:
         pres_form = form_class_pres(request.POST or None)
         med_form = form_class_med(request.POST or None)
     else:
@@ -85,16 +84,18 @@ def save_pres(request, patient_roll, pres_id=None, end=None):
         med_form = form_class_med(request.POST or None)
 
     if pres_form.is_valid():
-        if pres_id == None:
+        if pres_id:
             p = pres_form.save(commit=False)
             p.doctor = request.user.doctor
             p.patient = patient
             p.med_added = True
 
             p.save()
-            # current_time = datetime.datetime.now()
-            # det = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
-            # det.save()
+            pres_form.save_m2m()
+            current_time = datetime.now()
+            det = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
+            det.save()
+
             med_form = form_class_med(None)
             pres_form = form_class_pres(None)
             app.status = 'e'
@@ -107,9 +108,11 @@ def save_pres(request, patient_roll, pres_id=None, end=None):
         else:
             p = pres_form.save(commit=False)
             p.save()
-            current_time = datetime.datetime.now()
-            time = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
-            time.save()
+            pres_form.save_m2m()
+            current_time = datetime.now()
+            if pres.presdetails_set.filter(date__range = (current_time - timedelta(hours=24), current_time)) is None:
+                time = PresDetails(date=current_time, pres=p, doctor=request.user.doctor)
+                time.save()
 
             med_form = form_class_med(None)
             pres_form = form_class_pres(None)
@@ -145,6 +148,7 @@ def delete_med(request, patient_roll, pres_id, med_id):
     if pres_form.is_valid():
         p = pres_form.save(commit=False)
         p.save()
+        pres_form.save_m2m()
         return render(request, template_name,
                       {'pres_form': pres_form, 'med_form': med_form, 'pres': p, 'patient': patient,
                        'error_message': 'Medicine removed'})
@@ -176,7 +180,7 @@ def add_med(request, patient_roll, pres_id=None):
 
     if pres_form.is_valid() and med_form.is_valid():
         if pres_id == None:
-            # current_time = datetime.datetime.now()
+            # current_time = datetime.now()
             p = pres_form.save(commit=False)
             # p.date = current_time
             p.doctor = request.user.doctor
@@ -184,6 +188,7 @@ def add_med(request, patient_roll, pres_id=None):
             p.med_added = True
             # p.app
             p.save()
+            pres_form.save_m2m()
 
             m = med_form.save(commit=False)
             m.prescription = p
@@ -194,6 +199,7 @@ def add_med(request, patient_roll, pres_id=None):
         else:
             p = pres_form.save(commit=False)
             p.save()
+            pres_form.save_m2m()
 
             m = med_form.save(commit=False)
             m.prescription = p
@@ -268,3 +274,7 @@ def ref_pres(request, ref_id):
         return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'pres': pres})
 
     return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'error_message': 'You do not have rights to edit this prescription.'})
+
+def ref_list_view(request):
+    ref_list = References.objects.filter(from_doc=request.user.doctor)
+    return render(request, 'Doctor/ref_list.html', {'ref_list' : ref_list})

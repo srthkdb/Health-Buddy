@@ -57,7 +57,7 @@
           </div>
           <div class="info">
               <div class="title">
-                  <a target="_blank" href="https://scripteden.com/" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
+                  <a href="{% url 'users:redirect_home' %}" class="">{{request.user.first_name}} {{request.user.last_name}}</a>
               </div>
               <div class="desc">Reception</div>
           </div>
@@ -66,7 +66,7 @@
                 <a href="{%url 'Reception:pat_list'%}" class="dropdown-btn">Patient Search</a>
             </div>
               <div class="sidebar-items">
-                <a href="{%url 'Reception:stud_list'%}" class="dropdown-btn">Student Search</a>
+                <a href="{% url 'Reception:stud_list'%}" class="dropdown-btn">Student Search</a>
             </div>
             <div class="sidebar-items">
                 <a href="" class="dropdown-btn" data-toggle="modal" data-target="#createappointment">New Appointment</a>
