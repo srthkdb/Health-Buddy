@@ -274,3 +274,7 @@ def ref_pres(request, ref_id):
         return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'pres': pres})
 
     return render(request, template_name, {'pres_form': pres_form, 'med_form': med_form, 'patient': patient, 'error_message': 'You do not have rights to edit this prescription.'})
+
+def ref_list_view(request):
+    ref_list = References.objects.filter(from_doc=request.user.doctor)
+    return render(request, 'Doctor/ref_list.html', {'ref_list' : ref_list})
