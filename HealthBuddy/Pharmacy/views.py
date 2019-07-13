@@ -60,7 +60,6 @@ def change_quantity(request, med_id, patient_roll, pres_id):
 
     if form.is_valid():
         q_changed = form.cleaned_data['quantity_provided']
-        change_med_filter = Medicine.objects.filter(pk=med_id)
         change_med_get = Medicine.objects.get(pk=med_id)
 
         if q_changed <= change_med_get.quantity:
@@ -104,6 +103,53 @@ def change_quantity(request, med_id, patient_roll, pres_id):
         'pres': pres,
         'med_list': med_list,
         'med': med,
+        'form': form,
+        'temp_list': temp_list
+
+    }
+
+    return render(request, template_name, context)
+
+def database(request, med_id, is_deleted):
+    form_class = PharQuantity
+    template_name = 'Pharmacy/pres_view.html'
+    
+    med_list = Medicine.objects.all()
+    form = form_class(request.POST or None)
+    temp_list = []
+
+    if form.is_valid():
+        q_changed = form.cleaned_data['quantity_provided']
+        change_med_get = Medicine.objects.get(pk=med_id)
+
+        if is_deleted:
+            if q_changed <= change_med_get.quantity:
+                new = change_med_get.quantity - q_changed
+            else:
+                form = form_class(None)
+                context = {
+                    'med_list': med_list,
+                    'form': form,
+                    'temp_list': temp_list,
+                    'error_message': 'Quantity not sufficient'
+
+                }
+
+                return render(request, template_name, context)
+
+        else:
+            new = change_med_get.quantity + q_changed
+
+        change_med_get.quantity = new
+        change_med_get.save()
+        change_med_get.refresh_from_db()
+        form = form_class(None)
+        temp_list = []
+        a = {'error_message': 'Quantity changed', 'med_list': med_list, 'temp_list':temp_list, 'form': form}
+        return render(request, template_name, a)
+        
+    context = {
+        'med_list': med_list,
         'form': form,
         'temp_list': temp_list
 
