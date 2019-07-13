@@ -17,4 +17,5 @@ urlpatterns = [
     path('pres/refer/<int:patient_roll>/<int:pres_id>/', views.redirect_ref_form, name="refer"),
     path('pres/refer/<int:patient_roll>/', views.redirect_ref_form, name="refer_new"),
     path('create_reference/<int:pres_id>/', views.create_reference, name="create_reference"),
+    path('ref_list/', views.ref_list_view, name="ref_list"),
 ]
